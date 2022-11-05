@@ -114,6 +114,8 @@ func _ready():
 
 	window.close_requested.connect(_on_close_requested_window)
 
+	_translate()
+
 func init():
 	sekkei_graph_1.resource_previewer = resource_previewer
 	sekkei_graph_1.editor_interface = editor_interface
@@ -417,3 +419,17 @@ func _selected_sekkei_graph_update(index:int):
 func _close_window():
 	window.hide()
 	window_button.button_pressed = false
+
+#
+# 翻訳
+#
+func _translate():
+	window_button.tooltip_text = _S.tr("tooltip_main_window_button")
+	split_button.tooltip_text = _S.tr("tooltip_main_split_button")
+	left_button.tooltip_text = _S.tr("tooltip_main_left_button")
+	right_button.tooltip_text = _S.tr("tooltip_main_right_button")
+	reload_button.tooltip_text = _S.tr("tooltip_main_reload_button")
+	add_button.tooltip_text = _S.tr("tooltip_main_add_button")
+	duplicate_button.tooltip_text = _S.tr("tooltip_main_duplicate_button")
+	rename_button.tooltip_text = _S.tr("tooltip_main_rename_button")
+	remove_button.tooltip_text = _S.tr("tooltip_main_remove_button")

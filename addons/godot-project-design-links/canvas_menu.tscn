@@ -1,6 +1,13 @@
-[gd_scene load_steps=8 format=3 uid="uid://do755yejs3y7l"]
+[gd_scene load_steps=14 format=3 uid="uid://do755yejs3y7l"]
 
 [ext_resource type="Script" path="res://addons/godot-project-design-links/canvas_menu.gd" id="1_ug2mc"]
+
+[sub_resource type="InputEventKey" id="InputEventKey_suu4o"]
+alt_pressed = true
+keycode = 83
+
+[sub_resource type="Shortcut" id="Shortcut_tpbq0"]
+events = [SubResource("InputEventKey_suu4o")]
 
 [sub_resource type="InputEventKey" id="InputEventKey_0qylt"]
 alt_pressed = true
@@ -22,6 +29,20 @@ keycode = 84
 
 [sub_resource type="Shortcut" id="Shortcut_ms2rg"]
 events = [SubResource("InputEventKey_ijkyd")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_yl0k0"]
+alt_pressed = true
+keycode = 76
+
+[sub_resource type="Shortcut" id="Shortcut_f84nk"]
+events = [SubResource("InputEventKey_yl0k0")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_yf1im"]
+alt_pressed = true
+keycode = 67
+
+[sub_resource type="Shortcut" id="Shortcut_s74jh"]
+events = [SubResource("InputEventKey_yf1im")]
 
 [node name="CanvasMenu" type="VBoxContainer"]
 anchors_preset = 15
@@ -60,6 +81,7 @@ offset_right = 32.0
 offset_bottom = 38.0
 mouse_default_cursor_shape = 2
 theme_override_constants/h_separation = 0
+shortcut = SubResource("Shortcut_tpbq0")
 text = "保存"
 
 [node name="GroupButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
@@ -103,6 +125,7 @@ offset_left = 196.0
 offset_right = 244.0
 offset_bottom = 38.0
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_f84nk")
 text = "ロック"
 
 [node name="UnlockButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
@@ -123,6 +146,7 @@ offset_left = 246.0
 offset_right = 294.0
 offset_bottom = 38.0
 mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_s74jh")
 text = "接続"
 
 [node name="BgColorIcon" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
