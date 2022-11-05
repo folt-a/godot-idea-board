@@ -37,7 +37,7 @@ var resource_previewer:EditorResourcePreview
 var editor_interface:EditorInterface
 var undo_redo:EditorUndoRedoManager
 
-var save_json_file_path:String = "res://addons/godot-project-design-links/savedata/save1.json"
+var save_json_file_path:String = ""
 
 var is_window:bool
 

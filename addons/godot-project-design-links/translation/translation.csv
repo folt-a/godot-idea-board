@@ -35,7 +35,8 @@ Bg Light,Bg Light,背景白 - 字黒
 Bg Dark,Bg Dark,背景黒 - 字白
 Color White,Color White Line,白線
 Color Black,Color Black Line,黒線
-
+main_dir_not_exists,[%s] is not exists.,[%s]は存在しないディレクトリです。
+main_changed_dir_path,changed directory to [%s],[%s] へディレクトリを変更しました。
 tooltip_main_window_button,Open Floating Window,別ウィンドウで開く/閉じる
 tooltip_main_split_button,Toggle H Split View,左右ビューに切り替える
 tooltip_main_left_button,Select Left(H Split),左のビューを選択する（左右ビューONの場合のみ）
@@ -45,3 +46,4 @@ tooltip_main_add_button,Add new layout,新しいレイアウトを追加する
 tooltip_main_duplicate_button,Duplicate selected layout,選択したレイアウトを複製する
 tooltip_main_rename_button,rename selected layout,選択したレイアウトの名前を変更する
 tooltip_main_remove_button,remove selected layout,選択したレイアウトの名前を削除する
+tooltip_main_main_path_line_edit,change layout directory path,レイアウトファイルのディレクトリを変更する

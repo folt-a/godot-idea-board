@@ -71,6 +71,7 @@ layout_mode = 2
 offset_right = 36.0
 offset_bottom = 36.0
 size_flags_horizontal = 3
+tooltip_text = "別ウィンドウで開く/閉じる"
 toggle_mode = true
 icon_alignment = 1
 expand_icon = true
@@ -83,6 +84,7 @@ offset_left = 40.0
 offset_right = 76.0
 offset_bottom = 36.0
 size_flags_horizontal = 3
+tooltip_text = "左右ビューに切り替える"
 toggle_mode = true
 icon_alignment = 1
 expand_icon = true
@@ -95,6 +97,7 @@ offset_left = 80.0
 offset_right = 116.0
 offset_bottom = 36.0
 size_flags_horizontal = 3
+tooltip_text = "左のビューを選択する（左右ビューONの場合のみ）"
 disabled = true
 toggle_mode = true
 button_pressed = true
@@ -110,6 +113,7 @@ offset_left = 120.0
 offset_right = 156.0
 offset_bottom = 36.0
 size_flags_horizontal = 3
+tooltip_text = "右のビューを選択する（左右ビューONの場合のみ）"
 disabled = true
 toggle_mode = true
 button_group = ExtResource("2_wtk48")
@@ -124,6 +128,7 @@ offset_left = 160.0
 offset_right = 196.0
 offset_bottom = 36.0
 size_flags_horizontal = 3
+tooltip_text = "リロード"
 icon_alignment = 1
 expand_icon = true
 
@@ -140,6 +145,7 @@ layout_mode = 2
 offset_right = 46.0
 offset_bottom = 36.0
 size_flags_horizontal = 3
+tooltip_text = "新しいレイアウトを追加する"
 icon_alignment = 1
 expand_icon = true
 
@@ -151,6 +157,7 @@ offset_left = 50.0
 offset_right = 96.0
 offset_bottom = 36.0
 size_flags_horizontal = 3
+tooltip_text = "選択したレイアウトを複製する"
 icon_alignment = 1
 expand_icon = true
 
@@ -162,6 +169,7 @@ offset_left = 100.0
 offset_right = 146.0
 offset_bottom = 36.0
 size_flags_horizontal = 3
+tooltip_text = "選択したレイアウトの名前を変更する"
 icon_alignment = 1
 expand_icon = true
 
@@ -173,6 +181,7 @@ offset_left = 150.0
 offset_right = 196.0
 offset_bottom = 36.0
 size_flags_horizontal = 3
+tooltip_text = "選択したレイアウトの名前を削除する"
 icon_alignment = 1
 expand_icon = true
 
@@ -182,8 +191,37 @@ custom_minimum_size = Vector2(128, 0)
 layout_mode = 2
 offset_top = 80.0
 offset_right = 196.0
-offset_bottom = 648.0
+offset_bottom = 608.0
 size_flags_vertical = 3
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="SidebarVBoxContainer"]
+layout_mode = 2
+offset_top = 612.0
+offset_right = 196.0
+offset_bottom = 648.0
+
+[node name="MainPathEditButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+offset_right = 36.0
+offset_bottom = 36.0
+tooltip_text = "レイアウトファイルのディレクトリを変更する"
+toggle_mode = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="MainPathLineEdit" type="LineEdit" parent="SidebarVBoxContainer/HBoxContainer3"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 40.0
+offset_right = 196.0
+offset_bottom = 36.0
+size_flags_horizontal = 3
+tooltip_text = "レイアウトファイルのディレクトリを変更する"
+mouse_filter = 2
+editable = false
+virtual_keyboard_enabled = false
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 layout_mode = 2

@@ -25,7 +25,7 @@ enum DIALOG_TYPE{
 #-----------------------------------------------------------
 #07. constants
 #-----------------------------------------------------------
-const save_json_dir_path:String = "res://addons/godot-project-design-links/savedata/"
+
 
 #-----------------------------------------------------------
 #08. exported variables
@@ -37,6 +37,8 @@ const save_json_dir_path:String = "res://addons/godot-project-design-links/saved
 var resource_previewer:EditorResourcePreview
 var editor_interface:EditorInterface
 var undo_redo:EditorUndoRedoManager
+
+var save_json_dir_path:String = ""
 
 @onready var audio_stream_player = $AudioStreamPlayer
 
@@ -78,6 +80,10 @@ var _confirmed_exec:Callable
 
 @onready var saved_item_list:ItemList = %SavedItemList
 
+@onready var main_path_edit_button:Button = %MainPathEditButton
+@onready var main_path_line_edit:LineEdit = %MainPathLineEdit
+
+
 @onready var file_name_dialog:ConfirmationDialog = %FileNameDialog
 @onready var file_name_line_edit:LineEdit = %FileNameLineEdit
 @onready var file_name_label:Label = %FileNameLabel
@@ -106,6 +112,10 @@ func _ready():
 	rename_button.pressed.connect(_on_pressed_rename_button)
 	remove_button.pressed.connect(_on_pressed_remove_button)
 
+	main_path_edit_button.pressed.connect(_on_pressed_main_path_edit_button)
+	main_path_line_edit.focus_exited.connect(_on_focus_exited_main_path_line_edit)
+	main_path_line_edit.text_submitted.connect(_on_text_submitted_main_path_line_edit)
+
 	file_name_line_edit.text_changed.connect(_on_text_changed_file_name_line_edit)
 	file_name_dialog.confirmed.connect(_on_confirmed_file_name_dialog)
 	file_name_dialog.register_text_enter(file_name_line_edit)
@@ -133,10 +143,29 @@ func init():
 	split_button.icon = sekkei_graph_1.get_icon("HSplitContainer")
 	reload_button.icon = sekkei_graph_1.get_icon("Reload")
 
+	main_path_edit_button.icon = sekkei_graph_1.get_icon("Edit")
+
 	add_button.icon = sekkei_graph_1.get_icon("Add")
 	duplicate_button.icon = sekkei_graph_1.get_icon("Duplicate")
 	rename_button.icon = sekkei_graph_1.get_icon("Edit")
 	remove_button.icon = sekkei_graph_1.get_icon("Remove")
+
+#	メインのディレクトリパスを指定する
+
+#	初期起動時はないので追加する
+	if !ProjectSettings.has_setting("godot_project_design_links/directory_path"):
+		ProjectSettings.set_setting("godot_project_design_links/directory_path", "res://addons/godot-project-design-links/savedata/")
+		var property_info = {
+			"name": "godot_project_design_links/directory_path",
+			"type": TYPE_STRING,
+			"hint": PROPERTY_HINT_DIR,
+			"hint_string": ""
+		}
+		ProjectSettings.add_property_info(property_info)
+		ProjectSettings.save()
+
+	save_json_dir_path = ProjectSettings.get_setting("godot_project_design_links/directory_path")
+	main_path_line_edit.text = save_json_dir_path
 
 	var dir = DirAccess.open("res://")
 	if dir.dir_exists(save_json_dir_path):
@@ -216,6 +245,7 @@ func _on_toggled_split_button(button_pressed:bool):
 		window_button.disabled = false
 
 func _on_pressed_reload_button():
+	save_json_dir_path = ProjectSettings.get_setting("godot_project_design_links/directory_path")
 	update_saved_item_list()
 
 func _on_pressed_add_button():
@@ -260,6 +290,29 @@ func _on_pressed_remove_button():
 	confirmation_dialog.dialog_text = _S.tr("Delete json file.") % saved_item_list.get_item_metadata(_selected_index)
 	confirmation_dialog.popup_centered()
 
+
+func _on_pressed_main_path_edit_button():
+	main_path_edit_button.release_focus()
+	main_path_line_edit.editable = true
+	main_path_line_edit.grab_focus()
+	main_path_line_edit.select_all()
+	main_path_line_edit.mouse_filter = Control.MOUSE_FILTER_PASS
+
+func _on_focus_exited_main_path_line_edit():
+	var new_text = main_path_line_edit.text
+	main_path_line_edit.editable = false
+	var dir = DirAccess.open("res://")
+	if !dir.dir_exists(new_text):
+		printerr(_S.tr("main_dir_not_exists") % new_text)
+		return
+	ProjectSettings.set_setting("godot_project_design_links/directory_path", new_text)
+	ProjectSettings.save()
+	print(_S.tr("main_changed_dir_path") % ProjectSettings.get_setting("godot_project_design_links/directory_path"))
+	save_json_dir_path = new_text
+	main_path_line_edit.mouse_filter = Control.MOUSE_FILTER_IGNORE
+
+func _on_text_submitted_main_path_line_edit(_new_text:String):
+	main_path_line_edit.release_focus()
 
 func _on_text_changed_file_name_line_edit(new_text:String):
 	if new_text.is_valid_filename() or new_text == "":
@@ -388,6 +441,8 @@ func update_saved_item_list():
 		sekkei_graph_1.visible = false
 		no_data_reference_rect.visible = true
 
+	main_path_line_edit.text = save_json_dir_path
+
 
 #-----------------------------------------------------------
 #16. private methods
@@ -433,3 +488,5 @@ func _translate():
 	duplicate_button.tooltip_text = _S.tr("tooltip_main_duplicate_button")
 	rename_button.tooltip_text = _S.tr("tooltip_main_rename_button")
 	remove_button.tooltip_text = _S.tr("tooltip_main_remove_button")
+	main_path_line_edit.tooltip_text = _S.tr("tooltip_main_main_path_line_edit")
+	main_path_edit_button.tooltip_text = _S.tr("tooltip_main_main_path_line_edit")
