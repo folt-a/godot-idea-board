@@ -125,34 +125,71 @@ func init(data:Dictionary):
 	tooltip_text = file_path
 
 	var dir = DirAccess.open("res://")
-	var textfiles = _parent.editor_interface.get_editor_settings().get("docks/filesystem/textfile_extensions")
-
-#	ファイルがあるかチェックする、なかったらuidをチェックしてあればファイルを更新
-	var is_exists = FileAccess.file_exists(file_path)
-	if is_exists:
-		uid = ResourceUID.id_to_text(ResourceLoader.get_resource_uid(file_path))
-	else:
-		is_exists = ResourceLoader.exists(uid)
-		file_path = ResourceUID.get_id_path(ResourceUID.text_to_id(uid))
-		path = file_path
-
-	if file_path.ends_with(".tscn") and is_exists:
-#		シーン
-		_type = ITEM_TYPE.SCENE
+	if dir.dir_exists(file_path):
+#		ディレクトリ
+		_type = ITEM_TYPE.DIR
 		tscn_label.text = _get_path_name()
-		var instance:Node = load(file_path).instantiate()
-		var scn_script = instance.get_script()
+		tscn_icon_button.icon = _parent.get_icon("Folder")
+		tscn_icon_button.add_theme_color_override("icon_normal_color", Color.from_string("6cbae0",Color.WHITE))
+		tscn_icon_button.add_theme_color_override("icon_hover_color", Color.from_string("6cbae0",Color.WHITE))
+		icon_name = "Folder"
+		script_h_box_container.visible = false
+	else:
+		var textfiles = _parent.editor_interface.get_editor_settings().get("docks/filesystem/textfile_extensions")
 
-		var classname = instance.get_class()
-		tscn_icon_button.icon = _parent.get_icon(classname)
-		icon_name = classname
-		if scn_script:
-			script_path = scn_script.resource_path
+	#	ファイルがあるかチェックする、なかったらuidをチェックしてあればファイルを更新
+		var is_exists = FileAccess.file_exists(file_path)
+		if is_exists:
+			uid = ResourceUID.id_to_text(ResourceLoader.get_resource_uid(file_path))
+		else:
+			is_exists = ResourceLoader.exists(uid)
+			file_path = ResourceUID.get_id_path(ResourceUID.text_to_id(uid))
+			path = file_path
+
+		if file_path.ends_with(".tscn") and is_exists:
+	#		シーン
+			_type = ITEM_TYPE.SCENE
+			tscn_label.text = _get_path_name()
+			var instance:Node = load(file_path).instantiate()
+			var scn_script = instance.get_script()
+
+			var classname = instance.get_class()
+			tscn_icon_button.icon = _parent.get_icon(classname)
+			icon_name = classname
+			if scn_script:
+				script_path = scn_script.resource_path
+				script_label.text = _get_script_name()
+				script_icon_button.icon = _parent.get_icon("Script")
+				_resize_script_class_icon.call_deferred()
+				if script_icon_path == "":
+					var icon_path = get_gori_oshi_icon_path(scn_script.resource_path)
+					if icon_path != "":
+						script_class_icon_button.icon = load(icon_path)
+						script_icon_path = icon_path
+					else:
+						script_class_icon_button.icon = _parent.get_icon(classname)
+						script_icon_path = classname
+				elif script_icon_path.begins_with("res:"):
+					script_class_icon_button.icon = load(script_icon_path)
+				else:
+					script_class_icon_button.icon = _parent.get_icon(script_icon_path)
+			else:
+				script_h_box_container.visible = false
+
+		elif file_path.ends_with(".gd") and is_exists:
+	#		スクリプト
+			_type = ITEM_TYPE.SCRIPT
+			tscn_h_box_container.visible = false
+			script_path = file_path
 			script_label.text = _get_script_name()
 			script_icon_button.icon = _parent.get_icon("Script")
+			icon_name = "Script"
+			var script_class = load(file_path)
+			var classname = script_class.get_instance_base_type()
 			_resize_script_class_icon.call_deferred()
 			if script_icon_path == "":
-				var icon_path = get_gori_oshi_icon_path(scn_script.resource_path)
+				var icon_path = get_gori_oshi_icon_path(script_path)
+
 				if icon_path != "":
 					script_class_icon_button.icon = load(icon_path)
 					script_icon_path = icon_path
@@ -163,93 +200,56 @@ func init(data:Dictionary):
 				script_class_icon_button.icon = load(script_icon_path)
 			else:
 				script_class_icon_button.icon = _parent.get_icon(script_icon_path)
+
+		elif textfiles.contains(file_path.get_extension()) and is_exists:
+	#		テキストファイル
+				_type = ITEM_TYPE.TEXT
+				tscn_h_box_container.visible = false
+				script_path = file_path
+				script_label.text = _get_script_name()
+				script_icon_button.icon = _parent.get_icon("TextFile")
+				icon_name = "TextFile"
+
 		else:
+			var instance = null
+			if is_exists:
+				instance = load(file_path)
 			script_h_box_container.visible = false
-
-	elif file_path.ends_with(".gd") and is_exists:
-#		スクリプト
-		_type = ITEM_TYPE.SCRIPT
-		tscn_h_box_container.visible = false
-		script_path = file_path
-		script_label.text = _get_script_name()
-		script_icon_button.icon = _parent.get_icon("Script")
-		icon_name = "Script"
-		var script_class = load(file_path)
-		var classname = script_class.get_instance_base_type()
-		_resize_script_class_icon.call_deferred()
-		if script_icon_path == "":
-			var icon_path = get_gori_oshi_icon_path(script_path)
-
-			if icon_path != "":
-				script_class_icon_button.icon = load(icon_path)
-				script_icon_path = icon_path
+			tscn_label.text = _get_path_name()
+			if instance is Texture:
+	#		画像
+				_type = ITEM_TYPE.TEXTURE
+				tscn_icon_button.icon = _parent.get_icon("ImageTexture")
+				tscn_icon_button.add_theme_color_override("icon_normal_color", Color.from_string("ff8ccc",Color.WHITE))
+				tscn_icon_button.add_theme_color_override("icon_hover_color", Color.from_string("ff8ccc",Color.WHITE))
+				icon_name = "ImageTexture"
+				h_separator.visible = true
+				texture_rect.visible = true
+				texture_rect.texture = instance
+				resizable = true
+				if data.has("size_x"):
+					size.x = data.size_x
+				if data.has("size_y"):
+					size.y = data.size_y
+				_resize(size)
+			elif instance is AudioStream:
+				_type = ITEM_TYPE.SOUND
+				sound_play_button.visible = true
+				_stream = instance
+				var classname = instance.get_class()
+				tscn_icon_button.icon = _parent.get_icon(classname)
+				icon_name = classname
+			elif instance != null:
+	#		その他リソース
+				_type = ITEM_TYPE.RESOURCE
+				var classname = instance.get_class()
+				tscn_icon_button.icon = _parent.get_icon(classname)
+				icon_name = classname
 			else:
-				script_class_icon_button.icon = _parent.get_icon(classname)
-				script_icon_path = classname
-		elif script_icon_path.begins_with("res:"):
-			script_class_icon_button.icon = load(script_icon_path)
-		else:
-			script_class_icon_button.icon = _parent.get_icon(script_icon_path)
-
-	elif textfiles.contains(file_path.get_extension()) and is_exists:
-#		テキストファイル
-			_type = ITEM_TYPE.TEXT
-			tscn_h_box_container.visible = false
-			script_path = file_path
-			script_label.text = _get_script_name()
-			script_icon_button.icon = _parent.get_icon("TextFile")
-			icon_name = "TextFile"
-
-	elif dir.dir_exists(file_path):
-#		ディレクトリ
-		_type = ITEM_TYPE.DIR
-		tscn_label.text = _get_path_name()
-		tscn_icon_button.icon = _parent.get_icon("Folder")
-		tscn_icon_button.add_theme_color_override("icon_normal_color", Color.from_string("6cbae0",Color.WHITE))
-		tscn_icon_button.add_theme_color_override("icon_hover_color", Color.from_string("6cbae0",Color.WHITE))
-		icon_name = "Folder"
-		script_h_box_container.visible = false
-
-	else:
-		var instance = null
-		if is_exists:
-			instance = load(file_path)
-		script_h_box_container.visible = false
-		tscn_label.text = _get_path_name()
-		if instance is Texture:
-#		画像
-			_type = ITEM_TYPE.TEXTURE
-			tscn_icon_button.icon = _parent.get_icon("ImageTexture")
-			tscn_icon_button.add_theme_color_override("icon_normal_color", Color.from_string("ff8ccc",Color.WHITE))
-			tscn_icon_button.add_theme_color_override("icon_hover_color", Color.from_string("ff8ccc",Color.WHITE))
-			icon_name = "ImageTexture"
-			h_separator.visible = true
-			texture_rect.visible = true
-			texture_rect.texture = instance
-			resizable = true
-			if data.has("size_x"):
-				size.x = data.size_x
-			if data.has("size_y"):
-				size.y = data.size_y
-			_resize(size)
-		elif instance is AudioStream:
-			_type = ITEM_TYPE.SOUND
-			sound_play_button.visible = true
-			_stream = instance
-			var classname = instance.get_class()
-			tscn_icon_button.icon = _parent.get_icon(classname)
-			icon_name = classname
-		elif instance != null:
-#		その他リソース
-			_type = ITEM_TYPE.RESOURCE
-			var classname = instance.get_class()
-			tscn_icon_button.icon = _parent.get_icon(classname)
-			icon_name = classname
-		else:
-#			読み込めなかった
-			_type = ITEM_TYPE.NONE
-			tscn_icon_button.icon = _parent.get_icon("FileBroken")
-			icon_name = "FileBroken"
+	#			読み込めなかった
+				_type = ITEM_TYPE.NONE
+				tscn_icon_button.icon = _parent.get_icon("FileBroken")
+				icon_name = "FileBroken"
 
 #	右クリックメニューの初期化
 	context_menu.transient = !_parent.is_window
