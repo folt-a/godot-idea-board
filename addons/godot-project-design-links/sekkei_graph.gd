@@ -459,7 +459,14 @@ func clear():
 	if undo_redo:
 		var undo_redo_id := undo_redo.get_object_history_id(self)
 		undo_redo.get_history_undo_redo(undo_redo_id).clear_history()
-	pass
+
+func delete_node(node):
+	undo_redo.create_action("Delete nodes")
+	undo_redo.add_do_method(node, "hide")
+	undo_redo.add_undo_method(node, "show")
+	node.selected = false
+	undo_redo.commit_action()
+	set_dirty()
 
 func get_icon(icon_name:String) -> Texture:
 	return editor_interface.get_base_control().theme.get_icon(icon_name,"EditorIcons")
@@ -512,9 +519,7 @@ func penetrate_nodes():
 		if graphnode is GraphNode\
 		and graphnode.visible\
 		and (
-			graphnode.get_data().node == "File"\
-			or graphnode.get_data().node == "Label"\
-			or graphnode.get_data().node == "TextDocument"
+			graphnode.get_data().node != "LineHandle"
 		):
 #				選択中GraphNodeのポリゴンを取得
 			var poly_lt = graphnode.position

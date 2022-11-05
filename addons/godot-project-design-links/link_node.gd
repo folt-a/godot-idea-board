@@ -111,6 +111,8 @@ func _ready():
 
 	target_line_edit.focus_exited.connect(_on_focus_exited_target_line_edit)
 #	右クリックメニュー
+	context_menu.copied.connect(_on_copied_context_menu)
+	context_menu.deleted.connect(_on_deleted_context_menu)
 	context_menu.toggle_lock_selected.connect(_on_toggle_lock_selected_context_menu)
 
 #-----------------------------------------------------------
@@ -161,6 +163,15 @@ func _on_focus_exited_target_line_edit():
 ## ジャンプする
 func _on_pressed_icon_button():
 	_parent.link_jump(graph_path,target_id)
+
+func _on_copied_context_menu():
+	var data = get_data()
+	data.position_offset_x = 0
+	data.position_offset_y = 0
+	DisplayServer.clipboard_set(JSON.stringify([data]))
+
+func _on_deleted_context_menu():
+	_parent.delete_node(self)
 
 func _on_toggle_lock_selected_context_menu(is_enabled:bool):
 	if is_enabled:

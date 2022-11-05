@@ -180,6 +180,8 @@ func _ready():
 	text_edit.gui_input.connect(_text_edit_gui_input)
 
 #	context_menu events
+	context_menu.copied.connect(_on_copied_context_menu)
+	context_menu.deleted.connect(_on_deleted_context_menu)
 	context_menu.edit_title_selected.connect(_on_edit_title_selected_context_menu)
 	context_menu.toggle_lock_selected.connect(_on_toggle_lock_selected_context_menu)
 	context_menu.save_pressed.connect(_on_save_pressed_context_menu)
@@ -296,6 +298,15 @@ func _expand_selected(node, depth = 1):
 #					item.collapsed = false
 				pass
 		_expand_selected(child, depth + 1)
+
+func _on_copied_context_menu():
+	var data = get_data()
+	data.position_offset_x = 0
+	data.position_offset_y = 0
+	DisplayServer.clipboard_set(JSON.stringify([data]))
+
+func _on_deleted_context_menu():
+	_parent.delete_node(self)
 
 func _on_edit_title_selected_context_menu():
 	_on_pressed_icon_button()

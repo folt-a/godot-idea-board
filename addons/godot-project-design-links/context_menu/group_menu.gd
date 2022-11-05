@@ -14,6 +14,8 @@ signal toggle_lock_selected(is_enabled)
 signal copied
 signal deleted
 signal edit_title_selected
+signal group_locked
+signal group_unlocked
 #-----------------------------------------------------------
 #06. enums
 #-----------------------------------------------------------
@@ -27,6 +29,9 @@ const INDEX_COPY:int = 2
 const INDEX_DELETE:int = 3
 const SEPARATE_1:int = 4
 const INDEX_EDIT:int = 5
+const INDEX_GROUP_LOCK:int = 6
+const INDEX_GROUP_UNLOCK:int = 7
+
 #-----------------------------------------------------------
 #08. exported variables
 #-----------------------------------------------------------
@@ -58,7 +63,9 @@ func _ready():
 	add_icon_item(_parent.get_icon("Duplicate"), _S.tr("Copy only this"), INDEX_COPY)
 	add_icon_item(_parent.get_icon("Remove"), _S.tr("Delete"), INDEX_DELETE)
 	add_separator("", SEPARATE_1)
-	add_icon_item(_parent.get_icon("Edit"), _S.tr("Make TxtDoc"), INDEX_EDIT)
+	add_icon_item(_parent.get_icon("Edit"), _S.tr("Edit"), INDEX_EDIT)
+	add_icon_item(_parent.get_icon("Lock"), _S.tr("Group Lock"), INDEX_GROUP_LOCK)
+	add_icon_item(_parent.get_icon("Unlock"), _S.tr("Group Unlock"), INDEX_GROUP_UNLOCK)
 
 func _on_index_pressed(index:int):
 	match index:
@@ -81,8 +88,12 @@ func _on_index_pressed(index:int):
 			copied.emit()
 		INDEX_DELETE:
 			deleted.emit()
-		INDEX_EDIT:#"Edit Title"
+		INDEX_EDIT:
 			edit_title_selected.emit()
+		INDEX_GROUP_LOCK:
+			group_locked.emit()
+		INDEX_GROUP_UNLOCK:
+			group_unlocked.emit()
 
 #-----------------------------------------------------------
 #14. remaining built-in virtual methods

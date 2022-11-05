@@ -108,8 +108,12 @@ func _ready():
 	locked_button.pressed.connect(_on_pressed_locked_button)
 
 #	context_menu events
+	context_menu.copied.connect(_on_copied_context_menu)
+	context_menu.deleted.connect(_on_deleted_context_menu)
 	context_menu.edit_title_selected.connect(_on_edit_title_selected_context_menu)
 	context_menu.toggle_lock_selected.connect(_on_toggle_lock_selected_context_menu)
+	context_menu.group_locked.connect(_on_group_locked_context_menu)
+	context_menu.group_unlocked.connect(_on_group_unlocked_context_menu)
 
 
 #-----------------------------------------------------------
@@ -179,6 +183,15 @@ func _on_focus_exited_header_line_edit():
 	header_line_edit.mouse_filter = Control.MOUSE_FILTER_IGNORE
 	header_line_edit.mouse_default_cursor_shape = Control.CURSOR_MOVE
 
+func _on_copied_context_menu():
+	var data = get_data()
+	data.position_offset_x = 0
+	data.position_offset_y = 0
+	DisplayServer.clipboard_set(JSON.stringify([data]))
+
+func _on_deleted_context_menu():
+	_parent.delete_node(self)
+
 func _on_edit_title_selected_context_menu():
 	_on_double_pressed_header_line_edit()
 
@@ -188,6 +201,22 @@ func _on_toggle_lock_selected_context_menu(is_enabled:bool):
 		self.selectable = false
 	else:
 		_on_pressed_locked_button()
+
+## 範囲内のロックをする
+func _on_group_locked_context_menu():
+	for node in get_parent().get_children():
+		if node is GraphNode and _is_node_child(node):
+			node.context_menu.set_item_checked.bind(0,true).call_deferred()
+			node._on_toggle_lock_selected_context_menu.bind(true).call_deferred()
+	self.context_menu.set_item_checked.bind(0,true).call_deferred()
+	self._on_toggle_lock_selected_context_menu.bind(true).call_deferred()
+
+## 範囲内のロック解除をする
+func _on_group_unlocked_context_menu():
+	for node in get_parent().get_children():
+		if node is GraphNode and _is_node_child(node):
+			node._on_pressed_locked_button()
+	self._on_pressed_locked_button()
 
 func _on_pressed_locked_button():
 	context_menu.set_item_checked(0, false)#ロックのチェックを外す

@@ -270,6 +270,8 @@ func _ready():
 	locked_button_2.pressed.connect(_on_pressed_locked_button)
 
 #	右クリックメニュー
+	context_menu.copied.connect(_on_copied_context_menu)
+	context_menu.deleted.connect(_on_deleted_context_menu)
 	context_menu.toggle_lock_selected.connect(_on_toggle_lock_selected_context_menu)
 	context_menu.filepath_copied.connect(_on_filepath_copied_context_menu)
 	context_menu.toggle_play_scene_selected.connect(_on_toggle_play_scene_selected_context_menu)
@@ -336,6 +338,15 @@ func _on_pressed_script_icon_button():
 func _on_resize_request(new_minsize):
 	_resize(new_minsize)
 	get_parent().set_dirty()
+
+func _on_copied_context_menu():
+	var data = get_data()
+	data.position_offset_x = 0
+	data.position_offset_y = 0
+	DisplayServer.clipboard_set(JSON.stringify([data]))
+
+func _on_deleted_context_menu():
+	_parent.delete_node(self)
 
 func _on_toggle_lock_selected_context_menu(is_enabled:bool):
 	if is_enabled:

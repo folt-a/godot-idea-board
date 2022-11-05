@@ -29,6 +29,8 @@ Copy Link,Copy Link,リンクコピー
 Show Play Scene Button,Show Play Scene Button,シーン再生ボタンを表示
 Edit Title,Edit Title,タイトル編集
 Save,Save,保存
+Group Lock,Group Lock,グループ範囲ロック
+Group Unlock,Group Unlock,グループ範囲ロック解除
 Bg Transparent Light,Bg Transparent Light,背景透明 - 字黒
 Bg Transparent Dark,Bg Transparent Dark,背景透明 - 字白
 Bg Light,Bg Light,背景白 - 字黒
