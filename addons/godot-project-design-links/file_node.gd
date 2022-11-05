@@ -38,14 +38,17 @@ enum ITEM_TYPE{
 #-----------------------------------------------------------
 var path:String = ""
 var script_path:String = ""
+var uid
+var id
+var script_icon_path:String = ""
 #-----------------------------------------------------------
 #10. private variables
 #-----------------------------------------------------------
 var _parent:GraphEdit
 var graph_node_type = "File"
-var id
 var icon_name:String = "File"
-var script_icon_path:String = ""
+
+
 
 var snap: = true
 var drag_start = null
@@ -97,9 +100,15 @@ func init(data:Dictionary):
 		tscn_play_button.visible = data.is_scene_play
 	if data.has("script_icon_path"):
 		script_icon_path = data.script_icon_path
+
+
 	var file_path:String = data.path
 	_parent = get_parent()
 	path = file_path
+
+	# ファイルの場所が変わったときはuidを読む
+	if data.has("uid"):
+		uid = data.uid
 
 	if !data.has("position_offset_x"): #新規作成は空になってるのでそれで判定しておく、jsonロードはそうならない
 		id = get_instance_id()
@@ -117,7 +126,17 @@ func init(data:Dictionary):
 
 	var dir = DirAccess.open("res://")
 	var textfiles = _parent.editor_interface.get_editor_settings().get("docks/filesystem/textfile_extensions")
-	if file_path.ends_with(".tscn") and FileAccess.file_exists(file_path):
+
+#	ファイルがあるかチェックする、なかったらuidをチェックしてあればファイルを更新
+	var is_exists = FileAccess.file_exists(file_path)
+	if is_exists:
+		uid = ResourceUID.id_to_text(ResourceLoader.get_resource_uid(file_path))
+	else:
+		is_exists = ResourceLoader.exists(uid)
+		file_path = ResourceUID.get_id_path(ResourceUID.text_to_id(uid))
+		path = file_path
+
+	if file_path.ends_with(".tscn") and is_exists:
 #		シーン
 		_type = ITEM_TYPE.SCENE
 		tscn_label.text = _get_path_name()
@@ -147,7 +166,7 @@ func init(data:Dictionary):
 		else:
 			script_h_box_container.visible = false
 
-	elif file_path.ends_with(".gd") and FileAccess.file_exists(file_path):
+	elif file_path.ends_with(".gd") and is_exists:
 #		スクリプト
 		_type = ITEM_TYPE.SCRIPT
 		tscn_h_box_container.visible = false
@@ -172,7 +191,7 @@ func init(data:Dictionary):
 		else:
 			script_class_icon_button.icon = _parent.get_icon(script_icon_path)
 
-	elif textfiles.contains(file_path.get_extension()) and FileAccess.file_exists(file_path):
+	elif textfiles.contains(file_path.get_extension()) and is_exists:
 #		テキストファイル
 			_type = ITEM_TYPE.TEXT
 			tscn_h_box_container.visible = false
@@ -193,7 +212,7 @@ func init(data:Dictionary):
 
 	else:
 		var instance = null
-		if FileAccess.file_exists(file_path):
+		if is_exists:
 			instance = load(file_path)
 		script_h_box_container.visible = false
 		tscn_label.text = _get_path_name()
@@ -368,6 +387,7 @@ func get_data() -> Dictionary:
 		"size_x" : size.x,
 		"size_y" : size.y,
 		"path" : path,
+		"uid" : uid,
 		"is_scene_play" : tscn_play_button.visible,
 		"script_path" : script_path,
 		"script_icon_path" : script_icon_path
