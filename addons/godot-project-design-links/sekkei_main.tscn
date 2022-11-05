@@ -1,0 +1,346 @@
+[gd_scene load_steps=9 format=3 uid="uid://f2fuf622o1c0"]
+
+[ext_resource type="Script" path="res://addons/godot-project-design-links/sekkei_main.gd" id="1_2n0ft"]
+[ext_resource type="Script" path="res://addons/godot-project-design-links/sekkei_graph.gd" id="1_lrq46"]
+[ext_resource type="ButtonGroup" uid="uid://b8qct4jrxfu76" path="res://addons/godot-project-design-links/left_right_button_group.tres" id="2_wtk48"]
+[ext_resource type="Script" path="res://addons/godot-project-design-links/markdown_parser.gd" id="3_xn6dl"]
+[ext_resource type="Script" path="res://addons/godot-project-design-links/context_menu/graph_menu.gd" id="5_extsy"]
+
+[sub_resource type="Animation" id="Animation_sxgc8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_a5541"]
+resource_name = "blink"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(0.686275, 0.905882, 0.905882, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_juiic"]
+_data = {
+"RESET": SubResource("Animation_sxgc8"),
+"blink": SubResource("Animation_a5541")
+}
+
+[node name="SekkeiMain" type="HSplitContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_2n0ft")
+
+[node name="SidebarVBoxContainer" type="VBoxContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 2
+offset_right = 196.0
+offset_bottom = 648.0
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="SidebarVBoxContainer"]
+layout_mode = 2
+offset_right = 196.0
+offset_bottom = 36.0
+
+[node name="WindowButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+offset_right = 36.0
+offset_bottom = 36.0
+size_flags_horizontal = 3
+toggle_mode = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="SplitButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+offset_left = 40.0
+offset_right = 76.0
+offset_bottom = 36.0
+size_flags_horizontal = 3
+toggle_mode = true
+icon_alignment = 1
+expand_icon = true
+
+[node name="LeftButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+offset_left = 80.0
+offset_right = 116.0
+offset_bottom = 36.0
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_pressed = true
+button_group = ExtResource("2_wtk48")
+icon_alignment = 1
+expand_icon = true
+
+[node name="RightButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+offset_left = 120.0
+offset_right = 156.0
+offset_bottom = 36.0
+size_flags_horizontal = 3
+disabled = true
+toggle_mode = true
+button_group = ExtResource("2_wtk48")
+icon_alignment = 1
+expand_icon = true
+
+[node name="ReloadButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+offset_left = 160.0
+offset_right = 196.0
+offset_bottom = 36.0
+size_flags_horizontal = 3
+icon_alignment = 1
+expand_icon = true
+
+[node name="HBoxContainer" type="HBoxContainer" parent="SidebarVBoxContainer"]
+layout_mode = 2
+offset_top = 40.0
+offset_right = 196.0
+offset_bottom = 76.0
+
+[node name="AddButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+offset_right = 46.0
+offset_bottom = 36.0
+size_flags_horizontal = 3
+icon_alignment = 1
+expand_icon = true
+
+[node name="DuplicateButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+offset_left = 50.0
+offset_right = 96.0
+offset_bottom = 36.0
+size_flags_horizontal = 3
+icon_alignment = 1
+expand_icon = true
+
+[node name="RenameButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+offset_left = 100.0
+offset_right = 146.0
+offset_bottom = 36.0
+size_flags_horizontal = 3
+icon_alignment = 1
+expand_icon = true
+
+[node name="RemoveButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(36, 36)
+layout_mode = 2
+offset_left = 150.0
+offset_right = 196.0
+offset_bottom = 36.0
+size_flags_horizontal = 3
+icon_alignment = 1
+expand_icon = true
+
+[node name="SavedItemList" type="ItemList" parent="SidebarVBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 2
+offset_top = 80.0
+offset_right = 196.0
+offset_bottom = 648.0
+size_flags_vertical = 3
+
+[node name="HSplitContainer" type="HSplitContainer" parent="."]
+layout_mode = 2
+offset_left = 208.0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="NoDataReferenceRect" type="ReferenceRect" parent="HSplitContainer"]
+layout_mode = 2
+offset_right = 944.0
+offset_bottom = 648.0
+size_flags_horizontal = 3
+mouse_filter = 1
+border_width = 2.0
+
+[node name="SekkeiGraph1" type="GraphEdit" parent="HSplitContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+offset_left = 498.0
+offset_right = 984.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_colors/activity = Color(1, 0, 0, 1)
+scroll_offset = Vector2(-486, 0)
+snap_distance = 24
+zoom_min = 0.1
+zoom_max = 3.0
+show_zoom_label = true
+arrange_nodes_button_hidden = true
+script = ExtResource("1_lrq46")
+
+[node name="MarkdownParser" type="Node" parent="HSplitContainer/SekkeiGraph1"]
+script = ExtResource("3_xn6dl")
+
+[node name="ContextMenu" type="PopupMenu" parent="HSplitContainer/SekkeiGraph1"]
+script = ExtResource("5_extsy")
+
+[node name="DragPath" type="Line2D" parent="HSplitContainer/SekkeiGraph1"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HSplitContainer/SekkeiGraph1/DragPath"]
+libraries = {
+"": SubResource("AnimationLibrary_juiic")
+}
+
+[node name="SekkeiGraph2" type="GraphEdit" parent="HSplitContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+offset_left = 498.0
+offset_right = 984.0
+offset_bottom = 648.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+scroll_offset = Vector2(-486, -648)
+snap_distance = 24
+zoom_min = 0.1
+zoom_max = 3.0
+arrange_nodes_button_hidden = true
+script = ExtResource("1_lrq46")
+
+[node name="MarkdownParser" type="Node" parent="HSplitContainer/SekkeiGraph2"]
+script = ExtResource("3_xn6dl")
+
+[node name="ContextMenu" type="PopupMenu" parent="HSplitContainer/SekkeiGraph2"]
+script = ExtResource("5_extsy")
+
+[node name="DragPath" type="Line2D" parent="HSplitContainer/SekkeiGraph2"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="HSplitContainer/SekkeiGraph2/DragPath"]
+libraries = {
+"": SubResource("AnimationLibrary_juiic")
+}
+
+[node name="FileNameDialog" type="ConfirmationDialog" parent="."]
+unique_name_in_owner = true
+size = Vector2i(297, 115)
+
+[node name="FileNameMarginContainer" type="MarginContainer" parent="FileNameDialog"]
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 289.0
+offset_bottom = 66.0
+
+[node name="FileNameVBoxContainer" type="VBoxContainer" parent="FileNameDialog/FileNameMarginContainer"]
+layout_mode = 2
+offset_right = 281.0
+offset_bottom = 58.0
+theme_override_constants/separation = -4
+
+[node name="FileNameHBoxContainer" type="HBoxContainer" parent="FileNameDialog/FileNameMarginContainer/FileNameVBoxContainer"]
+layout_mode = 2
+offset_right = 281.0
+offset_bottom = 31.0
+
+[node name="FileNameLineEdit" type="LineEdit" parent="FileNameDialog/FileNameMarginContainer/FileNameVBoxContainer/FileNameHBoxContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(240, 0)
+layout_mode = 2
+offset_right = 240.0
+offset_bottom = 31.0
+
+[node name="FileNameLabel" type="Label" parent="FileNameDialog/FileNameMarginContainer/FileNameVBoxContainer/FileNameHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 244.0
+offset_top = 2.0
+offset_right = 281.0
+offset_bottom = 28.0
+text = ".json"
+
+[node name="FileNameMessageLabel" type="Label" parent="FileNameDialog/FileNameMarginContainer/FileNameVBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_top = 27.0
+offset_right = 281.0
+offset_bottom = 50.0
+theme_override_colors/font_color = Color(0.827451, 0.827451, 0.47451, 1)
+
+[node name="ConfirmationDialog" type="ConfirmationDialog" parent="."]
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+
+[node name="Window" type="Window" parent="."]
+visible = false
+wrap_controls = true
+always_on_top = true
+
+[node name="SekkeiGraph3" type="GraphEdit" parent="Window"]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+theme_override_colors/activity = Color(1, 0, 0, 1)
+snap_distance = 24
+zoom_min = 0.1
+zoom_max = 3.0
+show_zoom_label = true
+arrange_nodes_button_hidden = true
+script = ExtResource("1_lrq46")
+
+[node name="ContextMenu" type="PopupMenu" parent="Window/SekkeiGraph3"]
+script = ExtResource("5_extsy")
+
+[node name="MarkdownParser" type="Node" parent="Window/SekkeiGraph3"]
+script = ExtResource("3_xn6dl")
+
+[node name="DragPath" type="Line2D" parent="Window/SekkeiGraph3"]
+position = Vector2(706, 0)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Window/SekkeiGraph3/DragPath"]
+libraries = {
+"": SubResource("AnimationLibrary_juiic")
+}

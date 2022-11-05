@@ -1,0 +1,75 @@
+[gd_scene load_steps=10 format=3 uid="uid://dthcmi5lj88ky"]
+
+[ext_resource type="Texture2D" uid="uid://cmqjcgfb2hitf" path="res://addons/godot-project-design-links/icon/handle.svg" id="1_hiwoi"]
+[ext_resource type="StyleBox" uid="uid://w82ranjj3lbw" path="res://addons/godot-project-design-links/theme/line_handle_frame_stylebox.tres" id="2_pv2kw"]
+[ext_resource type="StyleBox" uid="uid://cha66fvd1ybkh" path="res://addons/godot-project-design-links/theme/line_handle_selected_stylebox.tres" id="3_qa1a4"]
+[ext_resource type="Script" path="res://addons/godot-project-design-links/line_handle_node.gd" id="4_kje78"]
+[ext_resource type="StyleBox" uid="uid://1a2ks43qywgj" path="res://addons/godot-project-design-links/theme/text_light_title_line_edit.tres" id="5_n7r5b"]
+[ext_resource type="Script" path="res://addons/godot-project-design-links/context_menu/line_handle_menu.gd" id="5_qleyb"]
+[ext_resource type="Gradient" uid="uid://dmlfrr36jr2vp" path="res://addons/godot-project-design-links/theme/black_gradient.tres" id="6_p88am"]
+[ext_resource type="StyleBox" uid="uid://dd3e5yean6mrf" path="res://addons/godot-project-design-links/theme/text_light_title_selected_line_edit.tres" id="6_vh0tj"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fcp3l"]
+
+[node name="LineHandleNode" type="GraphNode"]
+offset_right = 59.0
+offset_bottom = 23.0
+mouse_default_cursor_shape = 13
+theme_override_icons/resizer = ExtResource("1_hiwoi")
+theme_override_styles/frame = ExtResource("2_pv2kw")
+theme_override_styles/selected_frame = ExtResource("3_qa1a4")
+theme_override_styles/comment = SubResource("StyleBoxEmpty_fcp3l")
+theme_override_styles/comment_focus = SubResource("StyleBoxEmpty_fcp3l")
+theme_override_styles/breakpoint = SubResource("StyleBoxEmpty_fcp3l")
+theme_override_styles/position = SubResource("StyleBoxEmpty_fcp3l")
+theme_override_styles/slot = SubResource("StyleBoxEmpty_fcp3l")
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("4_kje78")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 2
+offset_right = 59.0
+offset_bottom = 23.0
+size_flags_vertical = 3
+
+[node name="LineEdit" type="LineEdit" parent="HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_right = 59.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+mouse_filter = 2
+theme_override_constants/caret_width = 3
+theme_override_styles/normal = ExtResource("5_n7r5b")
+theme_override_styles/focus = ExtResource("6_vh0tj")
+alignment = 1
+expand_to_text_length = true
+
+[node name="LockedButton" type="Button" parent="HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+offset_left = 12.0
+offset_right = 20.0
+offset_bottom = 24.0
+mouse_default_cursor_shape = 2
+icon_alignment = 1
+
+[node name="ContextMenu" type="PopupMenu" parent="."]
+script = ExtResource("5_qleyb")
+
+[node name="Line2D" type="Line2D" parent="."]
+show_behind_parent = true
+gradient = ExtResource("6_p88am")
+joint_mode = 2
+begin_cap_mode = 1
+end_cap_mode = 1
+antialiased = true

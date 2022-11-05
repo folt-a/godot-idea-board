@@ -1,0 +1,221 @@
+[gd_scene load_steps=14 format=3 uid="uid://qn1mmq344o61"]
+
+[ext_resource type="Texture2D" uid="uid://cmqjcgfb2hitf" path="res://addons/godot-project-design-links/icon/handle.svg" id="1_0jksm"]
+[ext_resource type="Script" path="res://addons/godot-project-design-links/comment_node.gd" id="1_pfk21"]
+[ext_resource type="FontFile" uid="uid://ev0lki5pf6w5" path="res://addons/godot-project-design-links/font/ZenMaruGothic-Bold-Subset.ttf" id="2_3t8kl"]
+[ext_resource type="StyleBox" uid="uid://bqp6u8a2jbsek" path="res://addons/godot-project-design-links/theme/frame_stylebox.tres" id="2_afal7"]
+[ext_resource type="Script" path="res://addons/godot-project-design-links/context_menu/comment_menu.gd" id="3_at1ac"]
+[ext_resource type="StyleBox" uid="uid://bacwowhkqlri7" path="res://addons/godot-project-design-links/theme/selected_frame_stylebox.tres" id="3_pvsnt"]
+[ext_resource type="StyleBox" uid="uid://dp23tuoxcdmsm" path="res://addons/godot-project-design-links/theme/header_lineedit_stylebox.tres" id="6_r7dye"]
+[ext_resource type="StyleBox" uid="uid://dd45kulojlvij" path="res://addons/godot-project-design-links/theme/focused_header_lineedit_stylebox.tres" id="7_rawt7"]
+[ext_resource type="StyleBox" uid="uid://do10b3bjhp1et" path="res://addons/godot-project-design-links/theme/transparent_style_box_line.tres" id="8_alaah"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o2qiq"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ftuq2"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vaj17"]
+
+[sub_resource type="StyleBoxLine" id="StyleBoxLine_pd02s"]
+content_margin_left = 8.0
+content_margin_top = 8.0
+content_margin_right = 8.0
+content_margin_bottom = 8.0
+color = Color(1, 1, 1, 1)
+thickness = 2
+
+[node name="CommentNode" type="GraphNode"]
+offset_right = 320.0
+offset_bottom = 320.0
+theme_override_colors/title_color = Color(0.811765, 0.815686, 0.819608, 0.0980392)
+theme_override_icons/resizer = ExtResource("1_0jksm")
+theme_override_styles/frame = ExtResource("2_afal7")
+theme_override_styles/selected_frame = ExtResource("3_pvsnt")
+theme_override_styles/comment = SubResource("StyleBoxEmpty_o2qiq")
+theme_override_styles/comment_focus = SubResource("StyleBoxEmpty_o2qiq")
+theme_override_styles/breakpoint = SubResource("StyleBoxEmpty_o2qiq")
+theme_override_styles/position = SubResource("StyleBoxEmpty_o2qiq")
+theme_override_styles/slot = SubResource("StyleBoxEmpty_o2qiq")
+resizable = true
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("1_pfk21")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+offset_right = 320.0
+offset_bottom = 320.0
+size_flags_vertical = 3
+theme_override_constants/margin_bottom = 16
+
+[node name="VB" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+offset_right = 320.0
+offset_bottom = 304.0
+theme_override_constants/separation = 0
+
+[node name="TitleHBoxContainer" type="HBoxContainer" parent="MarginContainer/VB"]
+layout_mode = 2
+offset_right = 320.0
+offset_bottom = 24.0
+mouse_default_cursor_shape = 13
+
+[node name="MarkdownToggledButton" type="Button" parent="MarginContainer/VB/TitleHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_right = 8.0
+offset_bottom = 24.0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+icon_alignment = 1
+
+[node name="FileButton" type="Button" parent="MarginContainer/VB/TitleHBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+offset_left = 12.0
+offset_right = 20.0
+offset_bottom = 24.0
+mouse_default_cursor_shape = 2
+icon_alignment = 1
+
+[node name="IconButton" type="Button" parent="MarginContainer/VB/TitleHBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+offset_left = 12.0
+offset_right = 20.0
+offset_bottom = 24.0
+mouse_default_cursor_shape = 2
+icon_alignment = 1
+
+[node name="SaveButton" type="Button" parent="MarginContainer/VB/TitleHBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+offset_left = 12.0
+offset_right = 20.0
+offset_bottom = 24.0
+mouse_default_cursor_shape = 2
+icon_alignment = 1
+
+[node name="HeaderLineEdit" type="LineEdit" parent="MarginContainer/VB/TitleHBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 12.0
+offset_right = 320.0
+offset_bottom = 24.0
+size_flags_horizontal = 3
+mouse_filter = 2
+mouse_default_cursor_shape = 13
+theme_override_constants/caret_width = 3
+theme_override_fonts/font = ExtResource("2_3t8kl")
+theme_override_styles/normal = ExtResource("6_r7dye")
+theme_override_styles/focus = ExtResource("7_rawt7")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_ftuq2")
+alignment = 1
+expand_to_text_length = true
+
+[node name="LockedButton" type="Button" parent="MarginContainer/VB/TitleHBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+offset_left = 12.0
+offset_right = 20.0
+offset_bottom = 24.0
+mouse_default_cursor_shape = 2
+icon_alignment = 1
+
+[node name="MenuHBoxContainer" type="HBoxContainer" parent="MarginContainer/VB"]
+visible = false
+layout_mode = 2
+offset_top = 24.0
+offset_right = 96.0
+offset_bottom = 32.0
+mouse_default_cursor_shape = 13
+
+[node name="BoldButton" type="Button" parent="MarginContainer/VB/MenuHBoxContainer"]
+layout_mode = 2
+offset_right = 8.0
+offset_bottom = 8.0
+mouse_default_cursor_shape = 2
+icon_alignment = 1
+
+[node name="H1Button" type="Button" parent="MarginContainer/VB/MenuHBoxContainer"]
+layout_mode = 2
+offset_left = 12.0
+offset_right = 20.0
+offset_bottom = 8.0
+mouse_default_cursor_shape = 2
+icon_alignment = 1
+
+[node name="H2Button" type="Button" parent="MarginContainer/VB/MenuHBoxContainer"]
+layout_mode = 2
+offset_left = 24.0
+offset_right = 32.0
+offset_bottom = 8.0
+mouse_default_cursor_shape = 2
+icon_alignment = 1
+
+[node name="ExportButton" type="Button" parent="MarginContainer/VB/MenuHBoxContainer"]
+visible = false
+layout_mode = 2
+offset_left = 36.0
+offset_right = 44.0
+offset_bottom = 8.0
+mouse_default_cursor_shape = 2
+icon_alignment = 1
+
+[node name="TextEdit" type="CodeEdit" parent="MarginContainer/VB"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(96, 40)
+layout_mode = 2
+offset_top = 24.0
+offset_right = 320.0
+offset_bottom = 304.0
+size_flags_vertical = 3
+mouse_force_pass_scroll_events = false
+theme_override_fonts/font = ExtResource("2_3t8kl")
+theme_override_styles/normal = ExtResource("8_alaah")
+theme_override_styles/focus = ExtResource("8_alaah")
+theme_override_styles/read_only = SubResource("StyleBoxEmpty_vaj17")
+virtual_keyboard_enabled = false
+wrap_mode = 1
+draw_tabs = true
+draw_spaces = true
+scroll_smooth = true
+
+[node name="ParsedRichTextLabel" type="RichTextLabel" parent="MarginContainer/VB"]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(96, 64)
+layout_mode = 2
+offset_top = 164.0
+offset_right = 320.0
+offset_bottom = 304.0
+size_flags_vertical = 3
+focus_mode = 2
+theme_override_fonts/normal_font = ExtResource("2_3t8kl")
+theme_override_fonts/bold_font = ExtResource("2_3t8kl")
+theme_override_fonts/italics_font = ExtResource("2_3t8kl")
+theme_override_fonts/bold_italics_font = ExtResource("2_3t8kl")
+theme_override_fonts/mono_font = ExtResource("2_3t8kl")
+theme_override_styles/focus = SubResource("StyleBoxLine_pd02s")
+theme_override_styles/normal = SubResource("StyleBoxLine_pd02s")
+bbcode_enabled = true
+text = "adwadwa"
+fit_content_height = true
+scroll_following = true
+autowrap_mode = 1
+threaded = true
+selection_enabled = true
+
+[node name="ContextMenu" type="PopupMenu" parent="."]
+script = ExtResource("3_at1ac")

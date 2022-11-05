@@ -1,0 +1,37 @@
+,en,ja_JP
+canvas_menu_save_button,Save,保存
+canvas_menu_group_button,Group,グループ
+canvas_menu_label_button,Label,ラベル
+canvas_menu_text_document_button,TxtDoc,テキスト
+canvas_menu_bg_color_label,Bg:,背景色:
+canvas_menu_lock_button,Lock,ロック
+canvas_menu_connect_button,Connect,接続
+canvas_menu_unlock_button,Unlock,ロック解除
+canvas_menu_sound_label,SndVol:,音量:
+connect_size_err,Select 2 Nodes only.,2つだけ選択してください。
+Edited data will not be saved.,Edited data will not be saved.,編集中のデータは保存されません。
+Edited data will not be saved.text,Edited data will not be saved. \nAre you sure you want to switch the displayed data?,編集中のデータは保存されません。\n画面を切り替えてよろしいですか？
+Add json file.,Add json file.,レイアウトファイルを追加する
+Duplicate json file.,Duplicate json file.,レイアウトファイルをコピーする
+Rename json file.,Rename json file.,レイアウトファイルの名前を変更する
+Delete json file.,Delete json file.,レイアウトファイルを削除する\n[%s]
+[{0}.json] is invalid name.,[%s.json] is invalid name.,[%s] はファイル名にできないので名前を変えてください
+[{0}] is already exists.,[%s] is already exists.,[%s] はすでに存在します
+Lock,Lock,ロック
+Copy,Copy,コピー
+Paste,Paste,ペースト
+Copy only this,Copy only this,これだけコピー
+Delete,Delte,削除
+Edit,Edit,編集
+Make TxtDoc,Make TxtDoc,このファイルからテキストをつくる
+Copy Path,Copy Path,パスをコピー
+Copy Link,Copy Link,リンクコピー
+Show Play Scene Button,Show Play Scene Button,シーン再生ボタンを表示
+Edit Title,Edit Title,タイトル編集
+Save,Save,保存
+Bg Transparent Light,Bg Transparent Light,背景透明 - 字黒
+Bg Transparent Dark,Bg Transparent Dark,背景透明 - 字白
+Bg Light,Bg Light,背景白 - 字黒
+Bg Dark,Bg Dark,背景黒 - 字白
+Color White,Color White Line,白線
+Color Black,Color Black Line,黒線

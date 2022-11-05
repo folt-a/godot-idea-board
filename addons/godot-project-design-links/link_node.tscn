@@ -1,0 +1,139 @@
+[gd_scene load_steps=14 format=3 uid="uid://8akhawpdokcm"]
+
+[ext_resource type="Texture2D" uid="uid://cmqjcgfb2hitf" path="res://addons/godot-project-design-links/icon/handle.svg" id="1_dls3y"]
+[ext_resource type="Script" path="res://addons/godot-project-design-links/link_node.gd" id="2_x00rg"]
+[ext_resource type="Script" path="res://addons/godot-project-design-links/context_menu/link_menu.gd" id="3_amj4g"]
+[ext_resource type="StyleBox" uid="uid://dp23tuoxcdmsm" path="res://addons/godot-project-design-links/theme/header_lineedit_stylebox.tres" id="3_m8tqn"]
+[ext_resource type="StyleBox" uid="uid://dd45kulojlvij" path="res://addons/godot-project-design-links/theme/focused_header_lineedit_stylebox.tres" id="4_cqrvk"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6q3xl"]
+bg_color = Color(0.14902, 0.160784, 0.176471, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bnv7"]
+bg_color = Color(0.301961, 0.32549, 0.360784, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_03sfx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xa4dc"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t8oxx"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xm36b"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_scucf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cyro3"]
+content_margin_left = 6.0
+content_margin_top = 2.0
+content_margin_right = 6.0
+content_margin_bottom = 2.0
+bg_color = Color(0.647059, 0.647059, 0.647059, 1)
+
+[node name="LinkNode" type="GraphNode"]
+offset_right = 73.0
+offset_bottom = 25.0
+theme_override_icons/resizer = ExtResource("1_dls3y")
+theme_override_styles/frame = SubResource("StyleBoxFlat_6q3xl")
+theme_override_styles/selected_frame = SubResource("StyleBoxFlat_2bnv7")
+theme_override_styles/comment = SubResource("StyleBoxEmpty_03sfx")
+theme_override_styles/comment_focus = SubResource("StyleBoxEmpty_xa4dc")
+theme_override_styles/breakpoint = SubResource("StyleBoxEmpty_t8oxx")
+theme_override_styles/position = SubResource("StyleBoxEmpty_xm36b")
+theme_override_styles/slot = SubResource("StyleBoxEmpty_scucf")
+slot/0/left_enabled = false
+slot/0/left_type = 0
+slot/0/left_color = Color(1, 1, 1, 1)
+slot/0/left_icon = null
+slot/0/right_enabled = false
+slot/0/right_type = 0
+slot/0/right_color = Color(1, 1, 1, 1)
+slot/0/right_icon = null
+slot/0/draw_stylebox = true
+script = ExtResource("2_x00rg")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 2
+offset_left = 1.0
+offset_top = 1.0
+offset_right = 88.0
+offset_bottom = 24.0
+mouse_default_cursor_shape = 13
+theme_override_constants/separation = 0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_right = 87.0
+offset_bottom = 23.0
+mouse_default_cursor_shape = 13
+theme_override_constants/separation = 0
+
+[node name="IconButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_right = 8.0
+offset_bottom = 23.0
+mouse_filter = 2
+icon_alignment = 1
+
+[node name="TargetLineEdit" type="LineEdit" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 8.0
+offset_right = 67.0
+offset_bottom = 23.0
+size_flags_horizontal = 3
+mouse_filter = 2
+mouse_default_cursor_shape = 13
+theme_override_styles/normal = ExtResource("3_m8tqn")
+theme_override_styles/focus = ExtResource("4_cqrvk")
+expand_to_text_length = true
+
+[node name="ArrowTargetIconButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 67.0
+offset_right = 75.0
+offset_bottom = 23.0
+mouse_filter = 2
+
+[node name="TargetIconButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+offset_left = 75.0
+offset_right = 87.0
+offset_bottom = 23.0
+mouse_default_cursor_shape = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_cyro3")
+theme_override_styles/hover = SubResource("StyleBoxFlat_cyro3")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_cyro3")
+theme_override_styles/focus = SubResource("StyleBoxFlat_cyro3")
+
+[node name="LockedButton" type="Button" parent="VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+offset_left = 12.0
+offset_right = 20.0
+offset_bottom = 23.0
+mouse_default_cursor_shape = 2
+icon_alignment = 1
+
+[node name="ContextMenu" type="PopupMenu" parent="."]
+script = ExtResource("3_amj4g")
