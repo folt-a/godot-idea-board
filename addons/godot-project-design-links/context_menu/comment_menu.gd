@@ -14,6 +14,7 @@ signal toggle_lock_selected(is_enabled)
 signal copied
 signal deleted
 signal edit_title_selected
+signal checked(is_enabled)
 signal save_pressed
 signal changed_color(s)
 
@@ -30,11 +31,12 @@ const INDEX_COPY:int = 2
 const INDEX_DELETE:int = 3
 const SEPARATE_1:int = 4
 const INDEX_EDIT:int = 5
-const INDEX_SAVE:int = 6
-const INDEX_BG_TR_LI:int = 7
-const INDEX_BG_TR_DA:int = 8
-const INDEX_BG_LI:int = 9
-const INDEX_BG_DA:int = 10
+const INDEX_CHECK:int = 6
+const INDEX_SAVE:int = 7
+const INDEX_BG_TR_LI:int = 8
+const INDEX_BG_TR_DA:int = 9
+const INDEX_BG_LI:int = 10
+const INDEX_BG_DA:int = 11
 
 #-----------------------------------------------------------
 #08. exported variables
@@ -71,8 +73,10 @@ func _ready():
 	add_separator("", SEPARATE_1)
 	add_icon_item(_parent.get_icon("Edit"), _S.tr("Edit Title"), INDEX_EDIT)
 	if parent.path != "":
+		add_separator("",INDEX_CHECK)
 		add_icon_item(_parent.get_icon("Save"), _S.tr("Save"), INDEX_SAVE)
 	else:
+		add_icon_check_item(_parent.get_icon("CheckBox"), _S.tr("Task"), INDEX_CHECK)
 		add_separator("",INDEX_SAVE)
 	add_icon_item(_parent.get_icon("Color"),_S.tr("Bg Transparent Light"), INDEX_BG_TR_LI)
 	add_icon_item(_parent.get_icon("Color"),_S.tr("Bg Transparent Dark"), INDEX_BG_TR_DA)
@@ -103,6 +107,9 @@ func _on_index_pressed(index:int):
 			deleted.emit()
 		INDEX_EDIT:#"Edit Title"
 			edit_title_selected.emit()
+		INDEX_CHECK:
+			set_item_checked(INDEX_CHECK,!is_item_checked(INDEX_CHECK))
+			checked.emit(is_item_checked(INDEX_CHECK))
 		INDEX_SAVE:#"Save"
 			save_pressed.emit()
 		INDEX_BG_TR_LI:# Bg Transparent Light

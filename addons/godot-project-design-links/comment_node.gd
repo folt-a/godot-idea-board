@@ -53,6 +53,7 @@ var dragging: = false
 
 # title_h_box_container
 @onready var title_h_box_container:HBoxContainer = $MarginContainer/VB/TitleHBoxContainer
+@onready var check_box:CheckBox = %CheckBox
 @onready var icon_button:Button = %IconButton
 @onready var markdown_toggled_button:Button = %MarkdownToggledButton
 @onready var file_button:Button = %FileButton
@@ -95,6 +96,10 @@ func init(data:Dictionary = {}):
 		parsed_rich_text_label.custom_minimum_size = Vector2.ZERO
 		custom_minimum_size = Vector2.ZERO
 		size = Vector2(size.x,0)
+	if data.has("is_visible_check"):
+		check_box.visible = data.is_visible_check
+	if data.has("check"):
+		check_box.button_pressed = data.check
 	if data.has("color_theme"):
 		color_theme = data.color_theme
 	else:
@@ -183,6 +188,7 @@ func _ready():
 	context_menu.copied.connect(_on_copied_context_menu)
 	context_menu.deleted.connect(_on_deleted_context_menu)
 	context_menu.edit_title_selected.connect(_on_edit_title_selected_context_menu)
+	context_menu.checked.connect(_on_checked_context_menu)
 	context_menu.toggle_lock_selected.connect(_on_toggle_lock_selected_context_menu)
 	context_menu.save_pressed.connect(_on_save_pressed_context_menu)
 	context_menu.changed_color.connect(_on_changed_color_context_menu)
@@ -377,6 +383,9 @@ func _on_pressed_locked_button():
 	locked_button.visible = false
 	self.selectable = true
 
+func _on_checked_context_menu(is_enabled:bool):
+	check_box.visible = is_enabled
+
 #-----------------------------------------------------------
 #15. public methods
 #-----------------------------------------------------------
@@ -405,6 +414,8 @@ func get_data() -> Dictionary:
 			"header_text" : header_line_edit.text,
 			"text_edit_text" : text_edit.text,
 			"color_theme" : color_theme,
+			"is_visible_check" : check_box.visible,
+			"check" : check_box.button_pressed,
 			"path" : path,
 		}
 		return data

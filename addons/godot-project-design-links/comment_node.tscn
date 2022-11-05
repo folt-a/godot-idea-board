@@ -1,8 +1,8 @@
 [gd_scene load_steps=14 format=3 uid="uid://qn1mmq344o61"]
 
-[ext_resource type="Texture2D" uid="uid://cmqjcgfb2hitf" path="res://addons/godot-project-design-links/icon/handle.svg" id="1_0jksm"]
+[ext_resource type="Texture2D" uid="uid://b4fk08gp5qkid" path="res://addons/godot-project-design-links/icon/handle.svg" id="1_0jksm"]
 [ext_resource type="Script" path="res://addons/godot-project-design-links/comment_node.gd" id="1_pfk21"]
-[ext_resource type="FontFile" uid="uid://ev0lki5pf6w5" path="res://addons/godot-project-design-links/font/ZenMaruGothic-Bold-Subset.ttf" id="2_3t8kl"]
+[ext_resource type="FontFile" uid="uid://cr58ra3scju1v" path="res://addons/godot-project-design-links/font/ZenMaruGothic-Bold-Subset.ttf" id="2_3t8kl"]
 [ext_resource type="StyleBox" uid="uid://bqp6u8a2jbsek" path="res://addons/godot-project-design-links/theme/frame_stylebox.tres" id="2_afal7"]
 [ext_resource type="Script" path="res://addons/godot-project-design-links/context_menu/comment_menu.gd" id="3_at1ac"]
 [ext_resource type="StyleBox" uid="uid://bacwowhkqlri7" path="res://addons/godot-project-design-links/theme/selected_frame_stylebox.tres" id="3_pvsnt"]
@@ -66,6 +66,15 @@ layout_mode = 2
 offset_right = 320.0
 offset_bottom = 24.0
 mouse_default_cursor_shape = 13
+
+[node name="CheckBox" type="CheckBox" parent="MarginContainer/VB/TitleHBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+offset_right = 24.0
+offset_bottom = 24.0
+flat = true
+alignment = 1
 
 [node name="MarkdownToggledButton" type="Button" parent="MarginContainer/VB/TitleHBoxContainer"]
 unique_name_in_owner = true
