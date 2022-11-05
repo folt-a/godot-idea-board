@@ -324,8 +324,6 @@ func _gui_input(event):
 		_right_click_line_anim.play("blink")
 	elif event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_RIGHT:
 		penetrate_nodes()
-		accept_event()
-		return
 
 	# 右クリックメニュー
 	if event is InputEventMouseButton:
@@ -675,7 +673,6 @@ func _on_pressed_connect_button():
 		printerr(_S.tr("connect_size_err"))
 		return
 	var is_LtoR = (selected_nodes[0].position_offset + selected_nodes[0].size / 2) < (selected_nodes[1].position_offset + selected_nodes[1].size / 2)
-	print("is_LtoR",is_LtoR)
 	var from_node
 	var to_node
 	if is_LtoR:
