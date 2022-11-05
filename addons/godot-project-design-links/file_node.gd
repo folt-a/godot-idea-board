@@ -4,6 +4,7 @@
 
 #03. extends
 extends GraphNode
+@icon("res://icon.svg")
 #-----------------------------------------------------------
 #04. # docstring
 ## hoge
@@ -44,6 +45,7 @@ var _parent:GraphEdit
 var graph_node_type = "File"
 var id
 var icon_name:String = "File"
+var script_icon_path:String = ""
 
 var snap: = true
 var drag_start = null
@@ -64,6 +66,7 @@ var _stream:AudioStream # 音楽ファイルのときは読み込んでおく
 @onready var tscn_label = %TscnLabel
 
 @onready var script_h_box_container = %ScriptHBoxContainer
+@onready var script_class_icon_button:Button = %ScriptClassIconButton
 @onready var script_icon_button:Button = %ScriptIconButton
 @onready var locked_button_2 = %LockedButton2
 @onready var script_label = %ScriptLabel
@@ -92,6 +95,8 @@ func init(data:Dictionary):
 		position_offset.y = data.position_offset_y
 	if data.has("is_scene_play"):
 		tscn_play_button.visible = data.is_scene_play
+	if data.has("script_icon_path"):
+		script_icon_path = data.script_icon_path
 	var file_path:String = data.path
 	_parent = get_parent()
 	path = file_path
@@ -118,6 +123,7 @@ func init(data:Dictionary):
 		tscn_label.text = _get_path_name()
 		var instance:Node = load(file_path).instantiate()
 		var scn_script = instance.get_script()
+
 		var classname = instance.get_class()
 		tscn_icon_button.icon = _parent.get_icon(classname)
 		icon_name = classname
@@ -125,6 +131,19 @@ func init(data:Dictionary):
 			script_path = scn_script.resource_path
 			script_label.text = _get_script_name()
 			script_icon_button.icon = _parent.get_icon("Script")
+			_resize_script_class_icon.call_deferred()
+			if script_icon_path == "":
+				var icon_path = get_gori_oshi_icon_path(scn_script.resource_path)
+				if icon_path != "":
+					script_class_icon_button.icon = load(icon_path)
+					script_icon_path = icon_path
+				else:
+					script_class_icon_button.icon = _parent.get_icon(classname)
+					script_icon_path = classname
+			elif script_icon_path.begins_with("res:"):
+				script_class_icon_button.icon = load(script_icon_path)
+			else:
+				script_class_icon_button.icon = _parent.get_icon(script_icon_path)
 		else:
 			script_h_box_container.visible = false
 
@@ -136,6 +155,22 @@ func init(data:Dictionary):
 		script_label.text = _get_script_name()
 		script_icon_button.icon = _parent.get_icon("Script")
 		icon_name = "Script"
+		var script_class = load(file_path)
+		var classname = script_class.get_instance_base_type()
+		_resize_script_class_icon.call_deferred()
+		if script_icon_path == "":
+			var icon_path = get_gori_oshi_icon_path(script_path)
+
+			if icon_path != "":
+				script_class_icon_button.icon = load(icon_path)
+				script_icon_path = icon_path
+			else:
+				script_class_icon_button.icon = _parent.get_icon(classname)
+				script_icon_path = classname
+		elif script_icon_path.begins_with("res:"):
+			script_class_icon_button.icon = load(script_icon_path)
+		else:
+			script_class_icon_button.icon = _parent.get_icon(script_icon_path)
 
 	elif textfiles.contains(file_path.get_extension()) and FileAccess.file_exists(file_path):
 #		テキストファイル
@@ -335,6 +370,7 @@ func get_data() -> Dictionary:
 		"path" : path,
 		"is_scene_play" : tscn_play_button.visible,
 		"script_path" : script_path,
+		"script_icon_path" : script_icon_path
 	}
 	return data
 
@@ -421,3 +457,41 @@ func _resize(size):
 #	custom_minimum_size = size + Vector2(0,32)
 #	self.size = size + Vector2(0,32)
 
+func get_gori_oshi_icon_path(path:String) -> String:
+	var file = FileAccess.open(path,FileAccess.READ)
+	var line := file.get_line()
+	var icon_path:String = ""
+	while !file.eof_reached():
+		icon_path = _load_line(line)
+		if icon_path != "":
+			break
+		line = file.get_line()
+
+	if icon_path == "":
+		return ""
+
+	return icon_path
+
+func _load_line(line:String) -> String:
+#	コメントチェック
+	var regex_comment = RegEx.new()
+	regex_comment.compile("\\s*#.*")
+	var result_comment = regex_comment.search(line)
+	if result_comment:
+		return ""
+
+#	@icon("res://icon.svg")
+#	iconsチェック
+	var regex_icon = RegEx.new()
+	regex_icon.compile("\\s*@icon\\(.*")
+	var result_icon = regex_icon.search(line)
+	if result_icon:
+		var icon_pos := line.find("@icon(")
+		var icon_path = line.substr(icon_pos + 7).trim_suffix(" ").trim_prefix(" ").trim_suffix(")").trim_suffix("\"")
+		return icon_path
+
+	return ""
+
+func _resize_script_class_icon():
+	script_class_icon_button.size = script_icon_button.size
+	script_class_icon_button.custom_minimum_size = script_icon_button.size
