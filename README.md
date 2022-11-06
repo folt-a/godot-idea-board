@@ -14,6 +14,20 @@ You can arrange and manage items such as (scenes, resources, files, directories)
 
 ---
 
+## Install
+
+download this repostitory.
+
+Copy this addons/godot-project-design-links directory to your godot project's addons directory.
+
+**Reload Project.**
+
+![image](https://user-images.githubusercontent.com/32963227/200170578-2419e79f-31a3-4e2e-98bd-9a71591e08cc.png)
+
+"Design" at Topbar
+
+---
+
 ## Feature
 
 * [x] Add item by drag-drop from Godot's file system.
@@ -481,6 +495,20 @@ Godotエディタ内でプログラムファイルの関連設計図を作成し
 Godot4 プロジェクト内の（シーン、リソース、ファイル、ディレクトリ）といったアイテムを好きなように配置して管理することができます。
 
 ![image](https://user-images.githubusercontent.com/32963227/200152885-cd65ccfa-8bd3-44d0-94d7-bf41459ef674.png)
+
+---
+
+## インストール
+
+このリポジトリをダウンロードするかクローンします。
+
+このアドオンのディレクトリから、addons/godot-project-design-linksをGodotのプロジェクト直下のaddonsディレクトリに入れます。
+
+**※プロジェクトをリロードして、Godotエディタを再起動します。**
+
+![image](https://user-images.githubusercontent.com/32963227/200170578-2419e79f-31a3-4e2e-98bd-9a71591e08cc.png)
+
+「Design」 が上部バーにでてます。
 
 ---
 
