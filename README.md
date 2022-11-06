@@ -126,7 +126,7 @@ Layout files data in json.
 
 ### Canvas
 
-![image](https://user-images.githubusercontent.com/32963227/200160041-66bca82f-a34c-4eaa-914b-08a5ddd28f88.png)
+![image](https://user-images.githubusercontent.com/32963227/200162783-b2de776e-833c-4ddc-8bed-5c58dd23ca51.png)
 
 #### Copy　（Ctrl+C）
 
@@ -160,7 +160,7 @@ History will be lost and undo/redo will not be possible.
 
 ### Common Item feature
 
-![image](https://user-images.githubusercontent.com/32963227/200157255-e1e2a77a-c45b-4a47-a13c-8523bd43bb1e.png)
+![image](https://user-images.githubusercontent.com/32963227/200162810-02a51ed7-b897-419a-ac31-e0fc5308702a.png)
 
 #### Lock
 
@@ -185,7 +185,7 @@ Copy the link information of the target item to the clipboard.
 Paste on the canvas to create a "link" item.  
 (Ctrl+V or from the right-click menu)
 
-![image](https://user-images.githubusercontent.com/32963227/200157447-cd40dd69-1159-4dd7-89a0-f061b19d7122.png)
+![image](https://user-images.githubusercontent.com/32963227/200162857-319d2634-a93a-4094-81c1-6db29d00de91.png)
 
 Clicking on the "→ icon of the target item" of a "link" item, you will jump to the location of that target item on the canvas.
 
@@ -222,19 +222,19 @@ Even if there are other selected items, only the item you right-clicked will be 
 
 ### Header menu Items
 
-![image](https://user-images.githubusercontent.com/32963227/200157941-bc760c01-8ade-46a1-af34-9323fb94cb99.png)
+![image](https://user-images.githubusercontent.com/32963227/200162879-63610001-a10b-405b-ba4e-8ecb474e8180.png)
 
 If your window is small, the header menu may not be displayed all the way to the right edge. I'll fix it soon, sorry!
 
-![image](https://user-images.githubusercontent.com/32963227/200158048-a7615fd9-da12-4d45-a7d7-0f956d229fd9.png)
+![image](https://user-images.githubusercontent.com/32963227/200162885-1bf7aa20-67c0-482e-bc99-b4c1e2952de8.png)
 
 Clicking the button on the header menu and clicking on the canvas creates the item at the click point.
 
 #### Group（Alt+G）
 
-![image](https://user-images.githubusercontent.com/32963227/200160083-0c4b4503-2d19-4436-91bc-220de360b66d.png)
+![image](https://user-images.githubusercontent.com/32963227/200162890-24e7e6e1-521b-4446-ae27-122b9c22685e.png)
 
-![image](https://user-images.githubusercontent.com/32963227/200156375-831ccb9e-5ed4-4367-acde-f8f997d97eff.png)
+![image](https://user-images.githubusercontent.com/32963227/200162897-da087196-0b6a-4afd-ac50-22fab4c67cdb.png)
 
 Press the "Group" button to create a "Group" item at the point where the mouse clicks on the canvas.
 
@@ -249,9 +249,9 @@ Right-click context menu "Group Unlock" to unlock all items within the group's r
 
 #### Label
 
-![image](https://user-images.githubusercontent.com/32963227/200160092-a28069e6-6e0e-4d1f-8795-3d5071b111f1.png)
+![image](https://user-images.githubusercontent.com/32963227/200162907-cc52f3d0-2600-4027-b4db-a0af12695231.png)
 
-![image](https://user-images.githubusercontent.com/32963227/200156653-7d2ae945-9897-490b-af04-d05623c10a5a.png)
+![image](https://user-images.githubusercontent.com/32963227/200162969-29b1bcb1-08fc-4ddc-bddb-40cbc5e02ef3.png)
 
 Press the "Label" button to create a "Label" item at the point where the mouse clicks on the canvas.
 
@@ -274,17 +274,15 @@ If you change the color, the next time you add a label, it will be that color fr
 
 #### TxtDoc (Text Document)
 
-![image](https://user-images.githubusercontent.com/32963227/200160106-03116d9f-a6f6-48da-8009-43eb03e50051.png)
+![image](https://user-images.githubusercontent.com/32963227/200163130-e7604899-7665-4dfc-8873-c979274b3ad1.png)
 
-![image](https://user-images.githubusercontent.com/32963227/200159512-63069850-e0cc-4629-9e06-17f1f2ba30d6.png)
+![image](https://user-images.githubusercontent.com/32963227/200163120-81f84812-1afe-4735-8118-f1ce9272f35d.png)
 
 Press the "TxtDoc" button to create a "TxtDoc" item at the point of mouse click on the canvas.
 
 The "TxtDoc" item is intended for document production where multiple lines of text are to be entered.
 
 Markdowns style text can be entered.
-
-![image](https://user-images.githubusercontent.com/32963227/200159125-558830d4-e8bc-4390-902b-18e59cbbf15a.png)
 
 Press the "Markdown and Edit Switch Icon" button in the upper left corner to switch modes between markdown view and text editing.
 
@@ -308,9 +306,9 @@ Related: "Create text from this file" for text files
 
 #### Connect button（Alt+C）
 
-![image](https://user-images.githubusercontent.com/32963227/200160113-49b3e265-8d2f-4a90-82b2-f7690b889b6d.png)
+![image](https://user-images.githubusercontent.com/32963227/200163153-00879523-9a7e-4fbf-89b7-a022e698d931.png)
 
-![image](https://user-images.githubusercontent.com/32963227/200157010-9ce3c4ee-c88c-4051-8b7c-5de163e53444.png)
+![image](https://user-images.githubusercontent.com/32963227/200163229-2b8334c2-21ff-4ff7-9a54-755636708061.png)
 
 Two items can be connected to each other to create a connect item.
 
@@ -330,9 +328,9 @@ Once you change the color, the next time you add a "Connect" item, it will be th
 
 ### other Header menu button
 
-![image](https://user-images.githubusercontent.com/32963227/200158084-224fd330-70c4-447c-95e1-0f851df11733.png)
+![image](https://user-images.githubusercontent.com/32963227/200163241-5504506a-9656-48a5-8c5d-be46991c0745.png)
 
-![image](https://user-images.githubusercontent.com/32963227/200158089-ed5f71aa-a49c-4382-bd2a-5b392838216c.png)
+![image](https://user-images.githubusercontent.com/32963227/200163246-db56136f-d95e-45c3-8fa3-69e7cf5275d1.png)
 
 #### Godot's built-in GraphEdit's button.
 
@@ -350,7 +348,7 @@ The difference with Ctrl+S is that even if there are multiple canvases, this one
 
 #### Lock button
 
-![image](https://user-images.githubusercontent.com/32963227/200160119-d78556e8-f9dd-4eaa-81b7-6fab925f2981.png)
+![image](https://user-images.githubusercontent.com/32963227/200163251-98a53350-8f28-4375-b6a2-2fbde784b05b.png)
 
 Locks all selected items.
 
@@ -360,7 +358,7 @@ If you want to unlock all the locked items, please use the command since there i
 
 #### Background color button
 
-![image](https://user-images.githubusercontent.com/32963227/200160123-ae08b905-f04b-4d1b-bd11-6829aa58364e.png)
+![image](https://user-images.githubusercontent.com/32963227/200163259-7035c1ff-256f-4792-9a35-063a0dd082fe.png)
 
 change background color.
 
@@ -374,15 +372,15 @@ andchange sub grid color.
 
 #### Sound settings buttons
 
-![image](https://user-images.githubusercontent.com/32963227/200160141-52f38196-1f0f-4faa-b8ee-6296c72d3b63.png)
-
-![image](https://user-images.githubusercontent.com/32963227/200160136-20379cd8-b76b-42da-a162-c9d42b7e6a47.png)
+![image](https://user-images.githubusercontent.com/32963227/200163270-e27d5e1a-0696-441f-bd85-f1c8d9817a6e.png)
 
 You can set the music playing.
 
 No pause! Will add if requested.
 
 #### Arrange buttons
+
+![image](https://user-images.githubusercontent.com/32963227/200160141-52f38196-1f0f-4faa-b8ee-6296c72d3b63.png)
 
 Aligns the currently selected items.
 
@@ -405,7 +403,7 @@ There are two buttons, one for aligning up, bottom, left, right, and one for ali
 
 ### Scene (.tscn)
 
-![image](https://user-images.githubusercontent.com/32963227/200158590-e9a2a0da-ac9c-4cb0-9c3d-4827271382d5.png)
+![image](https://user-images.githubusercontent.com/32963227/200163302-ba3601e1-b574-4b82-808b-79459d44c134.png)
 
 Click the icon in the upper left corner of the first line to open that scene.
 
@@ -439,11 +437,11 @@ Click to open the inspector.
 
 ### Text Document
 
-![image](https://user-images.githubusercontent.com/32963227/200158817-53b5d827-6e30-49bc-bd00-e6718431c870.png)
+![image](https://user-images.githubusercontent.com/32963227/200163317-57d00484-3ab3-4b33-b5f3-9643a9d81ebc.png)
 
 Right-click context menu "Make TxtDoc" to create a "TxtDoc" item from this text file.
 
-![image](https://user-images.githubusercontent.com/32963227/200158856-d466177c-72ee-45d9-b40b-e0814c000ce3.png)
+![image](https://user-images.githubusercontent.com/32963227/200163330-9f69a311-54a7-483b-9dd2-6cd8fd1ca757.png)
 
 The "TxtDoc" item you have now created will have an additional button to open the location of that file and a button to save it.
 
