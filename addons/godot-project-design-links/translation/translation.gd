@@ -59,8 +59,9 @@ func translate(id:String)->String:
 	var translations:Dictionary = strings_dict[id]
 	var locale:String = TranslationServer.get_locale()
 	if not locale in translations:
-		print("warning: there is no locale '%s' for id '%s'" % [locale, id])
-		return id
+#		print("warning: there is no locale '%s' for id '%s'" % [locale, id])
+#		FALLBACK!
+		return translations["en"]
 
 	var trans:String = translations[locale]
 #	print("id '%s' sucessfully translated on locale '%s' to '%s'" % [id, locale, trans])
