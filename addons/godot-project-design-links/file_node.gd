@@ -38,7 +38,7 @@ enum ITEM_TYPE{
 #-----------------------------------------------------------
 var path:String = ""
 var script_path:String = ""
-var uid
+var uid:String = ""
 var id
 var script_icon_path:String = ""
 #-----------------------------------------------------------
@@ -137,14 +137,17 @@ func init(data:Dictionary):
 	else:
 		var textfiles = _parent.editor_interface.get_editor_settings().get("docks/filesystem/textfile_extensions")
 
-	#	ファイルがあるかチェックする、なかったらuidをチェックしてあればファイルを更新
+#		ファイルがあるかチェックする、なかったらuidをチェックしてあればファイルを更新
+#		※スクリプトはUIDがない
 		var is_exists = FileAccess.file_exists(file_path)
-		if is_exists:
+		var resource_exists = ResourceLoader.exists(file_path)
+
+		if is_exists and resource_exists:
 			uid = ResourceUID.id_to_text(ResourceLoader.get_resource_uid(file_path))
-		else:
-			is_exists = ResourceLoader.exists(uid)
+		elif uid != "" and ResourceLoader.exists(uid):
 			file_path = ResourceUID.get_id_path(ResourceUID.text_to_id(uid))
 			path = file_path
+			is_exists = FileAccess.file_exists(file_path)
 
 		if file_path.ends_with(".tscn") and is_exists:
 	#		シーン
@@ -161,6 +164,7 @@ func init(data:Dictionary):
 				script_label.text = _get_script_name()
 				script_icon_button.icon = _parent.get_icon("Script")
 				_resize_script_class_icon.call_deferred()
+
 				if script_icon_path == "":
 					var icon_path = get_gori_oshi_icon_path(scn_script.resource_path)
 					if icon_path != "":
