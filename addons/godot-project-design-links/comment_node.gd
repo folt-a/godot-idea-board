@@ -432,6 +432,8 @@ func get_data() -> Dictionary:
 			"header_text" : header_line_edit.text,
 			"text_edit_text" : text_edit.text,
 			"color_theme" : color_theme,
+			"is_visible_check" : check_box.visible,
+			"check" : check_box.button_pressed,
 			"path" : path,
 		}
 		return data
