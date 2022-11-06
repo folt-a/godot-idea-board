@@ -1,8 +1,7 @@
-[gd_scene load_steps=14 format=3 uid="uid://qn1mmq344o61"]
+[gd_scene load_steps=13 format=3 uid="uid://qn1mmq344o61"]
 
 [ext_resource type="Texture2D" uid="uid://b4fk08gp5qkid" path="res://addons/godot-project-design-links/icon/handle.svg" id="1_0jksm"]
 [ext_resource type="Script" path="res://addons/godot-project-design-links/comment_node.gd" id="1_pfk21"]
-[ext_resource type="FontFile" uid="uid://cr58ra3scju1v" path="res://addons/godot-project-design-links/font/ZenMaruGothic-Bold-Subset.ttf" id="2_3t8kl"]
 [ext_resource type="StyleBox" uid="uid://bqp6u8a2jbsek" path="res://addons/godot-project-design-links/theme/frame_stylebox.tres" id="2_afal7"]
 [ext_resource type="Script" path="res://addons/godot-project-design-links/context_menu/comment_menu.gd" id="3_at1ac"]
 [ext_resource type="StyleBox" uid="uid://bacwowhkqlri7" path="res://addons/godot-project-design-links/theme/selected_frame_stylebox.tres" id="3_pvsnt"]
@@ -64,7 +63,7 @@ theme_override_constants/separation = 0
 [node name="TitleHBoxContainer" type="HBoxContainer" parent="MarginContainer/VB"]
 layout_mode = 2
 offset_right = 320.0
-offset_bottom = 24.0
+offset_bottom = 23.0
 mouse_default_cursor_shape = 13
 
 [node name="CheckBox" type="CheckBox" parent="MarginContainer/VB/TitleHBoxContainer"]
@@ -80,7 +79,7 @@ alignment = 1
 unique_name_in_owner = true
 layout_mode = 2
 offset_right = 8.0
-offset_bottom = 24.0
+offset_bottom = 23.0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 icon_alignment = 1
@@ -120,12 +119,11 @@ unique_name_in_owner = true
 layout_mode = 2
 offset_left = 12.0
 offset_right = 320.0
-offset_bottom = 24.0
+offset_bottom = 23.0
 size_flags_horizontal = 3
 mouse_filter = 2
 mouse_default_cursor_shape = 13
 theme_override_constants/caret_width = 3
-theme_override_fonts/font = ExtResource("2_3t8kl")
 theme_override_styles/normal = ExtResource("6_r7dye")
 theme_override_styles/focus = ExtResource("7_rawt7")
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_ftuq2")
@@ -186,12 +184,11 @@ icon_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(96, 40)
 layout_mode = 2
-offset_top = 24.0
+offset_top = 23.0
 offset_right = 320.0
 offset_bottom = 304.0
 size_flags_vertical = 3
 mouse_force_pass_scroll_events = false
-theme_override_fonts/font = ExtResource("2_3t8kl")
 theme_override_styles/normal = ExtResource("8_alaah")
 theme_override_styles/focus = ExtResource("8_alaah")
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_vaj17")
@@ -210,11 +207,6 @@ offset_right = 320.0
 offset_bottom = 304.0
 size_flags_vertical = 3
 focus_mode = 2
-theme_override_fonts/normal_font = ExtResource("2_3t8kl")
-theme_override_fonts/bold_font = ExtResource("2_3t8kl")
-theme_override_fonts/italics_font = ExtResource("2_3t8kl")
-theme_override_fonts/bold_italics_font = ExtResource("2_3t8kl")
-theme_override_fonts/mono_font = ExtResource("2_3t8kl")
 theme_override_styles/focus = SubResource("StyleBoxLine_pd02s")
 theme_override_styles/normal = SubResource("StyleBoxLine_pd02s")
 bbcode_enabled = true
