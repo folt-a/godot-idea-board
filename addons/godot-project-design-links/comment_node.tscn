@@ -198,7 +198,6 @@ theme_override_styles/read_only = SubResource("StyleBoxEmpty_vaj17")
 virtual_keyboard_enabled = false
 wrap_mode = 1
 draw_tabs = true
-draw_spaces = true
 scroll_smooth = true
 
 [node name="ParsedRichTextLabel" type="RichTextLabel" parent="MarginContainer/VB"]

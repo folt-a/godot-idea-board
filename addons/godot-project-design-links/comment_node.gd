@@ -455,8 +455,8 @@ func _resize(size):
 	size = get_parent().snap(size)
 	self.custom_minimum_size = size
 	self.size = size
-	text_edit.custom_minimum_size = size - Vector2(0,title_h_box_container.size.y) - Vector2(0,menu_h_box_container.size.y) - Vector2(0, 32)
-	text_edit.size =  size - Vector2(0,title_h_box_container.size.y) - Vector2(0,menu_h_box_container.size.y) - Vector2(0, 32)
+	text_edit.custom_minimum_size = size - Vector2(0,title_h_box_container.size.y) - Vector2(0,menu_h_box_container.size.y)
+	text_edit.size =  size - Vector2(0,title_h_box_container.size.y) - Vector2(0,menu_h_box_container.size.y)
 
 	get_parent().set_dirty()
 	# ラベルはフォントサイズも追従する
