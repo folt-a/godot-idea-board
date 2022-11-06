@@ -12,8 +12,6 @@ Godot4 プロジェクト内の（シーン、リソース、ファイル、デ�
 
 ---
 
-各アイテム
-
 ## メインの機能
 
 * [x] Godotファイルシステムからのドラッグドロップによる各アイテム追加
@@ -29,13 +27,9 @@ Godotのファイルシステムのところからアイテムをドラッグし
 
 シーンなら2D・3Dに対応したメイン画面、スクリプトファイルならスクリプト画面になる、などです。
 
-各アイテムでできること
-
 ### グループ・ラベル・テキスト・接続のアイテム追加（ヘッダーメニュー）
 
 ヘッダーメニューから管理系のアイテムを追加してアイテムをうまくまとめることができます。
-
-グループ・ラベル・テキスト・接続の使い方・できること
 
 ### キャンバス内のアイテムへジャンプできるリンク作成
 
@@ -467,6 +461,14 @@ Ctrl+Sとの違いは複数キャンバスがあってもこちらはこのキ�
 クリックするとGodotのファイルシステムでそのディレクトリの位置を開きます。
 
 （このディレクトリ内のファイルをアイテムとして追加する機能がほしいなあ）TODO
+
+---
+
+このアドオンはGodot3のアドオン [Project-Map](https://github.com/Yogoda/Project-Map) をベースにして作成しています。
+
+また、Markdownパースのスクリプトは[Dialogic](https://github.com/coppolaemilio/dialogic)の[DocsMarkdownParser.gd](https://github.com/coppolaemilio/dialogic/blob/dialogic-1/addons/dialogic/Documentation/Nodes/DocsMarkdownParser.gd)を使用しています。
+
+ありがとうございます！
 
 ---
 
