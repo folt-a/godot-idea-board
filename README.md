@@ -53,6 +53,8 @@ Godotのファイルシステムのところからアイテムをドラッグし
 
 #### ウィンドウボタン
 
+![image](https://user-images.githubusercontent.com/32963227/200159963-af58071b-c3b1-4225-b873-4064581f152a.png)
+
 **開発中のため不安定**
 
 現在のキャンバスを別ウィンドウとして表示します。
@@ -61,15 +63,21 @@ Godotのファイルシステムのところからアイテムをドラッグし
 
 #### Hスプリット、左キャンバス指定、右キャンバス指定
 
+![image](https://user-images.githubusercontent.com/32963227/200159975-4d253cf3-c36a-4258-bbdb-b5928597bcea.png)
+
 キャンバスを左右に分けて別のレイアウトを表示できます。
 
 左キャンバス指定、右キャンバス指定ボタンでレイアウトを変更する対象を選択します。
 
 #### リロードボタン
 
+![image](https://user-images.githubusercontent.com/32963227/200159984-a7997c84-d3e4-4c8f-9379-afc953626635.png)
+
 レイアウトファイル一覧を更新します。
 
 #### 追加ボタン
+
+![image](https://user-images.githubusercontent.com/32963227/200159991-f0873628-c844-4d29-ab1c-6e0d86521f02.png)
 
 新しくレイアウトファイルを追加します。
 
@@ -77,11 +85,15 @@ Godotのファイルシステムのところからアイテムをドラッグし
 
 #### 複製ボタン
 
+![image](https://user-images.githubusercontent.com/32963227/200159997-dcd64d60-9bd2-405f-be72-c730f1d198d0.png)
+
 現在選択中のレイアウトファイルをコピーして新しくレイアウトファイルを追加します。
 
 ポップアップダイアログで新しいレイアウトファイル名を入力してOKをおします。
 
 #### 名前変更ボタン
+
+![image](https://user-images.githubusercontent.com/32963227/200160002-ef00d650-1873-446c-bac9-5f760038abf1.png)
 
 現在選択中のレイアウトファイルの名前を変更します。
 
@@ -89,12 +101,16 @@ Godotのファイルシステムのところからアイテムをドラッグし
 
 #### 削除ボタン
 
+![image](https://user-images.githubusercontent.com/32963227/200160011-90acdda0-90cc-485e-a415-4425c008cd0e.png)
+
 現在選択中のレイアウトファイルを削除します。
 
 確認ポップアップダイアログがでます。
 
 
 #### レイアウトアイテムリスト
+
+![image](https://user-images.githubusercontent.com/32963227/200160016-d19c79eb-aef0-4e39-8d09-de06f050a95e.png)
 
 レイアウトファイルの一覧が表示されています。
 
@@ -104,6 +120,8 @@ Godotのファイルシステムのところからアイテムをドラッグし
 
 #### レイアウトディレクトリ変更
 
+![image](https://user-images.githubusercontent.com/32963227/200160027-5227e7f9-6ee3-4701-ab4b-b84b56054ed1.png)
+
 このアドオンで使用するレイアウトファイルを保存、読み込みをするディレクトリを変更します。
 
 レイアウトファイルはjsonでデータを保持しています。
@@ -111,6 +129,8 @@ Godotのファイルシステムのところからアイテムをドラッグし
 ---
 
 ### キャンバス
+
+![image](https://user-images.githubusercontent.com/32963227/200160041-66bca82f-a34c-4eaa-914b-08a5ddd28f88.png)
 
 #### コピー　（Ctrl+C）
 
@@ -222,6 +242,8 @@ json形式でコピーするのでこのアドオン以外では使えなさそ�
 
 #### グループ（Alt+G）
 
+![image](https://user-images.githubusercontent.com/32963227/200160083-0c4b4503-2d19-4436-91bc-220de360b66d.png)
+
 ![image](https://user-images.githubusercontent.com/32963227/200156375-831ccb9e-5ed4-4367-acde-f8f997d97eff.png)
 
 「グループ」ボタンを押し、キャンバス上でマウスクリックしたところに「グループ」アイテムを作成します。
@@ -236,6 +258,8 @@ json形式でコピーするのでこのアドオン以外では使えなさそ�
 右クリックコンテキストメニュー　「グループ範囲ロック解除」を押すと、グループの範囲内のアイテムをすべてロック解除します。
 
 #### ラベル
+
+![image](https://user-images.githubusercontent.com/32963227/200160092-a28069e6-6e0e-4d1f-8795-3d5071b111f1.png)
 
 ![image](https://user-images.githubusercontent.com/32963227/200156653-7d2ae945-9897-490b-af04-d05623c10a5a.png)
 
@@ -259,6 +283,8 @@ json形式でコピーするのでこのアドオン以外では使えなさそ�
 色変更をすると、次からラベルを追加するときは最初からその色になります。
 
 #### テキスト
+
+![image](https://user-images.githubusercontent.com/32963227/200160106-03116d9f-a6f6-48da-8009-43eb03e50051.png)
 
 ![image](https://user-images.githubusercontent.com/32963227/200159512-63069850-e0cc-4629-9e06-17f1f2ba30d6.png)
 
@@ -290,6 +316,8 @@ json形式でコピーするのでこのアドオン以外では使えなさそ�
 関連：テキストファイルの「このファイルからテキストをつくる」
 
 #### 接続（Alt+C）
+
+![image](https://user-images.githubusercontent.com/32963227/200160113-49b3e265-8d2f-4a90-82b2-f7690b889b6d.png)
 
 ![image](https://user-images.githubusercontent.com/32963227/200157010-9ce3c4ee-c88c-4051-8b7c-5de163e53444.png)
 
@@ -331,6 +359,8 @@ Ctrl+Sとの違いは複数キャンバスがあってもこちらはこのキ�
 
 #### ロック
 
+![image](https://user-images.githubusercontent.com/32963227/200160119-d78556e8-f9dd-4eaa-81b7-6fab925f2981.png)
+
 選択中のものをまとめてロックします。
 
 ロック状態のものは選択できないので、「まとめてロック解除」はありません！
@@ -339,15 +369,23 @@ Ctrl+Sとの違いは複数キャンバスがあってもこちらはこのキ�
 
 #### 背景色
 
+![image](https://user-images.githubusercontent.com/32963227/200160123-ae08b905-f04b-4d1b-bd11-6829aa58364e.png)
+
 キャンバスの背景色を変更します。
 
 #### グリッドの色
+
+![image](https://user-images.githubusercontent.com/32963227/200160130-59e1f79a-2269-4282-b302-c00094250520.png)
 
 メイングリッドの色を変更します。
 
 サブグリッドの色はメイングリッドの色にaを0.1乗算したものが設定されます。
 
 #### 音量・音楽再生・音楽停止・ループ
+
+![image](https://user-images.githubusercontent.com/32963227/200160141-52f38196-1f0f-4faa-b8ee-6296c72d3b63.png)
+
+![image](https://user-images.githubusercontent.com/32963227/200160136-20379cd8-b76b-42da-a162-c9d42b7e6a47.png)
 
 再生中の音楽の設定ができます。
 
@@ -392,6 +430,8 @@ Ctrl+Sとの違いは複数キャンバスがあってもこちらはこのキ�
 
 ### 画像リソース
 
+![image](https://user-images.githubusercontent.com/32963227/200160176-394f4c5c-e451-467a-8dbe-92b7f9ba3463.png)
+
 画像リソースはその画像を表示します。
 
 アイコンをクリックするとインスペクタでそのファイルを開きます。
@@ -422,15 +462,13 @@ Ctrl+Sとの違いは複数キャンバスがあってもこちらはこのキ�
 
 ### ディレクトリ
 
+![image](https://user-images.githubusercontent.com/32963227/200160191-b593addd-881c-4650-bc2e-c802593ae44c.png)
+
 クリックするとGodotのファイルシステムでそのディレクトリの位置を開きます。
 
 （このディレクトリ内のファイルをアイテムとして追加する機能がほしいなあ）TODO
 
 ---
-
-## 設定ファイル
-
-すべてのres://addons/godot-graphnode-document 下に
 
 ## 今後追加したいもの
 
