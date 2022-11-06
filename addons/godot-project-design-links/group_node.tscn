@@ -35,20 +35,17 @@ slot/0/draw_stylebox = true
 script = ExtResource("1_m4t2i")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 2
 offset_left = 3.0
 offset_top = 3.0
 offset_right = 175.0
 offset_bottom = 26.0
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
-layout_mode = 2
 offset_right = 172.0
 offset_bottom = 23.0
 
 [node name="SelectButton" type="Button" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 2
 offset_right = 8.0
 offset_bottom = 23.0
 mouse_default_cursor_shape = 2
@@ -57,7 +54,6 @@ icon_alignment = 1
 [node name="IconTextureRect" type="TextureRect" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
 visible = false
-layout_mode = 2
 offset_left = 12.0
 offset_right = 12.0
 offset_bottom = 31.0
@@ -65,7 +61,6 @@ stretch_mode = 5
 
 [node name="HeaderLineEdit" type="LineEdit" parent="MarginContainer/HBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 2
 offset_left = 12.0
 offset_right = 168.0
 offset_bottom = 23.0
@@ -76,7 +71,6 @@ theme_override_styles/normal = ExtResource("5_gmg6p")
 theme_override_styles/focus = ExtResource("6_qoikp")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
-layout_mode = 2
 offset_left = 172.0
 offset_right = 172.0
 offset_bottom = 23.0
@@ -85,7 +79,6 @@ alignment = 2
 [node name="LockedButton" type="Button" parent="MarginContainer/HBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
 visible = false
-layout_mode = 2
 offset_left = 12.0
 offset_right = 20.0
 offset_bottom = 24.0

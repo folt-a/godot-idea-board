@@ -30,19 +30,19 @@ keycode = 84
 [sub_resource type="Shortcut" id="Shortcut_ms2rg"]
 events = [SubResource("InputEventKey_ijkyd")]
 
-[sub_resource type="InputEventKey" id="InputEventKey_yl0k0"]
-alt_pressed = true
-keycode = 76
-
-[sub_resource type="Shortcut" id="Shortcut_f84nk"]
-events = [SubResource("InputEventKey_yl0k0")]
-
 [sub_resource type="InputEventKey" id="InputEventKey_yf1im"]
 alt_pressed = true
 keycode = 67
 
 [sub_resource type="Shortcut" id="Shortcut_s74jh"]
 events = [SubResource("InputEventKey_yf1im")]
+
+[sub_resource type="InputEventKey" id="InputEventKey_yl0k0"]
+alt_pressed = true
+keycode = 76
+
+[sub_resource type="Shortcut" id="Shortcut_f84nk"]
+events = [SubResource("InputEventKey_yl0k0")]
 
 [node name="CanvasMenu" type="VBoxContainer"]
 anchors_preset = 15
@@ -117,12 +117,23 @@ theme_override_constants/h_separation = 0
 shortcut = SubResource("Shortcut_ms2rg")
 text = "テキスト"
 
-[node name="LockButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
+[node name="ConnectButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 offset_left = 196.0
 offset_right = 244.0
+offset_bottom = 38.0
+mouse_default_cursor_shape = 2
+shortcut = SubResource("Shortcut_s74jh")
+text = "接続"
+
+[node name="LockButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(48, 0)
+layout_mode = 2
+offset_left = 246.0
+offset_right = 294.0
 offset_bottom = 38.0
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_f84nk")
@@ -137,17 +148,6 @@ offset_right = 108.0
 offset_bottom = 38.0
 mouse_default_cursor_shape = 2
 text = "ロック解除"
-
-[node name="ConnectButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
-unique_name_in_owner = true
-custom_minimum_size = Vector2(48, 0)
-layout_mode = 2
-offset_left = 246.0
-offset_right = 294.0
-offset_bottom = 38.0
-mouse_default_cursor_shape = 2
-shortcut = SubResource("Shortcut_s74jh")
-text = "接続"
 
 [node name="BgColorIcon" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
