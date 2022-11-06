@@ -2,7 +2,7 @@
 
 Design all Godot editor items. Godot4 addon.
 
-[日本語READMEはこちら japanese readme is here](https://github.com/folt-a/godot-project-design-links#%E3%83%A1%E3%82%A4%E3%83%B3%E3%81%AE%E6%A9%9F%E8%83%BD)
+[日本語READMEはこちら japanese readme is here](https://github.com/folt-a/godot-project-design-links#%E6%97%A5%E6%9C%AC%E8%AA%9E)
 
 There is no need to go back and forth between the design document tool and the Godot editor.
 
@@ -253,226 +253,223 @@ Right-click context menu "Group Unlock" to unlock all items within the group's r
 
 ![image](https://user-images.githubusercontent.com/32963227/200156653-7d2ae945-9897-490b-af04-d05623c10a5a.png)
 
-「ラベル」ボタンを押し、キャンバス上でマウスクリックしたところに「ラベル」アイテムを作成します。
+Press the "Label" button to create a "Label" item at the point where the mouse clicks on the canvas.
 
-「ラベル」は１行のふせんのように使う目的のアイテムです。
+A "Label" is an item intended to be used like a one-line label.
 
-右クリックコンテキストメニュー　「タイトル編集」を押す、またはグループヘッダーをダブルクリックすると、  
-ラベルの名前を編集することができます。ラベルの名前の幅の長さよりラベルは小さくなりません。（＝常に全文字表示される）
+Press the right-click context menu "Edit Title" or double-click on the group header.  
+You can edit the name of the label by pressing the right-click context menu "Edit Title" or double-clicking on the group header. The label will not be smaller than the length of the label name width. (= all characters are always displayed)
 
-ラベルの右下のハンドルをつかむと、ラベルのサイズを変更することができます。  
+You can change the size of the label by grabbing the bottom right handle of the label.  
 
-**縦のサイズを変更すると、フォントサイズも縦の長さに応じて大きくなります。**
+**If you change the size.y, the font size will also increase according to the vertical length. **
 
-右クリックコンテキストメニュー　「タスクにする」を押すと、チェックボックスが左に表示されます。
+Right-click context menu Press "Task" and a checkbox will appear on the left.
 
-チェックのON/OFFは保存内容に含まれます。ただのチェックボックスですが、タスクTODOリストのように使うことができます。
+Check ON/OFF is included in the saved contents. It is just a check box, but you can use it like a task TODO list!
 
-右クリックコンテキストメニュー　「背景～」を押すと、色がその色に変わります。
+Right click context menu Press "Bg~" to change the color to that color theme.
 
-色変更をすると、次からラベルを追加するときは最初からその色になります。
+If you change the color, the next time you add a label, it will be that color from the beginning.
 
-#### テキスト
+#### TxtDoc (Text Document)
 
 ![image](https://user-images.githubusercontent.com/32963227/200160106-03116d9f-a6f6-48da-8009-43eb03e50051.png)
 
 ![image](https://user-images.githubusercontent.com/32963227/200159512-63069850-e0cc-4629-9e06-17f1f2ba30d6.png)
 
-「テキスト」ボタンを押し、キャンバス上でマウスクリックしたところに「テキスト」アイテムを作成します。
+Press the "TxtDoc" button to create a "TxtDoc" item at the point of mouse click on the canvas.
 
-「テキスト」は複数行のテキストを入力するドキュメント制作を目的としたアイテムです。
+The "TxtDoc" item is intended for document production where multiple lines of text are to be entered.
 
-マークダウンを入力することができます。
+Markdowns style text can be entered.
 
 ![image](https://user-images.githubusercontent.com/32963227/200159125-558830d4-e8bc-4390-902b-18e59cbbf15a.png)
 
-左上の「マークダウン↔編集切り替えアイコン」ボタンを押すと、マークダウン表示とテキスト編集でモードが切り替わります。
+Press the "Markdown and Edit Switch Icon" button in the upper left corner to switch modes between markdown view and text editing.
 
-右クリックコンテキストメニュー　「タイトル編集」を押す、またはグループヘッダーをダブルクリックすると、  
-テキストのタイトルの名前を編集することができます。タイトルの名前の幅の長さよりこのアイテムの幅は小さくなりません。（＝常に全文字表示される）
+Right-click context menu Press "Edit Title" or double-click on the group header to
 
-右下のハンドルをつかむと、サイズを変更することができます。  
+You can edit the name of the text title. The width of this item will not be smaller than the length of the width of the title name. (= all characters are always displayed)
 
-右クリックコンテキストメニュー　「タスクにする」を押すと、チェックボックスが左に表示されます。
+Grab the bottom right handle to change the size.  
 
-チェックのON/OFFは保存内容に含まれます。ただのチェックボックスです。
+Right-click context menu Press "Make it a task" and a check box will appear on the left.
 
-右クリックコンテキストメニュー　「背景～」を押すと、色がその色に変わります。
+Check ON/OFF is included in the saved contents. It is just a check box.
 
-色変更をすると、次からテキストを追加するときは最初からその色になります。
+Right-click context menu Press "Background~" to change the color to that color.
 
-（未実装：ファイルにして保存する機能を追加したい）TODO
+After changing the color, the next time you add text, it will be the same color as the first time you add text.
 
-関連：テキストファイルの「このファイルからテキストをつくる」
+(Not implemented: I want to add a function to save the file as a file) TODO
 
-#### 接続（Alt+C）
+Related: "Create text from this file" for text files
+
+#### Connect button（Alt+C）
 
 ![image](https://user-images.githubusercontent.com/32963227/200160113-49b3e265-8d2f-4a90-82b2-f7690b889b6d.png)
 
 ![image](https://user-images.githubusercontent.com/32963227/200157010-9ce3c4ee-c88c-4051-8b7c-5de163e53444.png)
 
-2つのアイテム同士をつないでコネクトアイテムを作ることができます。
+Two items can be connected to each other to create a connect item.
 
-プログラムファイルをつないでクラス図のようにして設計したり、キャラクター相関図やストーリーフローのドキュメントを作ったりするのに使えます。
+This can be used to connect program files and design them as a class diagram, or to create a character correlation chart or story flow document.
 
-2つのアイテムを選択した状態でAlt＋Cまたは「接続」ボタンを押すとコネクトアイテムが間にできます。
+When two items are selected, press Alt+C or the "Connect" button to create a connect item between them.
 
-アイテムを選択している数が2以外の場合はなにもおこりません。2つのみ選択してください。
+If the number of items selected is not 2, nothing will happen; only 2 items should be selected.
 
-「コネクト」アイテム以外のすべてのアイテムをつなぐことができます。
+You can connect all items except the "connect" item.
 
-「コネクト」アイテムをダブルクリックすると、表示文字を編集することができます。（**1行のみ**）常に全文字表示されます。
+Double-click on a "connect" item to edit the text displayed (**only one line**). (**only one line**) All characters are always displayed.
 
-右クリックコンテキストメニュー　「色～」を押すと、色がその色に変わります。
+Right-click context menu "Color~" to change the color to that color.
 
-色変更をすると、次から「コネクト」アイテムを追加するときは最初からその色になります。
+Once you change the color, the next time you add a "Connect" item, it will be the same color from the beginning.
 
-### その他のヘッダーメニュー
+### other Header menu button
 
 ![image](https://user-images.githubusercontent.com/32963227/200158084-224fd330-70c4-447c-95e1-0f851df11733.png)
 
 ![image](https://user-images.githubusercontent.com/32963227/200158089-ed5f71aa-a49c-4382-bd2a-5b392838216c.png)
 
-#### Godotの組み込みGraphEditにもとからついているやつ
+#### Godot's built-in GraphEdit's button.
 
-ズームやスナップ粒度やミニマップON/OFFができます。
+You can zoom, snap distance and minimap on/off.
 
-スナップ粒度はこのアドオンでも値を参照していますが、私は24で使っていて特にほかのスナップ粒度で確認していません。
+Snap distance is also referenced in this add-on, but I'm using 24 and haven't checked with other snap granularities in particular.
 
-（このアドオンはベースがGraphEditなのでGraphEditに感謝です。Godotbeta4で⚠マークついていますがなにとぞ破壊的変更はひかえめにおねがいします……）
+(Thanks to GraphEdit, this add-on is based on GraphEdit, and is marked as ⚠ in Godotbeta4, but please do not make destructive changes: ......)
 
-#### 保存（Alt＋S）
+#### Save button（Alt＋S）
 
-保存します。
+Save layout file.
 
-Ctrl+Sとの違いは複数キャンバスがあってもこちらはこのキャンバスのみを保存します。
+The difference with Ctrl+S is that even if there are multiple canvases, this one will save only this canvas.
 
-#### ロック
+#### Lock button
 
 ![image](https://user-images.githubusercontent.com/32963227/200160119-d78556e8-f9dd-4eaa-81b7-6fab925f2981.png)
 
-選択中のものをまとめてロックします。
+Locks all selected items.
 
-ロック状態のものは選択できないので、「まとめてロック解除」はありません！
+Since you cannot select locked items, there is no "Unlock all together" command!
 
-グループで「グループ範囲をまとめてロック/ロック解除」があるためまとめてロック解除がしたいときはこちらを使ってください。
+If you want to unlock all the locked items, please use the command since there is "Group Lock/Unlock" in the group.
 
-#### 背景色
+#### Background color button
 
 ![image](https://user-images.githubusercontent.com/32963227/200160123-ae08b905-f04b-4d1b-bd11-6829aa58364e.png)
 
-キャンバスの背景色を変更します。
+change background color.
 
-#### グリッドの色
+#### Grid color button
 
 ![image](https://user-images.githubusercontent.com/32963227/200160130-59e1f79a-2269-4282-b302-c00094250520.png)
 
-メイングリッドの色を変更します。
+change grid color.
 
-サブグリッドの色はメイングリッドの色にaを0.1乗算したものが設定されます。
+andchange sub grid color.
 
-#### 音量・音楽再生・音楽停止・ループ
+#### Sound settings buttons
 
 ![image](https://user-images.githubusercontent.com/32963227/200160141-52f38196-1f0f-4faa-b8ee-6296c72d3b63.png)
 
 ![image](https://user-images.githubusercontent.com/32963227/200160136-20379cd8-b76b-42da-a162-c9d42b7e6a47.png)
 
-再生中の音楽の設定ができます。
+You can set the music playing.
 
-一時停止はありません！要望があれば追加します。
+No pause! Will add if requested.
 
-#### 整列ボタンたち
+#### Arrange buttons
 
-選択中のアイテムを整列します。
+Aligns the currently selected items.
 
-ただし、「コネクタ」アイテムは無視されます。
+However, "connect" items are ignored.
 
-上下左右にそろえるボタンと一定間隔でそろえるボタンがあります。
+There are two buttons, one for aligning up, bottom, left, right, and one for aligning at regular intervals.
 
 ---
 
-## 各アイテムについて
+## Items
 
-* [x] シーン (.tscn)
-* [x] 画像 (.pngなど、Texture2Dとして読み込んだリソース)
-* [x] 音楽
-* [x] リソース(.tres)
-* [x] テキストファイル
-* [x] ディレクトリ
-* [ ] Dialogic2.0 タイムライン 未実装
-* [ ] Dialogic2.0 キャラクター 未実装
+* [x] Scene (.tscn)
+* [x] Image (.png... resource loaded as Texture2D)
+* [x] Sound
+* [x] Other resource(.tres)
+* [x] Text file
+* [x] Directory
+* [ ] Dialogic2.0 Timeline (Under Development)
+* [ ] Dialogic2.0 Character (Under Development)
 
-### シーン (.tscn)
+### Scene (.tscn)
 
 ![image](https://user-images.githubusercontent.com/32963227/200158590-e9a2a0da-ac9c-4cb0-9c3d-4827271382d5.png)
 
-1行目の左上のアイコンをクリックするとそのシーンが開きます。
+Click the icon in the upper left corner of the first line to open that scene.
 
-2Dか3DかはそのシーンのNode種類で判断されます。
+Whether the scene is 2D or 3D is determined by the Node type of the scene.
 
-右クリックコンテキストメニュー　「シーン再生ボタンを表示」を押すと、シーン再生ボタンを表示が左に表示されます。
+Right-click on the context menu "Show Play Scene Button" and the Show Scene Play Button will appear on the left.
 
-シーン再生ボタンを押すと、Godotエディタでそのシーンをゲーム再生します。これは便利
+Pressing the Play Scene button will play the scene in the Godot editor. This is useful!
 
-### リソース(.tres)
+### Resource(.tres)
 
-クリックするとインスペクタが開きます。
+Click to open the inspector.
 
-### 画像リソース
+### Image
 
 ![image](https://user-images.githubusercontent.com/32963227/200160176-394f4c5c-e451-467a-8dbe-92b7f9ba3463.png)
 
-画像リソースはその画像を表示します。
+Click to open the inspector.
 
-アイコンをクリックするとインスペクタでそのファイルを開きます。
+(I'd like a command to open the location of that file on the file system...) TODO
 
-（ファイルシステム上でそのファイルの場所を開くコマンドが欲しいな・・・）TODO
-
-### 音楽リソース
+### Sound
 
 ![image](https://user-images.githubusercontent.com/32963227/200158761-b9184a8d-86e5-4997-92bf-b40deab43c84.png)
 
-音楽リソースは再生ボタンがついています。
+with play button. header settings.
 
-アイコンをクリックするとインスペクタでそのファイルを開きます。
+Click to open the inspector.
 
-（ファイルシステム上でそのファイルの場所を開くコマンドが欲しいな・・・）TODO
+(I'd like a command to open the location of that file on the file system...) TODO
 
-再生ボタンを押すとその音楽が再生されます。ヘッダーで調整できます。
-
-### テキストファイル
+### Text Document
 
 ![image](https://user-images.githubusercontent.com/32963227/200158817-53b5d827-6e30-49bc-bd00-e6718431c870.png)
 
-右クリックコンテキストメニュー　「このファイルからテキストをつくる」を押すと、このテキストファイルから「テキスト」アイテムを作成します。
+Right-click context menu "Make TxtDoc" to create a "TxtDoc" item from this text file.
 
 ![image](https://user-images.githubusercontent.com/32963227/200158856-d466177c-72ee-45d9-b40b-e0814c000ce3.png)
 
-これで作成した「テキスト」アイテムには、そのファイルの場所を開くボタンと、保存するボタンが追加されます。
+The "TxtDoc" item you have now created will have an additional button to open the location of that file and a button to save it.
 
-### ディレクトリ
+### Directory
 
 ![image](https://user-images.githubusercontent.com/32963227/200160191-b593addd-881c-4650-bc2e-c802593ae44c.png)
 
-クリックするとGodotのファイルシステムでそのディレクトリの位置を開きます。
+Click to open the location of that directory in Godot's file system.
 
-（このディレクトリ内のファイルをアイテムとして追加する機能がほしいなあ）TODO
-
----
-
-このアドオンはGodot3のアドオン [Project-Map](https://github.com/Yogoda/Project-Map) をベースにして作成しています。
-
-また、Markdownパースのスクリプトは[Dialogic](https://github.com/coppolaemilio/dialogic)の[DocsMarkdownParser.gd](https://github.com/coppolaemilio/dialogic/blob/dialogic-1/addons/dialogic/Documentation/Nodes/DocsMarkdownParser.gd)を使用しています。
-
-ありがとうございます！
+(I'd like the ability to add files in this directory as items.) TODO
 
 ---
 
-## 今後追加したいもの
+This add-on is based on and inspired the Godot3 add-on [Project-Map](https://github.com/Yogoda/Project-Map).
 
-* [ ] テキスト（未実装：ファイルにして保存する機能を追加したい）TODO
-* [ ] リソース（ファイルシステム上でそのファイルの場所を開くコマンドが欲しいな・・・）TODO
-* [ ] ディレクトリ（このディレクトリ内のファイルをアイテムとして追加する機能がほしいなあ）TODO
+the Markdown parse script is [DocsMarkdownParser.gd](https://github.com/coppolaemilio/dialogic/blob/dialogic-1/addons/dialogic/Documentation/Nodes/DocsMarkdownParser.gd) from [Dialogic](https://github.com/coppolaemilio/dialogic).
+
+Thank you!
+
+---
+
+## Future Plans
+
+* [ ] (Not implemented: I want to add a function to save the file as a file) TODO
+* [ ] (I'd like a command to open the location of that file on the file system...) TODO
+* [ ] (I'd like the ability to add files in this directory as items.) TODO
 
 
 ---
