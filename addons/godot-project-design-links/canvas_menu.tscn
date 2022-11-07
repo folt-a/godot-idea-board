@@ -18,7 +18,7 @@ events = [SubResource("InputEventKey_0qylt")]
 
 [sub_resource type="InputEventKey" id="InputEventKey_f50a7"]
 alt_pressed = true
-keycode = 76
+keycode = 82
 
 [sub_resource type="Shortcut" id="Shortcut_s5cmg"]
 events = [SubResource("InputEventKey_f50a7")]
@@ -160,7 +160,6 @@ theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-shortcut = SubResource("Shortcut_ms2rg")
 flat = true
 
 [node name="BgColorLabel" type="Label" parent="HBoxContainer/PanelContainer/LeftContainer"]
@@ -188,7 +187,6 @@ layout_mode = 2
 offset_left = 389.0
 offset_right = 397.0
 offset_bottom = 38.0
-shortcut = SubResource("Shortcut_ms2rg")
 flat = true
 
 [node name="GridColorLabel" type="Label" parent="HBoxContainer/PanelContainer/LeftContainer"]
