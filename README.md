@@ -261,7 +261,7 @@ Pressing the right-click context menu "Group Lock" will lock all items within th
 
 Right-click context menu "Group Unlock" to unlock all items within the group's range.
 
-#### Label
+#### Label (Alt+R)
 
 ![image](https://user-images.githubusercontent.com/32963227/200162907-cc52f3d0-2600-4027-b4db-a0af12695231.png)
 
@@ -286,7 +286,7 @@ Right click context menu Press "Bg~" to change the color to that color theme.
 
 If you change the color, the next time you add a label, it will be that color from the beginning.
 
-#### TxtDoc (Text Document)
+#### TxtDoc (Text Document) (Alt+T)
 
 ![image](https://user-images.githubusercontent.com/32963227/200163130-e7604899-7665-4dfc-8873-c979274b3ad1.png)
 
@@ -360,7 +360,7 @@ Save layout file.
 
 The difference with Ctrl+S is that even if there are multiple canvases, this one will save only this canvas.
 
-#### Lock button
+#### Lock button (Alt+L)
 
 ![image](https://user-images.githubusercontent.com/32963227/200163251-98a53350-8f28-4375-b6a2-2fbde784b05b.png)
 
@@ -751,7 +751,7 @@ json形式でコピーするのでこのアドオン以外では使えなさそ�
 
 右クリックコンテキストメニュー　「グループ範囲ロック解除」を押すと、グループの範囲内のアイテムをすべてロック解除します。
 
-#### ラベル
+#### ラベル (Alt+R)
 
 ![image](https://user-images.githubusercontent.com/32963227/200160092-a28069e6-6e0e-4d1f-8795-3d5071b111f1.png)
 
@@ -776,7 +776,7 @@ json形式でコピーするのでこのアドオン以外では使えなさそ�
 
 色変更をすると、次からラベルを追加するときは最初からその色になります。
 
-#### テキスト
+#### テキスト (Alt+T)
 
 ![image](https://user-images.githubusercontent.com/32963227/200160106-03116d9f-a6f6-48da-8009-43eb03e50051.png)
 
@@ -851,7 +851,7 @@ json形式でコピーするのでこのアドオン以外では使えなさそ�
 
 Ctrl+Sとの違いは複数キャンバスがあってもこちらはこのキャンバスのみを保存します。
 
-#### ロック
+#### ロック (Alt+L)
 
 ![image](https://user-images.githubusercontent.com/32963227/200160119-d78556e8-f9dd-4eaa-81b7-6fab925f2981.png)
 
