@@ -180,7 +180,8 @@ func init():
 #14. remaining built-in virtual methods
 #-----------------------------------------------------------
 func _on_item_selected(index:int):
-	saved_item_list.select(_selected_index, true)
+	if _selected_index != -1:
+		saved_item_list.select(_selected_index, true)
 	# 編集中だったら確認ダイアログを出す
 	if no_data_reference_rect.visible:
 		_selected_sekkei_graph_update(index)
