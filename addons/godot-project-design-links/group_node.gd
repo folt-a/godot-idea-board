@@ -171,7 +171,7 @@ func _on_resize_request(new_minsize):
 func _on_pressed_select_button():
 	selected = true
 	for node in get_parent().get_children():
-		if node is GraphNode and _is_node_child(node):
+		if node is GraphNode and is_node_child(node):
 			node.selected = true
 
 func _on_double_pressed_header_line_edit():
@@ -205,7 +205,7 @@ func _on_toggle_lock_selected_context_menu(is_enabled:bool):
 ## 範囲内のロックをする
 func _on_group_locked_context_menu():
 	for node in get_parent().get_children():
-		if node is GraphNode and _is_node_child(node):
+		if node is GraphNode and is_node_child(node):
 			node.context_menu.set_item_checked.bind(0,true).call_deferred()
 			node._on_toggle_lock_selected_context_menu.bind(true).call_deferred()
 	self.context_menu.set_item_checked.bind(0,true).call_deferred()
@@ -214,7 +214,7 @@ func _on_group_locked_context_menu():
 ## 範囲内のロック解除をする
 func _on_group_unlocked_context_menu():
 	for node in get_parent().get_children():
-		if node is GraphNode and _is_node_child(node):
+		if node is GraphNode and is_node_child(node):
 			node._on_pressed_locked_button()
 	self._on_pressed_locked_button()
 
@@ -247,6 +247,21 @@ func get_data() -> Dictionary:
 	}
 	return data
 
+func is_node_child(node):
+	# 全点が矩形内にはいっているか確認する
+	var this_rect:Rect2i = Rect2i(position_offset,size)
+	var node_points = [
+		node.position_offset,
+		Vector2(node.position_offset.x + node.size.x,node.position_offset.y),
+		Vector2(node.position_offset.x,node.position_offset.y + node.size.y),
+		node.position_offset + node.size,
+		]
+	var is_intersect:bool = this_rect.has_point(node_points[0])\
+	and this_rect.has_point(node_points[1])\
+	and this_rect.has_point(node_points[2])\
+	and this_rect.has_point(node_points[3])
+	return is_intersect and node != self
+
 func lock():
 #	_on_index_pressed(index:int):の処理
 	context_menu.set_item_checked(0, true)
@@ -269,27 +284,12 @@ func _get_group_nodes():
 	var nodes = []
 	for child in _parent.get_children():
 		if child is GraphNode:
-			if _is_node_child(child):
+			if is_node_child(child):
 				nodes.append(child)
 	return nodes
 
-func _is_node_child(node):
-	# 全点が矩形内にはいっているか確認する
-	var this_rect:Rect2i = Rect2i(position_offset,size)
-	var node_points = [
-		node.position_offset,
-		Vector2(node.position_offset.x + node.size.x,node.position_offset.y),
-		Vector2(node.position_offset.x,node.position_offset.y + node.size.y),
-		node.position_offset + node.size,
-		]
-	var is_intersect:bool = this_rect.has_point(node_points[0])\
-	and this_rect.has_point(node_points[1])\
-	and this_rect.has_point(node_points[2])\
-	and this_rect.has_point(node_points[3])
-	return is_intersect and node != self
-
 func on_file_node_moved(node):
-	if _is_node_child(node):
+	if is_node_child(node):
 		if not _children.has(node):
 			_children.append(node)
 	else:

@@ -534,6 +534,19 @@ func penetrate_nodes():
 
 	# 2つ以上通過していたら最初の２GraphNodeをつなげる 近い方から遠い方につなぐ
 	if 2 <= through_nodes.size():
+
+		# グループアイテムの場合は内部にないかチェックする
+		if through_nodes[0].graph_node_type == "Group":
+			if through_nodes[0].is_node_child(through_nodes[1]):
+#				内部にあったらコネクタをつながない
+				_right_click_line.clear_points()
+				return
+		if through_nodes[1].graph_node_type == "Group":
+			if through_nodes[1].is_node_child(through_nodes[0]):
+#				内部にあったらコネクタをつながない
+				_right_click_line.clear_points()
+				return
+
 		var is_LtoR = Geometry2D.get_closest_point_to_segment(_right_click_line.points[0],through_points[0],through_points[1]) == through_points[0]
 		var from_node
 		var to_node
