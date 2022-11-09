@@ -227,6 +227,11 @@ func _on_paste_nodes_request():
 		data.position_offset_x = data.position_offset_x + mouse_pos.x
 		data.position_offset_y = data.position_offset_y + mouse_pos.y
 	var added_nodes = _add_nodes(datas)
+
+#	選択中のものは非選択にする
+	for selected_node in _get_selected_graphnode():
+		selected_node.selected = false
+
 	for node in added_nodes:
 #		IDを再取得
 		node.id = node.get_instance_id()
