@@ -619,6 +619,7 @@ func _add_nodes(datas:Array) -> Array:
 			var label_font_size = editor_interface.get_base_control().theme.get_font_size("font_size","Label")
 			node.change_text_font(header_font_size,label_font_size)
 			node.init(data)
+			node.position_offset_changed.emit()
 			added_nodes.append(node)
 
 #	LineHandle以外は移動終了イベントを発火させて前面に移動させる
