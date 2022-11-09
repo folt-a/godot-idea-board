@@ -44,8 +44,8 @@ var graph_node_type = "LineHandle"
 
 var _from_node
 var _to_node
-var _from_node_id
-var _to_node_id
+var from_node_id
+var to_node_id
 #-----------------------------------------------------------
 #11. onready variables
 #-----------------------------------------------------------
@@ -64,11 +64,11 @@ var _to_node_id
 func init(data = {}):
 	_parent = get_parent()
 	if data.has("from_node_id"):
-		_from_node_id = data.from_node_id
+		from_node_id = data.from_node_id
 		_from_node = _parent.get_node_from_id(data.from_node_id)
 		_from_node.position_offset_changed.connect(_on_position_offset_changed)
 	if data.has("to_node_id"):
-		_to_node_id = data.to_node_id
+		to_node_id = data.to_node_id
 		_to_node = _parent.get_node_from_id(data.to_node_id)
 		_to_node.position_offset_changed.connect(_on_position_offset_changed)
 	if data.has("text"):
@@ -266,8 +266,8 @@ func get_data() -> Dictionary:
 		"position_offset_y" : position_offset.y,
 		"color_theme" : color_theme,
 		"text" : line_edit.text,
-		"from_node_id" : _from_node_id,
-		"to_node_id" : _to_node_id,
+		"from_node_id" : from_node_id,
+		"to_node_id" : to_node_id,
 	}
 	return data
 

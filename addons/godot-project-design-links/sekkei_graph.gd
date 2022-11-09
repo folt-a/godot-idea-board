@@ -175,12 +175,25 @@ func _undo_create_file_nodes(undo_id):
 
 func _on_delete_nodes_request(_nodes):
 	undo_redo.create_action("Delete nodes")
+	var deleted_node_ids:= {}
 	for child in get_children():
 		if child is GraphNode:
 			if child.selected and child.visible:
 				undo_redo.add_do_method(child, "hide")
 				undo_redo.add_undo_method(child, "show")
 				child.selected = false
+				if "id" in child and child.id != 0:
+					deleted_node_ids[child.id] = child.id
+
+#	コネクトされたアイテムを消すとコネクトも消すようにする
+	for child in get_children():
+		if child is GraphNode:
+			if child.graph_node_type == "LineHandle":
+				if deleted_node_ids.has(child.from_node_id)\
+				or deleted_node_ids.has(child.to_node_id):
+					undo_redo.add_do_method(child, "hide")
+					undo_redo.add_undo_method(child, "show")
+					child.selected = false
 
 	undo_redo.commit_action()
 	set_dirty()
