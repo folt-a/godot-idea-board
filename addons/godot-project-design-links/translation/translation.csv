@@ -24,7 +24,8 @@ Copy only this,Copy only this,これだけコピー
 Task,Task,タスクにする
 Delete,Delte,削除
 Edit,Edit,編集
-Make TxtDoc,Make TxtDoc,このファイルからテキストをつくる
+Make TxtDoc,Create TxtDoc,このファイルからテキストをつくる
+Make Files,Create Files in this Dir,ディレクトリ内のファイルからつくる
 Copy Path,Copy Path,パスをコピー
 Copy Link,Copy Link,リンクコピー
 Show Play Scene Button,Show Play Scene Button,シーン再生ボタンを表示

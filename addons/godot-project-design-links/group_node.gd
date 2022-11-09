@@ -173,6 +173,8 @@ func _on_pressed_select_button():
 	for node in get_parent().get_children():
 		if node is GraphNode and is_node_child(node):
 			node.selected = true
+	select_button.release_focus()
+	_parent.grab_focus.call_deferred()
 
 func _on_double_pressed_header_line_edit():
 	header_line_edit.grab_focus()
@@ -222,6 +224,7 @@ func _on_pressed_locked_button():
 	context_menu.set_item_checked(0, false)#ロックのチェックを外す
 	locked_button.visible = false
 	self.selectable = true
+
 
 #-----------------------------------------------------------
 #15. public methods

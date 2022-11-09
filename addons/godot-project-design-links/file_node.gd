@@ -280,6 +280,10 @@ func _ready():
 	context_menu.filepath_copied.connect(_on_filepath_copied_context_menu)
 	context_menu.toggle_play_scene_selected.connect(_on_toggle_play_scene_selected_context_menu)
 	context_menu.make_edit.connect(_on_make_edit_context_menu)
+	context_menu.add_files_in_dir.connect(_on_add_files_in_dir_context_menu)
+	context_menu.add_files_recursive_in_dir.connect(_on_add_files_recursive_in_dir_context_menu)
+
+
 
 #-----------------------------------------------------------
 #14. remaining built-in virtual methods
@@ -381,6 +385,37 @@ func _on_toggle_play_scene_selected_context_menu(is_enabled:bool):
 	tscn_play_button.visible = is_enabled
 	size = Vector2.ZERO
 
+## ディレクトリ内のファイルをすべて追加する
+func _on_add_files_in_dir_context_menu():
+	var file_paths:Array[String] = []
+	var dir = DirAccess.open(path)
+	if dir.get_open_error() == OK:
+		for file in dir.get_files():
+			if file.begins_with("."): continue
+			file_paths.append(path + file)
+#	print(file_paths)
+#	for file_path in file_paths:
+	_parent._drop_data(position + size, {"files":file_paths})
+
+## ディレクトリ内のファイルをすべて追加する
+func _on_add_files_recursive_in_dir_context_menu():
+	var file_paths:Array[String] = []
+	_get_file_paths_recursive(file_paths, path)
+	print(file_paths)
+	_parent._drop_data(position + size, {"files":file_paths})
+
+func _get_file_paths_recursive(file_paths:Array[String], dir_path:String) -> void:
+	var dir = DirAccess.open(dir_path)
+	if dir.get_open_error() == OK:
+		var files = dir.get_files()
+		var dirs = dir.get_directories()
+		dirs.append_array(files)
+		for file in dir.get_files():
+			if file.begins_with("."): continue
+			file_paths.append(dir_path + file)
+		for dir_child_path in dir.get_directories():
+			if dir_child_path.begins_with("."): continue
+			_get_file_paths_recursive(file_paths,dir_path + dir_child_path)
 #-----------------------------------------------------------
 #15. public methods
 #-----------------------------------------------------------

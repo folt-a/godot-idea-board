@@ -16,6 +16,8 @@ signal deleted
 signal toggle_play_scene_selected
 signal filepath_copied
 signal make_edit
+signal add_files_in_dir
+signal add_files_recursive_in_dir
 
 #-----------------------------------------------------------
 #06. enums
@@ -38,8 +40,13 @@ const INDEX_COPY:int = 2
 const INDEX_DELETE:int = 3
 const SEPARATE_1:int = 4
 const INDEX_COPY_PATH:int = 5
+
 const INDEX_SCENE_PLAY:int = 6
-const INDEX_EDIT:int = 7
+
+const INDEX_EDIT:int = 6
+
+const INDEX_ADD_FILES_IN_DIR:int = 6
+const INDEX_ADD_FILES_RECURSIVE_IN_DIR:int = 7
 
 #-----------------------------------------------------------
 #08. exported variables
@@ -75,18 +82,17 @@ func init(item_type:int):
 	add_icon_item(_parent.get_icon("Duplicate"), _S.tr("Copy Path"), INDEX_COPY_PATH)
 	match item_type:
 		ITEM_TYPE.DIR:
-			pass
+			add_icon_item(_parent.get_icon("Folder"), _S.tr("Make Files"), INDEX_ADD_FILES_IN_DIR)
+#			add_icon_item(_parent.get_icon("Folder"), _S.tr("Make Files Recursive"), INDEX_ADD_FILES_IN_DIR) TODO 再帰！
 		ITEM_TYPE.SCENE:
 			add_icon_check_item(_parent.get_icon("PlayScene"), _S.tr("Show Play Scene Button"), INDEX_SCENE_PLAY)
 		ITEM_TYPE.SCRIPT:
-			add_separator("", INDEX_SCENE_PLAY)
 			add_icon_item(_parent.get_icon("Edit"), _S.tr("Make TxtDoc"), INDEX_EDIT)
 		ITEM_TYPE.TEXTURE:
 			pass
 		ITEM_TYPE.SOUND:
 			pass
 		ITEM_TYPE.TEXT:
-			add_separator("", INDEX_SCENE_PLAY)
 			add_icon_item(_parent.get_icon("Edit"), _S.tr("Make TxtDoc"), INDEX_EDIT)
 		_:
 			pass
@@ -113,13 +119,33 @@ func _on_index_pressed(index:int):
 			copied.emit()
 		INDEX_DELETE:
 			deleted.emit()
-		INDEX_SCENE_PLAY:
-			set_item_checked(INDEX_SCENE_PLAY,!is_item_checked(INDEX_SCENE_PLAY))
-			toggle_play_scene_selected.emit(is_item_checked(INDEX_SCENE_PLAY))
-		INDEX_COPY_PATH:
-			filepath_copied.emit()
-		INDEX_EDIT:
-			make_edit.emit()
+	match _item_type:
+		ITEM_TYPE.DIR:
+			match index:
+				INDEX_ADD_FILES_IN_DIR:
+					add_files_in_dir.emit()
+				INDEX_ADD_FILES_RECURSIVE_IN_DIR:
+					add_files_recursive_in_dir.emit()
+		ITEM_TYPE.SCENE:
+			match index:
+				INDEX_SCENE_PLAY:
+					set_item_checked(INDEX_SCENE_PLAY,!is_item_checked(INDEX_SCENE_PLAY))
+					toggle_play_scene_selected.emit(is_item_checked(INDEX_SCENE_PLAY))
+		ITEM_TYPE.SCRIPT:
+			match index:
+				INDEX_EDIT:
+					make_edit.emit()
+		ITEM_TYPE.TEXTURE:
+			pass
+		ITEM_TYPE.SOUND:
+			pass
+		ITEM_TYPE.TEXT:
+			match index:
+				INDEX_EDIT:
+					make_edit.emit()
+		_:
+			pass
+
 
 
 #-----------------------------------------------------------
