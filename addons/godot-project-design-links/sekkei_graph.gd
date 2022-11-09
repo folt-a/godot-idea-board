@@ -522,7 +522,8 @@ func set_dirty():
 	if _data_init_completed:
 		dirty = true
 
-func get_node_from_id(id:int):
+func get_node_from_id(id):
+	if !id:return null
 	for node in get_children():
 		if node is GraphNode and node.get_data().id == id:
 			return node

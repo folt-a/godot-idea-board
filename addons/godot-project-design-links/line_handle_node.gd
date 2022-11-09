@@ -66,11 +66,13 @@ func init(data = {}):
 	if data.has("from_node_id"):
 		from_node_id = data.from_node_id
 		_from_node = _parent.get_node_from_id(data.from_node_id)
-		_from_node.position_offset_changed.connect(_on_position_offset_changed)
+		if _from_node:
+			_from_node.position_offset_changed.connect(_on_position_offset_changed)
 	if data.has("to_node_id"):
 		to_node_id = data.to_node_id
 		_to_node = _parent.get_node_from_id(data.to_node_id)
-		_to_node.position_offset_changed.connect(_on_position_offset_changed)
+		if _to_node:
+			_to_node.position_offset_changed.connect(_on_position_offset_changed)
 	if data.has("text"):
 		line_edit.text = data.text
 	if data.has("color_theme"):
@@ -169,6 +171,7 @@ func _gui_input(event):
 		_on_pressed_icon_button()
 
 func _on_position_offset_changed():
+	if !_from_node or !_to_node: return
 	var to_pos = ((_from_node.position_offset - self.position_offset + _from_node.size / 2) / _parent.zoom ) * _parent.zoom
 	var self_pos = size / 2
 	var from_pos = ((_to_node.position_offset - self.position_offset + _to_node.size / 2) / _parent.zoom ) * _parent.zoom
