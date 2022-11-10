@@ -514,8 +514,9 @@ func link_jump(graph_path:String, target_id:int):
 				Vector2(snap_distance * 4,snap_distance * 4)
 				zoom = current_zoom
 	else:
-		print("TODO JUMP OTHER GRAPHEDIT NODE")
-		pass
+		save()
+		if _main.select_by_json_path(graph_path):
+			link_jump.bind(graph_path, target_id).call_deferred()
 	pass
 
 func set_dirty():

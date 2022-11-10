@@ -444,6 +444,12 @@ func update_saved_item_list():
 
 	main_path_line_edit.text = save_json_dir_path
 
+func select_by_json_path(path:String) -> bool:
+	for index in saved_item_list.item_count:
+		if saved_item_list.get_item_metadata(index) == path:
+			_selected_sekkei_graph_update(index)
+			return true
+	return false
 
 #-----------------------------------------------------------
 #16. private methods

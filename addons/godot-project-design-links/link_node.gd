@@ -79,6 +79,12 @@ func init(data:Dictionary):
 		graph_path = data.graph_path
 	if data.has("name"):
 		target_line_edit.text = data.name
+	if data.has("graph_path") and data.has("name"):
+#		対象レイアウトが現在と別なら名前につける
+		if data.graph_path != _parent.save_json_file_path:
+			var filebasename = data.graph_path.get_file().left(-5)
+			target_line_edit.text = filebasename + ":" + data.name
+
 
 	if data.has("selectable"): #ロック
 		if !data.selectable:
@@ -199,10 +205,11 @@ func hide():
 	self.selectable = false
 
 func get_data() -> Dictionary:
+	var data_name = target_line_edit.text.trim_prefix(graph_path.get_file().left(-5) + ":")
 	var data = {
 		"node" : "Link",
 		"id" : id,
-		"name" : target_line_edit.text,
+		"name" : data_name,
 		"selectable" : selectable,
 		"position_offset_x" : position_offset.x,
 		"position_offset_y" : position_offset.y,
