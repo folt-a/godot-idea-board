@@ -237,8 +237,6 @@ func init(data:Dictionary):
 					size.y = data.size_y
 				else:
 					size = instance.get_size() + Vector2(0,tscn_h_box_container.size.y)
-					print(instance.get_size() + Vector2(0,tscn_h_box_container.size.y))
-					print(size)
 				_resize(size)
 			elif instance is AudioStream:
 				_type = ITEM_TYPE.SOUND
