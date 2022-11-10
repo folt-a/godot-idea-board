@@ -220,7 +220,7 @@ func init(data:Dictionary):
 				instance = load(file_path)
 			script_h_box_container.visible = false
 			tscn_label.text = _get_path_name()
-			if instance is Texture:
+			if instance is Texture2D:
 	#		画像
 				_type = ITEM_TYPE.TEXTURE
 				tscn_icon_button.icon = _parent.get_icon("ImageTexture")
@@ -235,6 +235,10 @@ func init(data:Dictionary):
 					size.x = data.size_x
 				if data.has("size_y"):
 					size.y = data.size_y
+				else:
+					size = instance.get_size() + Vector2(0,tscn_h_box_container.size.y)
+					print(instance.get_size() + Vector2(0,tscn_h_box_container.size.y))
+					print(size)
 				_resize(size)
 			elif instance is AudioStream:
 				_type = ITEM_TYPE.SOUND
@@ -401,7 +405,6 @@ func _on_add_files_in_dir_context_menu():
 func _on_add_files_recursive_in_dir_context_menu():
 	var file_paths:Array[String] = []
 	_get_file_paths_recursive(file_paths, path)
-	print(file_paths)
 	_parent._drop_data(position + size, {"files":file_paths})
 
 func _get_file_paths_recursive(file_paths:Array[String], dir_path:String) -> void:
