@@ -98,7 +98,7 @@ func init(graphedit):
 	var header_small_font_size = _graphedit.editor_interface.get_base_control().theme.get_font_size("font_size","HeaderSmall")
 
 	save_button.icon = _graphedit.get_icon("Save")
-	save_button.add_theme_font_override("font", _graphedit.main_font)
+#	save_button.add_theme_font_override("font", _graphedit.main_font)
 	save_button.add_theme_font_size_override("font_size", header_small_font_size)
 	save_button.add_theme_color_override("icon_normal_color", Color.from_string("faaa24",Color.WHITE))
 	save_button.add_theme_color_override("icon_pressed_color", Color.from_string("faaa24",Color.WHITE))
@@ -107,7 +107,7 @@ func init(graphedit):
 	save_button.add_theme_color_override("icon_focus_color", Color.from_string("faaa24",Color.WHITE))
 
 	group_button.icon = _graphedit.get_icon("Viewport")
-	group_button.add_theme_font_override("font", _graphedit.main_font)
+#	group_button.add_theme_font_override("font", _graphedit.main_font)
 	group_button.add_theme_font_size_override("font_size", header_small_font_size)
 	group_button.add_theme_color_override("icon_normal_color", Color.from_string("65b5ff",Color.WHITE))
 	group_button.add_theme_color_override("icon_pressed_color", Color.from_string("65b5ff",Color.WHITE))
@@ -116,7 +116,7 @@ func init(graphedit):
 	group_button.add_theme_color_override("icon_focus_color", Color.from_string("65b5ff",Color.WHITE))
 
 	label_button.icon = _graphedit.get_icon("Label")
-	label_button.add_theme_font_override("font", _graphedit.main_font)
+#	label_button.add_theme_font_override("font", _graphedit.main_font)
 	label_button.add_theme_font_size_override("font_size", header_small_font_size)
 	label_button.add_theme_color_override("icon_normal_color", Color.from_string("8eef97",Color.WHITE))
 	label_button.add_theme_color_override("icon_pressed_color", Color.from_string("8eef97",Color.WHITE))
@@ -125,7 +125,7 @@ func init(graphedit):
 	label_button.add_theme_color_override("icon_focus_color", Color.from_string("8eef97",Color.WHITE))
 
 	text_document_button.icon = _graphedit.get_icon("Edit")
-	text_document_button.add_theme_font_override("font", _graphedit.main_font)
+#	text_document_button.add_theme_font_override("font", _graphedit.main_font)
 	text_document_button.add_theme_font_size_override("font_size", header_small_font_size)
 	text_document_button.add_theme_color_override("icon_normal_color", Color.from_string("e589a4",Color.WHITE))
 	text_document_button.add_theme_color_override("icon_pressed_color", Color.from_string("e589a4",Color.WHITE))

@@ -24,7 +24,7 @@ var group_node = preload("res://addons/godot-project-design-links/group_node.tsc
 var comment_node = preload("res://addons/godot-project-design-links/comment_node.tscn")
 var link_node = preload("res://addons/godot-project-design-links/link_node.tscn")
 var line_handle_node = preload("res://addons/godot-project-design-links/line_handle_node.tscn")
-var main_font = preload("res://addons/godot-project-design-links/font/ZenMaruGothic-Bold-Subset.ttf")
+#var main_font = preload("res://addons/godot-project-design-links/font/ZenMaruGothic-Bold-Subset.ttf")
 
 #-----------------------------------------------------------
 #08. exported variables
