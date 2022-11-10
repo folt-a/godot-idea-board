@@ -119,6 +119,8 @@ func _on_index_pressed(index:int):
 			copied.emit()
 		INDEX_DELETE:
 			deleted.emit()
+		INDEX_COPY_PATH:
+			filepath_copied.emit()
 	match _item_type:
 		ITEM_TYPE.DIR:
 			match index:
