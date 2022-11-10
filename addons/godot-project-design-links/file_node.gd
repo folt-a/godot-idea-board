@@ -396,6 +396,7 @@ func _on_add_files_in_dir_context_menu():
 	if dir.get_open_error() == OK:
 		for file in dir.get_files():
 			if file.begins_with("."): continue
+			if file.ends_with(".import"): continue
 			file_paths.append(path + file)
 #	print(file_paths)
 #	for file_path in file_paths:
@@ -415,9 +416,11 @@ func _get_file_paths_recursive(file_paths:Array[String], dir_path:String) -> voi
 		dirs.append_array(files)
 		for file in dir.get_files():
 			if file.begins_with("."): continue
+			if file.ends_with(".import"): continue
 			file_paths.append(dir_path + file)
 		for dir_child_path in dir.get_directories():
 			if dir_child_path.begins_with("."): continue
+			if dir_child_path.ends_with(".import"): continue
 			_get_file_paths_recursive(file_paths,dir_path + dir_child_path)
 #-----------------------------------------------------------
 #15. public methods
