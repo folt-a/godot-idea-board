@@ -140,6 +140,7 @@ func init(graphedit):
 	bg_color_icon.add_theme_color_override("icon_hover_pressed_color", Color.WHITE)
 	bg_color_icon.add_theme_color_override("icon_focus_color", Color.WHITE)
 
+#
 	grid_color_icon.icon = _graphedit.get_icon("Grid")
 	grid_color_icon.add_theme_color_override("icon_normal_color", grid_color_picker_button.color)
 	grid_color_icon.add_theme_color_override("icon_pressed_color", grid_color_picker_button.color)

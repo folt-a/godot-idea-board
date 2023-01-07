@@ -23,6 +23,8 @@ enum ITEM_TYPE{
 	SOUND,
 	RESOURCE,
 	TEXT,
+	DIALOGIC_TIMELINE,
+	DIALOGIC_CHARA,
 	NONE
 }
 #-----------------------------------------------------------
@@ -98,6 +100,8 @@ func init(data:Dictionary):
 		position_offset.y = data.position_offset_y
 	if data.has("is_scene_play"):
 		tscn_play_button.visible = data.is_scene_play
+		if data.is_scene_play:
+			context_menu.set_scene_play_check.bind(true).call_deferred()
 	if data.has("script_icon_path"):
 		script_icon_path = data.script_icon_path
 
@@ -148,6 +152,8 @@ func init(data:Dictionary):
 			file_path = ResourceUID.get_id_path(ResourceUID.text_to_id(uid))
 			path = file_path
 			is_exists = FileAccess.file_exists(file_path)
+
+		var is_installed_dialogic:bool = FileAccess.file_exists("res://addons/dialogic/plugin.gd")
 
 		if file_path.ends_with(".tscn") and is_exists:
 	#		シーン
@@ -214,6 +220,22 @@ func init(data:Dictionary):
 				script_icon_button.icon = _parent.get_icon("TextFile")
 				icon_name = "TextFile"
 
+		elif file_path.ends_with(".dtl") and is_installed_dialogic and is_exists:
+	#		Dialogic タイムライン
+			_type = ITEM_TYPE.DIALOGIC_TIMELINE
+			script_h_box_container.visible = false
+			tscn_label.text = _get_path_name()
+			tscn_icon_button.icon = load("res://addons/dialogic/Editor/Images/plugin-icon.svg")
+			icon_name = "File"
+
+		elif file_path.ends_with(".dch") and is_installed_dialogic and is_exists:
+	#		Dialogic キャラクター
+			_type = ITEM_TYPE.DIALOGIC_CHARA
+			script_h_box_container.visible = false
+			tscn_label.text = _get_path_name()
+			tscn_icon_button.icon = load("res://addons/dialogic/Editor/Images/Resources/character.svg")
+			icon_name = "File"
+
 		else:
 			var instance = null
 			if is_exists:
@@ -237,6 +259,8 @@ func init(data:Dictionary):
 					size.y = data.size_y
 				else:
 					size = instance.get_size() + Vector2(0,tscn_h_box_container.size.y)
+					print(instance.get_size() + Vector2(0,tscn_h_box_container.size.y))
+					print(size)
 				_resize(size)
 			elif instance is AudioStream:
 				_type = ITEM_TYPE.SOUND
@@ -331,7 +355,14 @@ func _on_pressed_tscn_icon_button():
 	_resource_activated(path)
 
 func _on_pressed_tscn_play_button():
-	_parent.editor_interface.play_custom_scene(path)
+	match _type:
+		ITEM_TYPE.SCENE:
+			_parent.editor_interface.play_custom_scene(path)
+		ITEM_TYPE.DIALOGIC_TIMELINE:
+			ProjectSettings.set_setting('dialogic/editor/current_timeline_path', path)
+			ProjectSettings.save()
+			var tree: SceneTree = Engine.get_main_loop()
+			tree.get_root().get_child(0).get_node('DialogicPlugin').editor_interface.play_custom_scene("res://addons/dialogic/Editor/Common/TestTimelineScene.tscn")
 
 func _on_pressed_sound_play_button():
 	var audio_stream_player:AudioStreamPlayer = _parent._main.audio_stream_player

@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dv1k1e6v1u8hl"]
 
 [ext_resource type="Script" path="res://addons/godot-project-design-links/file_node.gd" id="1_22c3v"]
-[ext_resource type="Texture2D" uid="uid://b4fk08gp5qkid" path="res://addons/godot-project-design-links/icon/handle.svg" id="1_dls3y"]
+[ext_resource type="Texture2D" uid="uid://fvv1ml283w3g" path="res://addons/godot-project-design-links/icon/handle.svg" id="1_dls3y"]
 [ext_resource type="Script" path="res://addons/godot-project-design-links/context_menu/file_menu.gd" id="2_brc2y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6q3xl"]
@@ -59,7 +59,6 @@ slot/0/draw_stylebox = true
 script = ExtResource("1_22c3v")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
-layout_mode = 2
 offset_left = 1.0
 offset_top = 1.0
 offset_right = 26.0
@@ -68,13 +67,12 @@ theme_override_constants/separation = 0
 
 [node name="TscnHBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 2
 offset_right = 25.0
 offset_bottom = 23.0
+size_flags_vertical = 3
 
 [node name="TscnIconButton" type="Button" parent="VBoxContainer/TscnHBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 2
 offset_right = 8.0
 offset_bottom = 23.0
 mouse_default_cursor_shape = 2
@@ -83,7 +81,6 @@ icon_alignment = 1
 [node name="TscnPlayButton" type="Button" parent="VBoxContainer/TscnHBoxContainer"]
 unique_name_in_owner = true
 visible = false
-layout_mode = 2
 offset_left = 12.0
 offset_right = 20.0
 offset_bottom = 23.0
@@ -93,7 +90,6 @@ icon_alignment = 1
 [node name="SoundPlayButton" type="Button" parent="VBoxContainer/TscnHBoxContainer"]
 unique_name_in_owner = true
 visible = false
-layout_mode = 2
 offset_left = 24.0
 offset_right = 32.0
 offset_bottom = 23.0
@@ -102,7 +98,6 @@ icon_alignment = 1
 
 [node name="TscnLabel" type="Label" parent="VBoxContainer/TscnHBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 2
 offset_left = 12.0
 offset_right = 25.0
 offset_bottom = 23.0
@@ -115,7 +110,6 @@ vertical_alignment = 1
 [node name="LockedButton" type="Button" parent="VBoxContainer/TscnHBoxContainer"]
 unique_name_in_owner = true
 visible = false
-layout_mode = 2
 offset_left = 12.0
 offset_right = 20.0
 offset_bottom = 23.0
@@ -124,14 +118,13 @@ icon_alignment = 1
 
 [node name="ScriptHBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 2
 offset_top = 23.0
 offset_right = 25.0
 offset_bottom = 46.0
+size_flags_vertical = 3
 
 [node name="ScriptIconButton" type="Button" parent="VBoxContainer/ScriptHBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 2
 offset_right = 8.0
 offset_bottom = 23.0
 mouse_default_cursor_shape = 2
@@ -139,7 +132,6 @@ icon_alignment = 1
 
 [node name="ScriptClassIconButton" type="Button" parent="VBoxContainer/ScriptHBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 2
 offset_left = 12.0
 offset_right = 20.0
 offset_bottom = 23.0
@@ -153,7 +145,6 @@ expand_icon = true
 
 [node name="ScriptLabel" type="Label" parent="VBoxContainer/ScriptHBoxContainer"]
 unique_name_in_owner = true
-layout_mode = 2
 offset_left = 24.0
 offset_right = 25.0
 offset_bottom = 23.0
@@ -166,7 +157,6 @@ vertical_alignment = 1
 [node name="LockedButton2" type="Button" parent="VBoxContainer/ScriptHBoxContainer"]
 unique_name_in_owner = true
 visible = false
-layout_mode = 2
 offset_left = 12.0
 offset_right = 20.0
 offset_bottom = 23.0
@@ -176,7 +166,6 @@ icon_alignment = 1
 [node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
 unique_name_in_owner = true
 visible = false
-layout_mode = 2
 offset_top = 48.0
 offset_right = 44.0
 offset_bottom = 52.0
@@ -186,7 +175,6 @@ mouse_default_cursor_shape = 13
 unique_name_in_owner = true
 visible = false
 texture_filter = 1
-layout_mode = 2
 offset_top = 56.0
 offset_right = 44.0
 offset_bottom = 56.0

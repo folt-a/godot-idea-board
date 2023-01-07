@@ -29,7 +29,10 @@ enum ITEM_TYPE{
 	TEXTURE,
 	SOUND,
 	RESOURCE,
-	TEXT
+	TEXT,
+	DIALOGIC_TIMELINE,
+	DIALOGIC_CHARA,
+	NONE
 }
 #-----------------------------------------------------------
 #07. constants
@@ -44,6 +47,9 @@ const INDEX_COPY_PATH:int = 5
 const INDEX_SCENE_PLAY:int = 6
 
 const INDEX_EDIT:int = 6
+
+const INDEX_DIALOGIC_TIMELINE_PLAY:int = 6
+const INDEX_DIALOGIC_EDIT:int = 7
 
 const INDEX_ADD_FILES_IN_DIR:int = 6
 const INDEX_ADD_FILES_RECURSIVE_IN_DIR:int = 7
@@ -94,6 +100,9 @@ func init(item_type:int):
 			pass
 		ITEM_TYPE.TEXT:
 			add_icon_item(_parent.get_icon("Edit"), _S.tr("Make TxtDoc"), INDEX_EDIT)
+		ITEM_TYPE.DIALOGIC_TIMELINE:
+			add_icon_check_item(_parent.get_icon("PlayScene"), _S.tr("Play Dialogic Timeline"), INDEX_DIALOGIC_TIMELINE_PLAY)
+			add_icon_item(_parent.get_icon("Edit"), _S.tr("Make TxtDoc"), INDEX_DIALOGIC_EDIT)
 		_:
 			pass
 
@@ -119,8 +128,6 @@ func _on_index_pressed(index:int):
 			copied.emit()
 		INDEX_DELETE:
 			deleted.emit()
-		INDEX_COPY_PATH:
-			filepath_copied.emit()
 	match _item_type:
 		ITEM_TYPE.DIR:
 			match index:
@@ -145,6 +152,13 @@ func _on_index_pressed(index:int):
 			match index:
 				INDEX_EDIT:
 					make_edit.emit()
+		ITEM_TYPE.DIALOGIC_TIMELINE:
+			match index:
+				INDEX_DIALOGIC_TIMELINE_PLAY:
+					set_item_checked(INDEX_DIALOGIC_TIMELINE_PLAY,!is_item_checked(INDEX_DIALOGIC_TIMELINE_PLAY))
+					toggle_play_scene_selected.emit(is_item_checked(INDEX_DIALOGIC_TIMELINE_PLAY))
+				INDEX_DIALOGIC_EDIT:
+					make_edit.emit()
 		_:
 			pass
 
@@ -157,6 +171,14 @@ func _on_index_pressed(index:int):
 #-----------------------------------------------------------
 #15. public methods
 #-----------------------------------------------------------
+func set_scene_play_check(is_pressed:bool):
+	match _item_type:
+		ITEM_TYPE.SCENE:
+			set_item_checked(INDEX_SCENE_PLAY,is_pressed)
+		ITEM_TYPE.DIALOGIC_TIMELINE:
+			set_item_checked(INDEX_DIALOGIC_TIMELINE_PLAY,is_pressed)
+		_:
+			pass
 
 #-----------------------------------------------------------
 #16. private methods
