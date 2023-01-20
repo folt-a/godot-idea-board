@@ -4,7 +4,6 @@
 
 #03. extends
 extends GraphNode
-@icon("res://icon.svg")
 #-----------------------------------------------------------
 #04. # docstring
 ## hoge

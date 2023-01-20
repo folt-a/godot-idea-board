@@ -4,15 +4,21 @@ extends EditorPlugin
 @onready var godot_sekkei = godot_sekkei_path.instantiate()
 var godot_sekkei_path = preload("res://addons/godot-project-design-links/sekkei_main.tscn")
 
-func _ready():
-	init()
-
 func _enter_tree():
 	get_tree().set_meta("__editor_interface", get_editor_interface())
 	get_tree().set_meta("__undo_redo", get_undo_redo())
 
+func _ready():
+	init()
+
 func init():
 	godot_sekkei.visible = false
+#	add_control_to_dock(EditorPlugin.DOCK_SLOT_LEFT_BR, godot_sekkei)
+#	add_control_to_bottom_panel(godot_sekkei,"BottomPanelPlugin")
+#	godot_sekkei.name = "DockPlugin"
+#	add_tool_menu_item("ToolPlugin",func():return)
+#	add_tool_submenu_item("ToolSubPlugin", PopupMenu.new())
+
 	get_editor_interface().get_editor_main_screen().add_child(godot_sekkei)
 	godot_sekkei.resource_previewer = get_editor_interface().get_resource_previewer()
 	godot_sekkei.editor_interface = get_editor_interface()
