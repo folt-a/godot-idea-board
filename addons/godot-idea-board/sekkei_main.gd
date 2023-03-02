@@ -300,6 +300,8 @@ func _on_pressed_main_path_edit_button():
 	main_path_line_edit.mouse_filter = Control.MOUSE_FILTER_PASS
 
 func _on_focus_exited_main_path_line_edit():
+	if !main_path_line_edit.text.ends_with("/"):
+		main_path_line_edit.text = main_path_line_edit.text + "/"
 	var new_text = main_path_line_edit.text
 	main_path_line_edit.editable = false
 	var dir = DirAccess.open("res://")
