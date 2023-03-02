@@ -1,8 +1,8 @@
-# godot-project-design-links
+# godot-idea-board
 
 Design all Godot editor items. Godot4 addon.
 
-[日本語READMEはこちら japanese readme is here](https://github.com/folt-a/godot-project-design-links#%E6%97%A5%E6%9C%AC%E8%AA%9E)
+[日本語READMEはこちら japanese readme is here](https://github.com/folt-a/godot-idea-board#%E6%97%A5%E6%9C%AC%E8%AA%9E)
 
 There is no need to go back and forth between the design document tool and the Godot editor.
 
@@ -18,7 +18,7 @@ You can arrange and manage items such as (scenes, resources, files, directories)
 
 download this repostitory.
 
-Copy this addons/godot-project-design-links directory to your godot project's addons directory.
+Copy this addons/godot-idea-board directory to your godot project's addons directory.
 
 **Reload Project.**
 
@@ -502,7 +502,7 @@ Godot4 プロジェクト内の（シーン、リソース、ファイル、デ�
 
 このリポジトリをダウンロードするかクローンします。
 
-このアドオンのディレクトリから、addons/godot-project-design-linksをGodotのプロジェクト直下のaddonsディレクトリに入れます。
+このアドオンのディレクトリから、addons/godot-idea-boardをGodotのプロジェクト直下のaddonsディレクトリに入れます。
 
 **※プロジェクトをリロードして、Godotエディタを再起動します。**
 
@@ -518,7 +518,7 @@ Markdownテキストは、RichTextLabelになっているのでひらがなな�
 
 ![image](https://user-images.githubusercontent.com/32963227/200868518-59731061-7890-4d93-b8e8-110cc90919a3.png)
 
-`res://addons/godot-project-design-links/main_theme.tres` にて、default_fontを設定するとこのアドオンはすべてこのフォントになります。
+`res://addons/godot-idea-board/main_theme.tres` にて、default_fontを設定するとこのアドオンはすべてこのフォントになります。
 
 このテーマファイルにて対象のコントロールだけフォント変更する手もあります。
 

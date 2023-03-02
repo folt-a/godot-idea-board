@@ -1,13 +1,13 @@
 [gd_scene load_steps=13 format=3 uid="uid://qn1mmq344o61"]
 
-[ext_resource type="Texture2D" uid="uid://b4fk08gp5qkid" path="res://addons/godot-project-design-links/icon/handle.svg" id="1_0jksm"]
-[ext_resource type="Script" path="res://addons/godot-project-design-links/comment_node.gd" id="1_pfk21"]
-[ext_resource type="StyleBox" uid="uid://bqp6u8a2jbsek" path="res://addons/godot-project-design-links/theme/frame_stylebox.tres" id="2_afal7"]
-[ext_resource type="Script" path="res://addons/godot-project-design-links/context_menu/comment_menu.gd" id="3_at1ac"]
-[ext_resource type="StyleBox" uid="uid://bacwowhkqlri7" path="res://addons/godot-project-design-links/theme/selected_frame_stylebox.tres" id="3_pvsnt"]
-[ext_resource type="StyleBox" uid="uid://dp23tuoxcdmsm" path="res://addons/godot-project-design-links/theme/header_lineedit_stylebox.tres" id="6_r7dye"]
-[ext_resource type="StyleBox" uid="uid://dd45kulojlvij" path="res://addons/godot-project-design-links/theme/focused_header_lineedit_stylebox.tres" id="7_rawt7"]
-[ext_resource type="StyleBox" uid="uid://do10b3bjhp1et" path="res://addons/godot-project-design-links/theme/transparent_style_box_line.tres" id="8_alaah"]
+[ext_resource type="Texture2D" uid="uid://b4fk08gp5qkid" path="res://addons/godot-idea-board/icon/handle.svg" id="1_0jksm"]
+[ext_resource type="Script" path="res://addons/godot-idea-board/comment_node.gd" id="1_pfk21"]
+[ext_resource type="StyleBox" uid="uid://bqp6u8a2jbsek" path="res://addons/godot-idea-board/theme/frame_stylebox.tres" id="2_afal7"]
+[ext_resource type="Script" path="res://addons/godot-idea-board/context_menu/comment_menu.gd" id="3_at1ac"]
+[ext_resource type="StyleBox" uid="uid://bacwowhkqlri7" path="res://addons/godot-idea-board/theme/selected_frame_stylebox.tres" id="3_pvsnt"]
+[ext_resource type="StyleBox" uid="uid://dp23tuoxcdmsm" path="res://addons/godot-idea-board/theme/header_lineedit_stylebox.tres" id="6_r7dye"]
+[ext_resource type="StyleBox" uid="uid://dd45kulojlvij" path="res://addons/godot-idea-board/theme/focused_header_lineedit_stylebox.tres" id="7_rawt7"]
+[ext_resource type="StyleBox" uid="uid://do10b3bjhp1et" path="res://addons/godot-idea-board/theme/transparent_style_box_line.tres" id="8_alaah"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o2qiq"]
 

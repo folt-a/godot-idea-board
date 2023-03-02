@@ -3,7 +3,7 @@
 #02. class_name
 
 #03. extends
-extends "res://addons/godot-project-design-links/context_menu/menu_base.gd"
+extends "res://addons/godot-idea-board/context_menu/menu_base.gd"
 #-----------------------------------------------------------
 #04. # docstring
 ## hoge
@@ -39,7 +39,7 @@ const INDEX_IS_SHOW_ARROW_TO:int = 10
 const SEPARATE_4:int = 11
 const INDEX_ARROW_TYPE_NORMAL:int = 12
 
-const arrow_icon = preload("res://addons/godot-project-design-links/icon/arrow_normal.svg")
+const arrow_icon = preload("res://addons/godot-idea-board/icon/arrow_normal.svg")
 #-----------------------------------------------------------
 #08. exported variables
 #-----------------------------------------------------------
@@ -53,7 +53,7 @@ const arrow_icon = preload("res://addons/godot-project-design-links/icon/arrow_n
 #-----------------------------------------------------------
 @onready var parent = get_parent()
 
-@onready var _S = preload("res://addons/godot-project-design-links/translation/translation.gd").get_translation_singleton(self)
+@onready var _S = preload("res://addons/godot-idea-board/translation/translation.gd").get_translation_singleton(self)
 #-----------------------------------------------------------
 #11. onready variables
 #-----------------------------------------------------------

@@ -1,10 +1,10 @@
 [gd_scene load_steps=14 format=3 uid="uid://8akhawpdokcm"]
 
-[ext_resource type="Texture2D" uid="uid://cmqjcgfb2hitf" path="res://addons/godot-project-design-links/icon/handle.svg" id="1_dls3y"]
-[ext_resource type="Script" path="res://addons/godot-project-design-links/link_node.gd" id="2_x00rg"]
-[ext_resource type="Script" path="res://addons/godot-project-design-links/context_menu/link_menu.gd" id="3_amj4g"]
-[ext_resource type="StyleBox" uid="uid://dp23tuoxcdmsm" path="res://addons/godot-project-design-links/theme/header_lineedit_stylebox.tres" id="3_m8tqn"]
-[ext_resource type="StyleBox" uid="uid://dd45kulojlvij" path="res://addons/godot-project-design-links/theme/focused_header_lineedit_stylebox.tres" id="4_cqrvk"]
+[ext_resource type="Texture2D" uid="uid://cmqjcgfb2hitf" path="res://addons/godot-idea-board/icon/handle.svg" id="1_dls3y"]
+[ext_resource type="Script" path="res://addons/godot-idea-board/link_node.gd" id="2_x00rg"]
+[ext_resource type="Script" path="res://addons/godot-idea-board/context_menu/link_menu.gd" id="3_amj4g"]
+[ext_resource type="StyleBox" uid="uid://dp23tuoxcdmsm" path="res://addons/godot-idea-board/theme/header_lineedit_stylebox.tres" id="3_m8tqn"]
+[ext_resource type="StyleBox" uid="uid://dd45kulojlvij" path="res://addons/godot-idea-board/theme/focused_header_lineedit_stylebox.tres" id="4_cqrvk"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6q3xl"]
 bg_color = Color(0.14902, 0.160784, 0.176471, 1)

@@ -18,16 +18,16 @@ signal end_node_move
 #-----------------------------------------------------------
 #07. constants
 #-----------------------------------------------------------
-const select_icon = preload("res://addons/godot-project-design-links/icon/tool_select.svg")
-const down_arrow_icon = preload("res://addons/godot-project-design-links/icon/down_arrow.svg")
-const left_arrow_icon = preload("res://addons/godot-project-design-links/icon/left_arrow.svg")
-const right_arrow_icon = preload("res://addons/godot-project-design-links/icon/right_arrow.svg")
-const up_arrow_icon = preload("res://addons/godot-project-design-links/icon/up_arrow.svg")
+const select_icon = preload("res://addons/godot-idea-board/icon/tool_select.svg")
+const down_arrow_icon = preload("res://addons/godot-idea-board/icon/down_arrow.svg")
+const left_arrow_icon = preload("res://addons/godot-idea-board/icon/left_arrow.svg")
+const right_arrow_icon = preload("res://addons/godot-idea-board/icon/right_arrow.svg")
+const up_arrow_icon = preload("res://addons/godot-idea-board/icon/up_arrow.svg")
 
-const top_left_arrow_icon = preload("res://addons/godot-project-design-links/icon/top_left_arrow.svg")
-const top_right_arrow_icon = preload("res://addons/godot-project-design-links/icon/top_right_arrow.svg")
-const down_left_arrow_icon = preload("res://addons/godot-project-design-links/icon/down_left_arrow.svg")
-const down_right_arrow_icon = preload("res://addons/godot-project-design-links/icon/down_right_arrow.svg")
+const top_left_arrow_icon = preload("res://addons/godot-idea-board/icon/top_left_arrow.svg")
+const top_right_arrow_icon = preload("res://addons/godot-idea-board/icon/top_right_arrow.svg")
+const down_left_arrow_icon = preload("res://addons/godot-idea-board/icon/down_left_arrow.svg")
+const down_right_arrow_icon = preload("res://addons/godot-idea-board/icon/down_right_arrow.svg")
 
 #-----------------------------------------------------------
 #08. exported variables
@@ -47,7 +47,7 @@ var drag_start = null
 var mouse_drag_start
 var dragging: = false
 
-const context_menu_class = preload("res://addons/godot-project-design-links/context_menu/line_handle_menu.gd")
+const context_menu_class = preload("res://addons/godot-idea-board/context_menu/line_handle_menu.gd")
 
 #-----------------------------------------------------------
 #10. private variables
@@ -361,21 +361,21 @@ func _on_changed_color_context_menu(color_str:String):
 	var bg_style_focus:StyleBox
 	match color_theme:
 		"White":
-#			line_grad = preload("res://addons/godot-project-design-links/theme/white_gradient.tres")
+#			line_grad = preload("res://addons/godot-idea-board/theme/white_gradient.tres")
 			line_color = Color.WHITE_SMOKE
-			handle_style_box = preload("res://addons/godot-project-design-links/theme/line_handle_frame_white_stylebox.tres")
-			selected_handle_style_box = preload("res://addons/godot-project-design-links/theme/line_handle_selected_white_stylebox.tres")
+			handle_style_box = preload("res://addons/godot-idea-board/theme/line_handle_frame_white_stylebox.tres")
+			selected_handle_style_box = preload("res://addons/godot-idea-board/theme/line_handle_selected_white_stylebox.tres")
 			font_color = Color.from_string("393939",Color.WHITE)
-			bg_style = preload("res://addons/godot-project-design-links/theme/text_light_title_line_edit.tres")
-			bg_style_focus = preload("res://addons/godot-project-design-links/theme/text_light_title_selected_line_edit.tres")
+			bg_style = preload("res://addons/godot-idea-board/theme/text_light_title_line_edit.tres")
+			bg_style_focus = preload("res://addons/godot-idea-board/theme/text_light_title_selected_line_edit.tres")
 		"Black":
-#			line_grad = preload("res://addons/godot-project-design-links/theme/black_gradient.tres")
+#			line_grad = preload("res://addons/godot-idea-board/theme/black_gradient.tres")
 			line_color = Color.from_string("393939",Color.WHITE)
-			handle_style_box = preload("res://addons/godot-project-design-links/theme/line_handle_frame_black_stylebox.tres")
-			selected_handle_style_box = preload("res://addons/godot-project-design-links/theme/line_handle_selected_black_stylebox.tres")
+			handle_style_box = preload("res://addons/godot-idea-board/theme/line_handle_frame_black_stylebox.tres")
+			selected_handle_style_box = preload("res://addons/godot-idea-board/theme/line_handle_selected_black_stylebox.tres")
 			font_color = Color.from_string("ccced1",Color.WHITE)
-			bg_style = preload("res://addons/godot-project-design-links/theme/text_dark_title_line_edit.tres")
-			bg_style_focus = preload("res://addons/godot-project-design-links/theme/text_dark_title_selected_line_edit.tres")
+			bg_style = preload("res://addons/godot-idea-board/theme/text_dark_title_line_edit.tres")
+			bg_style_focus = preload("res://addons/godot-idea-board/theme/text_dark_title_selected_line_edit.tres")
 	line_2d.default_color = line_color
 	arrow_from.modulate = line_color
 	add_theme_stylebox_override("frame",handle_style_box)

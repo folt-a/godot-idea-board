@@ -39,7 +39,7 @@ signal distribute_v_aligned(dir:int)
 #-----------------------------------------------------------
 #07. constants
 #-----------------------------------------------------------
-const bg_icon = preload("res://addons/godot-project-design-links/icon/bg.svg")
+const bg_icon = preload("res://addons/godot-idea-board/icon/bg.svg")
 #-----------------------------------------------------------
 #08. exported variables
 #-----------------------------------------------------------
@@ -53,7 +53,7 @@ const bg_icon = preload("res://addons/godot-project-design-links/icon/bg.svg")
 #-----------------------------------------------------------
 var _graphedit
 
-@onready var _S = preload("res://addons/godot-project-design-links/translation/translation.gd").get_translation_singleton(self)
+@onready var _S = preload("res://addons/godot-idea-board/translation/translation.gd").get_translation_singleton(self)
 #-----------------------------------------------------------
 #11. onready variables
 #-----------------------------------------------------------

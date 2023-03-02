@@ -45,7 +45,7 @@ var save_json_dir_path:String = ""
 #-----------------------------------------------------------
 #10. private variables
 #-----------------------------------------------------------
-@onready var _S = preload("res://addons/godot-project-design-links/translation/translation.gd").get_translation_singleton(self)
+@onready var _S = preload("res://addons/godot-idea-board/translation/translation.gd").get_translation_singleton(self)
 
 var _is_left:bool = true
 
@@ -154,7 +154,7 @@ func init():
 
 #	初期起動時はないので追加する
 	if !ProjectSettings.has_setting("godot_project_design_links/directory_path"):
-		ProjectSettings.set_setting("godot_project_design_links/directory_path", "res://addons/godot-project-design-links/savedata/")
+		ProjectSettings.set_setting("godot_project_design_links/directory_path", "res://addons/godot-idea-board/savedata/")
 		var property_info = {
 			"name": "godot_project_design_links/directory_path",
 			"type": TYPE_STRING,

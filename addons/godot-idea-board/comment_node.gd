@@ -18,10 +18,10 @@ signal end_node_move
 #-----------------------------------------------------------
 #07. constants
 #-----------------------------------------------------------
-const md_icon = preload("res://addons/godot-project-design-links/icon/md.svg")
-const bold_icon = preload("res://addons/godot-project-design-links/icon/b.svg")
-const h1_icon = preload("res://addons/godot-project-design-links/icon/h1.svg")
-const h2_icon = preload("res://addons/godot-project-design-links/icon/h2.svg")
+const md_icon = preload("res://addons/godot-idea-board/icon/md.svg")
+const bold_icon = preload("res://addons/godot-idea-board/icon/b.svg")
+const h1_icon = preload("res://addons/godot-idea-board/icon/h1.svg")
+const h2_icon = preload("res://addons/godot-idea-board/icon/h2.svg")
 
 #-----------------------------------------------------------
 #08. exported variables
@@ -331,27 +331,27 @@ func _on_changed_color_context_menu(color_str:String):
 	match color_theme:
 		"TrLight":
 			font_color = Color.from_string("393939",Color.WHITE)
-			header_bg_style = preload("res://addons/godot-project-design-links/theme/transparent_title_line_edit.tres")
-			header_bg_style_focus = preload("res://addons/godot-project-design-links/theme/transparent_title_selected_line_edit.tres")
-			bg_style = preload("res://addons/godot-project-design-links/theme/transparent_style_box_line.tres")
+			header_bg_style = preload("res://addons/godot-idea-board/theme/transparent_title_line_edit.tres")
+			header_bg_style_focus = preload("res://addons/godot-idea-board/theme/transparent_title_selected_line_edit.tres")
+			bg_style = preload("res://addons/godot-idea-board/theme/transparent_style_box_line.tres")
 			bg_color = Color.from_string("cfd0d119",Color.WHITE)
 		"TrDark":
 			font_color = Color.from_string("ccced1",Color.WHITE)
-			header_bg_style = preload("res://addons/godot-project-design-links/theme/transparent_title_line_edit.tres")
-			header_bg_style_focus = preload("res://addons/godot-project-design-links/theme/transparent_title_selected_line_edit.tres")
-			bg_style = preload("res://addons/godot-project-design-links/theme/transparent_style_box_line.tres")
+			header_bg_style = preload("res://addons/godot-idea-board/theme/transparent_title_line_edit.tres")
+			header_bg_style_focus = preload("res://addons/godot-idea-board/theme/transparent_title_selected_line_edit.tres")
+			bg_style = preload("res://addons/godot-idea-board/theme/transparent_style_box_line.tres")
 			bg_color = Color.from_string("1d222919",Color.WHITE)
 		"Light":
 			font_color = Color.from_string("393939",Color.WHITE)
-			header_bg_style = preload("res://addons/godot-project-design-links/theme/text_light_title_line_edit.tres")
-			header_bg_style_focus = preload("res://addons/godot-project-design-links/theme/text_light_title_selected_line_edit.tres")
-			bg_style = preload("res://addons/godot-project-design-links/theme/text_light_style_box_line.tres")
+			header_bg_style = preload("res://addons/godot-idea-board/theme/text_light_title_line_edit.tres")
+			header_bg_style_focus = preload("res://addons/godot-idea-board/theme/text_light_title_selected_line_edit.tres")
+			bg_style = preload("res://addons/godot-idea-board/theme/text_light_style_box_line.tres")
 			bg_color = Color.from_string("cfd0d1",Color.WHITE)
 		"Dark":
 			font_color = Color.from_string("ccced1",Color.WHITE)
-			header_bg_style = preload("res://addons/godot-project-design-links/theme/text_dark_title_line_edit.tres")
-			header_bg_style_focus = preload("res://addons/godot-project-design-links/theme/text_dark_title_selected_line_edit.tres")
-			bg_style = preload("res://addons/godot-project-design-links/theme/text_dark_style_box_line.tres")
+			header_bg_style = preload("res://addons/godot-idea-board/theme/text_dark_title_line_edit.tres")
+			header_bg_style_focus = preload("res://addons/godot-idea-board/theme/text_dark_title_selected_line_edit.tres")
+			bg_style = preload("res://addons/godot-idea-board/theme/text_dark_style_box_line.tres")
 			bg_color = Color.from_string("1d2229",Color.WHITE)
 
 	header_line_edit.add_theme_color_override("font_color",font_color)

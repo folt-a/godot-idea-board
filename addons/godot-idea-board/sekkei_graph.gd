@@ -18,13 +18,13 @@ extends GraphEdit
 #-----------------------------------------------------------
 #07. constants
 #-----------------------------------------------------------
-var file_node = preload("res://addons/godot-project-design-links/file_node.tscn")
-var script_node = preload("res://addons/godot-project-design-links/file_node.tscn")
-var group_node = preload("res://addons/godot-project-design-links/group_node.tscn")
-var comment_node = preload("res://addons/godot-project-design-links/comment_node.tscn")
-var link_node = preload("res://addons/godot-project-design-links/link_node.tscn")
-var line_handle_node = preload("res://addons/godot-project-design-links/line_handle_node.tscn")
-#var main_font = preload("res://addons/godot-project-design-links/font/ZenMaruGothic-Bold-Subset.ttf")
+var file_node = preload("res://addons/godot-idea-board/file_node.tscn")
+var script_node = preload("res://addons/godot-idea-board/file_node.tscn")
+var group_node = preload("res://addons/godot-idea-board/group_node.tscn")
+var comment_node = preload("res://addons/godot-idea-board/comment_node.tscn")
+var link_node = preload("res://addons/godot-idea-board/link_node.tscn")
+var line_handle_node = preload("res://addons/godot-idea-board/line_handle_node.tscn")
+#var main_font = preload("res://addons/godot-idea-board/font/ZenMaruGothic-Bold-Subset.ttf")
 
 #-----------------------------------------------------------
 #08. exported variables
@@ -60,7 +60,7 @@ var _canvas_menu
 
 var _is_right_dragging:bool = false
 
-@onready var _S = preload("res://addons/godot-project-design-links/translation/translation.gd").get_translation_singleton(self)
+@onready var _S = preload("res://addons/godot-idea-board/translation/translation.gd").get_translation_singleton(self)
 #-----------------------------------------------------------
 #11. onready variables
 #-----------------------------------------------------------
@@ -85,7 +85,7 @@ func init(main):
 	var hbox:HBoxContainer = get_zoom_hbox()
 	hbox.size_flags_horizontal = HBoxContainer.SIZE_EXPAND_FILL
 
-	var canvas_menu = preload("res://addons/godot-project-design-links/canvas_menu.tscn").instantiate()
+	var canvas_menu = preload("res://addons/godot-idea-board/canvas_menu.tscn").instantiate()
 	hbox.add_child(canvas_menu)
 	canvas_menu.init(self)
 	_canvas_menu = canvas_menu

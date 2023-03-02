@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://dv1k1e6v1u8hl"]
 
-[ext_resource type="Script" path="res://addons/godot-project-design-links/file_node.gd" id="1_22c3v"]
-[ext_resource type="Texture2D" uid="uid://fvv1ml283w3g" path="res://addons/godot-project-design-links/icon/handle.svg" id="1_dls3y"]
-[ext_resource type="Script" path="res://addons/godot-project-design-links/context_menu/file_menu.gd" id="2_brc2y"]
+[ext_resource type="Script" path="res://addons/godot-idea-board/file_node.gd" id="1_22c3v"]
+[ext_resource type="Texture2D" uid="uid://fvv1ml283w3g" path="res://addons/godot-idea-board/icon/handle.svg" id="1_dls3y"]
+[ext_resource type="Script" path="res://addons/godot-idea-board/context_menu/file_menu.gd" id="2_brc2y"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6q3xl"]
 bg_color = Color(0.14902, 0.160784, 0.176471, 1)

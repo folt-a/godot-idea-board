@@ -10,10 +10,14 @@ config_version=5
 
 [application]
 
-config/name="godot-project-design-links"
+config/name="godot-idea-board"
 config/features=PackedStringArray("4.0", "Forward Plus")
 config/icon="res://icon.svg"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/godot-project-design-links/plugin.cfg")
+enabled=PackedStringArray("res://addons/godot-idea-board/plugin.cfg")
+
+[godot_project_design_links]
+
+directory_path="res://addons/godot-idea-board/savedata/"

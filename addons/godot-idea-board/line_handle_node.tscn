@@ -1,14 +1,14 @@
 [gd_scene load_steps=11 format=3 uid="uid://dthcmi5lj88ky"]
 
-[ext_resource type="Texture2D" uid="uid://b4fk08gp5qkid" path="res://addons/godot-project-design-links/icon/handle.svg" id="1_hiwoi"]
-[ext_resource type="StyleBox" uid="uid://w82ranjj3lbw" path="res://addons/godot-project-design-links/theme/line_handle_frame_stylebox.tres" id="2_pv2kw"]
-[ext_resource type="StyleBox" uid="uid://cha66fvd1ybkh" path="res://addons/godot-project-design-links/theme/line_handle_selected_stylebox.tres" id="3_qa1a4"]
-[ext_resource type="Script" path="res://addons/godot-project-design-links/line_handle_node.gd" id="4_kje78"]
-[ext_resource type="StyleBox" uid="uid://1a2ks43qywgj" path="res://addons/godot-project-design-links/theme/text_light_title_line_edit.tres" id="5_n7r5b"]
-[ext_resource type="Script" path="res://addons/godot-project-design-links/context_menu/line_handle_menu.gd" id="5_qleyb"]
-[ext_resource type="StyleBox" uid="uid://dd3e5yean6mrf" path="res://addons/godot-project-design-links/theme/text_light_title_selected_line_edit.tres" id="6_vh0tj"]
-[ext_resource type="Texture2D" uid="uid://cp28xjejif1gc" path="res://addons/godot-project-design-links/icon/down_arrow.svg" id="8_jr8a2"]
-[ext_resource type="Texture2D" uid="uid://ihnhrknyp4dk" path="res://addons/godot-project-design-links/icon/down_left_arrow.svg" id="9_rhgfu"]
+[ext_resource type="Texture2D" uid="uid://b4fk08gp5qkid" path="res://addons/godot-idea-board/icon/handle.svg" id="1_hiwoi"]
+[ext_resource type="StyleBox" uid="uid://w82ranjj3lbw" path="res://addons/godot-idea-board/theme/line_handle_frame_stylebox.tres" id="2_pv2kw"]
+[ext_resource type="StyleBox" uid="uid://cha66fvd1ybkh" path="res://addons/godot-idea-board/theme/line_handle_selected_stylebox.tres" id="3_qa1a4"]
+[ext_resource type="Script" path="res://addons/godot-idea-board/line_handle_node.gd" id="4_kje78"]
+[ext_resource type="StyleBox" uid="uid://1a2ks43qywgj" path="res://addons/godot-idea-board/theme/text_light_title_line_edit.tres" id="5_n7r5b"]
+[ext_resource type="Script" path="res://addons/godot-idea-board/context_menu/line_handle_menu.gd" id="5_qleyb"]
+[ext_resource type="StyleBox" uid="uid://dd3e5yean6mrf" path="res://addons/godot-idea-board/theme/text_light_title_selected_line_edit.tres" id="6_vh0tj"]
+[ext_resource type="Texture2D" uid="uid://cp28xjejif1gc" path="res://addons/godot-idea-board/icon/down_arrow.svg" id="8_jr8a2"]
+[ext_resource type="Texture2D" uid="uid://ihnhrknyp4dk" path="res://addons/godot-idea-board/icon/down_left_arrow.svg" id="9_rhgfu"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2j14n"]
 

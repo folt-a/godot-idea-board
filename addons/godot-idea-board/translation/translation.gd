@@ -7,8 +7,8 @@ extends Node
 
 var strings_dict:Dictionary = {}
 
-const _locale_csv_path := "res://addons/godot-project-design-links/translation/translation.csv"
-const _this_script_path := "res://addons/godot-project-design-links/translation/translation.gd"
+const _locale_csv_path := "res://addons/godot-idea-board/translation/translation.csv"
+const _this_script_path := "res://addons/godot-idea-board/translation/translation.gd"
 
 func load_strings()->void:
 	## loads the strings dictionary from the default strings csv file

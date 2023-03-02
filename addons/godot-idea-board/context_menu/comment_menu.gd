@@ -3,7 +3,7 @@
 #02. class_name
 
 #03. extends
-extends "res://addons/godot-project-design-links/context_menu/menu_base.gd"
+extends "res://addons/godot-idea-board/context_menu/menu_base.gd"
 #-----------------------------------------------------------
 #04. # docstring
 ## hoge
@@ -51,7 +51,7 @@ const INDEX_BG_DA:int = 11
 #-----------------------------------------------------------
 @onready var parent = get_parent()
 
-@onready var _S = preload("res://addons/godot-project-design-links/translation/translation.gd").get_translation_singleton(self)
+@onready var _S = preload("res://addons/godot-idea-board/translation/translation.gd").get_translation_singleton(self)
 #-----------------------------------------------------------
 #11. onready variables
 #-----------------------------------------------------------

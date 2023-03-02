@@ -18,7 +18,7 @@ signal end_node_move
 #-----------------------------------------------------------
 #07. constants
 #-----------------------------------------------------------
-const select_icon = preload("res://addons/godot-project-design-links/icon/tool_select.svg")
+const select_icon = preload("res://addons/godot-idea-board/icon/tool_select.svg")
 #-----------------------------------------------------------
 #08. exported variables
 #-----------------------------------------------------------

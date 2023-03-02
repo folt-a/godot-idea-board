@@ -1,11 +1,11 @@
 [gd_scene load_steps=10 format=3 uid="uid://ctvg3e2tkspqb"]
 
-[ext_resource type="Script" path="res://addons/godot-project-design-links/sekkei_main.gd" id="1_2n0ft"]
-[ext_resource type="Theme" uid="uid://dp1xxx710usj3" path="res://addons/godot-project-design-links/main_theme.tres" id="1_eha6v"]
-[ext_resource type="Script" path="res://addons/godot-project-design-links/sekkei_graph.gd" id="1_lrq46"]
-[ext_resource type="ButtonGroup" uid="uid://b8qct4jrxfu76" path="res://addons/godot-project-design-links/left_right_button_group.tres" id="2_wtk48"]
-[ext_resource type="Script" path="res://addons/godot-project-design-links/markdown_parser.gd" id="3_xn6dl"]
-[ext_resource type="Script" path="res://addons/godot-project-design-links/context_menu/graph_menu.gd" id="5_extsy"]
+[ext_resource type="Script" path="res://addons/godot-idea-board/sekkei_main.gd" id="1_2n0ft"]
+[ext_resource type="Theme" uid="uid://dp1xxx710usj3" path="res://addons/godot-idea-board/main_theme.tres" id="1_eha6v"]
+[ext_resource type="Script" path="res://addons/godot-idea-board/sekkei_graph.gd" id="1_lrq46"]
+[ext_resource type="ButtonGroup" uid="uid://b8qct4jrxfu76" path="res://addons/godot-idea-board/left_right_button_group.tres" id="2_wtk48"]
+[ext_resource type="Script" path="res://addons/godot-idea-board/markdown_parser.gd" id="3_xn6dl"]
+[ext_resource type="Script" path="res://addons/godot-idea-board/context_menu/graph_menu.gd" id="5_extsy"]
 
 [sub_resource type="Animation" id="Animation_w05kn"]
 length = 0.001

@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://do755yejs3y7l"]
 
-[ext_resource type="Script" path="res://addons/godot-project-design-links/canvas_menu.gd" id="1_ug2mc"]
+[ext_resource type="Script" path="res://addons/godot-idea-board/canvas_menu.gd" id="1_ug2mc"]
 
 [sub_resource type="InputEventKey" id="InputEventKey_suu4o"]
 alt_pressed = true
