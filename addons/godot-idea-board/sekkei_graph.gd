@@ -542,6 +542,7 @@ func penetrate_nodes():
 		node.init({
 			"from_node_id": from_node.get_data().id,
 			"to_node_id": to_node.get_data().id,
+			"is_main_handle": true
 			})
 		## 2点の真ん中に置く、ちょっとずらす
 		var pos_1 = from_node.position_offset + from_node.size / 2

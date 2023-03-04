@@ -12,6 +12,7 @@
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_2j14n"]
 
 [node name="LineHandleNode" type="GraphNode"]
+custom_minimum_size = Vector2(42, 42)
 offset_right = 59.0
 offset_bottom = 23.0
 mouse_default_cursor_shape = 13

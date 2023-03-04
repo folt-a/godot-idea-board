@@ -90,7 +90,11 @@ func init(data = {}):
 	_parent = get_parent()
 
 #	複数ハンドル
-
+	if !data.has("is_main_handle"):
+		#後方互換
+		data.is_main_handle = true
+		data.handle_node_ids = str(get_instance_id())
+		data.id = get_instance_id()
 	if data.has("is_main_handle"):
 		is_main_handle = data.is_main_handle
 
@@ -258,15 +262,19 @@ func _gui_input(event):
 	and event.button_index == MOUSE_BUTTON_RIGHT\
 	and !event.pressed:
 		accept_event()
+		var pa = _parent.get_parent()
 		if is_main_handle:
 			context_menu.popup()
+			if pa is Window: #PopupGraphならWindowのぶんずらす
+				context_menu.position = DisplayServer.mouse_get_position() + pa.position
+			else:
+				context_menu.position = DisplayServer.mouse_get_position()
 		else:
 			main_handle.context_menu.popup()
-		var pa = _parent.get_parent()
-		if pa is Window: #PopupGraphならWindowのぶんずらす
-			context_menu.position = DisplayServer.mouse_get_position() + pa.position
-		else:
-			context_menu.position = DisplayServer.mouse_get_position()
+			if pa is Window: #PopupGraphならWindowのぶんずらす
+				main_handle.context_menu.position = DisplayServer.mouse_get_position() + pa.position
+			else:
+				main_handle.context_menu.position = DisplayServer.mouse_get_position()
 		_parent.penetrate_nodes()
 
 #	ダブルクリック
@@ -367,10 +375,16 @@ func _on_position_offset_changed():
 		line_2d.add_point(to_intersect_point)
 
 func _on_mouse_entered():
-	line_2d.width = 20.0
+	if is_main_handle:
+		line_2d.width = 20.0
+	else:
+		main_handle._on_mouse_entered()
 
 func _on_mouse_exited():
-	line_2d.width = 10.0
+	if is_main_handle:
+		line_2d.width = 10.0
+	else:
+		main_handle._on_mouse_exited()
 
 func _on_copied_context_menu():
 	var data = get_data()
