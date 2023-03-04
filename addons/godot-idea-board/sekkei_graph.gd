@@ -59,6 +59,8 @@ var _canvas_menu
 
 var _is_right_dragging:bool = false
 
+var _selected_nodes:Array = []
+
 @onready var _S = preload("res://addons/godot-idea-board/translation/translation.gd").get_translation_singleton(self)
 #-----------------------------------------------------------
 #11. onready variables
@@ -118,7 +120,6 @@ func init(main):
 
 	is_window = get_parent() is Window
 
-
 func _ready():
 
 	resized.connect(_on_resized)
@@ -126,6 +127,7 @@ func _ready():
 	copy_nodes_request.connect(_on_copy_nodes_request)
 	paste_nodes_request.connect(_on_paste_nodes_request)
 	node_selected.connect(_on_node_selected)
+	node_deselected.connect(_on_node_deselected)
 
 #	エディタのWindowにファイルドロップのシグナルをつける おくらいり
 #	get_viewport().files_dropped.connect(_on_files_dropped_editor_window)
@@ -234,10 +236,13 @@ func _on_paste_nodes_request():
 			node.selected = true
 
 func _on_node_selected(node):
-	if node is GraphNode and node.graph_node_type == "Group":
-		for child in get_children():
-			if child is GraphNode and child.graph_node_type != "Group":
-				child.move_to_front()
+	if node is GraphNode and node.get_data().id:
+		if !_selected_nodes.has(node.get_data().id):
+			_selected_nodes.append(node.get_data().id)
+
+func _on_node_deselected(node):
+	if _selected_nodes.has(node.get_data().id):
+		_selected_nodes.erase(node.get_data().id)
 
 ### OSエクスプローラーからのドラッグドロップでOSノードを作成する。　おくらいり
 # https://twitter.com/Faultun/status/1588516067579940864?s=20&t=GraPUx9afeW6Qxb1iGL69Q
@@ -264,6 +269,9 @@ func _on_node_selected(node):
 func _on_file_removed(file_path):
 	for child in get_children():
 		if child is GraphNode and child.get("path") and child.path == file_path:
+			_on_node_deselected(child)
+			if child.graph_node_type == "LineHandle":
+				child.remove()
 			child.queue_free()
 			set_dirty()
 
@@ -444,7 +452,10 @@ func clear():
 	dirty = false
 
 func delete_node(node):
+	_on_node_deselected(node)
 	node.queue_free()
+	if node.graph_node_type == "LineHandle":
+		node.remove()
 	set_dirty()
 
 func get_icon(icon_name:String) -> Texture:
@@ -602,6 +613,7 @@ func _add_nodes(datas:Array) -> Array:
 		or node.graph_node_type == "TextDocument" or node.graph_node_type == "Label"\
 		or node.graph_node_type == "Group" or node.graph_node_type == "Link"):
 			node.move_to_front()
+	_selected_nodes = []
 	return added_nodes
 
 func _add_node(scn_node, pos) -> GraphNode:
@@ -631,6 +643,13 @@ func _get_selected_graphnode() -> Array[GraphNode]:
 	for node in get_children():
 		if node is GraphNode and node.selected and node.graph_node_type:
 			selected_nodes.append(node)
+	return selected_nodes
+
+func _get_selected_graphnode_ids() -> Array:
+	var selected_nodes:Array[int] = []
+	for node in get_children():
+		if node is GraphNode and node.selected and node.graph_node_type:
+			selected_nodes.append(node.get_data().id)
 	return selected_nodes
 
 func _on_pressed_save_button():
@@ -676,22 +695,22 @@ func _on_pressed_unlock_button():
 
 func _on_pressed_connect_button():
 	# ２GraphNodeをつなげる
-	var selected_nodes:Array[GraphNode] = _get_selected_graphnode()
-	if selected_nodes.size() != 2:
+
+	var real_selected_nodes:Array = _get_selected_graphnode_ids()
+	for selected_node in _selected_nodes:
+		if !real_selected_nodes.has(selected_node):
+			_selected_nodes.erase(selected_node)
+	if _selected_nodes.size() != 2:
 		printerr(_S.tr("connect_size_err"))
 		return
-	var is_LtoR = (selected_nodes[0].position_offset + selected_nodes[0].size / 2) < (selected_nodes[1].position_offset + selected_nodes[1].size / 2)
-	var from_node
-	var to_node
-	if is_LtoR:
-		from_node = selected_nodes[0]
-		to_node = selected_nodes[1]
-	else:
-		from_node = selected_nodes[1]
-		to_node = selected_nodes[0]
+
+	var from_node = get_node_from_id(_selected_nodes[0])
+	var to_node = get_node_from_id(_selected_nodes[1])
+
 	var node = line_handle_node.instantiate()
 	self.add_child(node)
 	node.init({
+		"is_main_handle": true,
 		"from_node_id": from_node.get_data().id,
 		"to_node_id": to_node.get_data().id,
 		})
@@ -700,6 +719,7 @@ func _on_pressed_connect_button():
 	var pos_2 = to_node.position_offset + to_node.size / 2
 	node.position_offset = snap((pos_1 + pos_2) / 2)
 	set_dirty()
+	_selected_nodes = []
 	pass
 
 ## 整列

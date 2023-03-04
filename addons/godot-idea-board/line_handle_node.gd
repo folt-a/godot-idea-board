@@ -93,8 +93,12 @@ func init(data = {}):
 	if !data.has("is_main_handle"):
 		#後方互換
 		data.is_main_handle = true
-		data.handle_node_ids = str(get_instance_id())
-		data.id = get_instance_id()
+		if data.has("id") and data.id != null:
+			id = data.id
+		else:
+			data.id = get_instance_id()
+		data.handle_node_ids = str(data.id)
+		data.handle_nodes = [self]
 	if data.has("is_main_handle"):
 		is_main_handle = data.is_main_handle
 
@@ -190,12 +194,12 @@ func init(data = {}):
 
 #	line_edit.add_theme_font_size_override("font_size", int(size.y/1.5))
 
-	_on_position_offset_changed.call_deferred()
-
-	_on_changed_color_context_menu.bind(color_theme).call_deferred()
-
 	context_menu.transient = !_parent.is_window
 	context_menu.always_on_top = _parent.is_window
+
+	await get_tree().create_timer(0.1).timeout
+	_on_changed_color_context_menu.bind(color_theme).call_deferred()
+	_on_position_offset_changed()
 
 func init_handles():
 	handle_nodes = []
@@ -218,7 +222,7 @@ func _ready():
 	context_menu.deleted.connect(_on_deleted_context_menu)
 	context_menu.toggle_lock_selected.connect(_on_toggle_lock_selected_context_menu)
 	context_menu.added_point.connect(_on_added_point_context_menu)
-	context_menu.removed_point.connect(_on_removed_point_context_menu)
+#	context_menu.removed_point.connect(_on_removed_point_context_menu)
 	context_menu.changed_color.connect(_on_changed_color_context_menu)
 	context_menu.toggle_hide_editable_text.connect(_on_toggle_show_editable_text_context_menu)
 
@@ -419,6 +423,7 @@ func _on_added_point_context_menu():
 	var node = line_handle_node.instantiate()
 	_parent.add_child(node)
 	node.init({
+		"id": node.get_instance_id(),
 		"from_node_id": -1,
 		"to_node_id": -1,
 		"is_main_handle": false,
@@ -433,11 +438,25 @@ func _on_added_point_context_menu():
 	var pos_2 = _to_node.position_offset + (_to_node.size / 2)
 	node.position_offset = (pos_1 + pos_2) / 2
 
-func _on_removed_point_context_menu():
-
-	pass
+#func _on_removed_point_context_menu():
+#	if handle_node_ids.is_empty(): return
+#
+##	1個なら自分の切替のみ
+#	if handle_node_ids.size() == 1:
+#		handle_node_ids = []
+#		handle_nodes = []
+#		_on_position_offset_changed()
+#		return
+#
+#	var remove_node = handle_nodes.pop_back()
+#	var remove_node_id = handle_node_ids.pop_back()
+#	remove_node.queue_free()
 
 func _on_changed_color_context_menu(color_str:String):
+	for node in handle_nodes:
+		if node != self:
+			node._on_changed_color_context_menu.bind(color_str).call_deferred()
+
 	color_theme = color_str
 	var line_color:Color
 	var handle_style_box:StyleBoxFlat
@@ -464,6 +483,7 @@ func _on_changed_color_context_menu(color_str:String):
 			bg_style_focus = preload("res://addons/godot-idea-board/theme/text_dark_title_selected_line_edit.tres")
 	line_2d.default_color = line_color
 	arrow_from.modulate = line_color
+	arrow_to.modulate = line_color
 	add_theme_stylebox_override("frame",handle_style_box)
 	add_theme_stylebox_override("selected_frame",selected_handle_style_box)
 
@@ -477,6 +497,9 @@ func _on_changed_color_context_menu(color_str:String):
 	_parent.set_dirty()
 
 func _on_toggle_show_editable_text_context_menu(is_show):
+	for node in handle_nodes:
+		if node != self:
+			node._on_toggle_show_editable_text_context_menu.bind(is_show).call_deferred()
 	line_edit.visible = is_show
 	if is_show:
 		set_deferred("size",Vector2.ZERO)
@@ -546,6 +569,20 @@ func lock():
 #	_on_index_pressed(index:int):の処理
 	context_menu.set_item_checked(0, true)
 	context_menu.toggle_lock_selected.emit(context_menu.is_item_checked(0))
+
+func remove():
+	if is_main_handle:
+		for handle_node in handle_nodes:
+			handle_node.queue_free()
+	else:
+		main_handle.remove_sub_handle(id, self)
+
+func remove_sub_handle(sub_id,sub_handle):
+	if handle_node_ids.has(sub_id):
+		handle_node_ids.erase(sub_id)
+	if handle_nodes.has(sub_handle):
+		handle_nodes.erase(sub_handle)
+	_on_position_offset_changed()
 
 #-----------------------------------------------------------
 #16. private methods

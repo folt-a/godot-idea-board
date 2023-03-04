@@ -32,17 +32,17 @@ const INDEX_COPY:int = 1
 const INDEX_DELETE:int = 2
 const SEPARATE_1:int = 3
 const INDEX_ADD_POINT:int = 4
-const INDEX_REMOVE_POINT:int = 5
-const SEPARATE_2:int = 6
-const INDEX_COLOR_WHITE:int = 7
-const INDEX_COLOR_BLACK:int = 8
-const SEPARATE_3:int = 9
-const INDEX_IS_SHOW_EDITABLE_TEXT:int = 10
-const SEPARATE_4:int = 11
-const INDEX_IS_SHOW_ARROW_FROM:int = 12
-const INDEX_IS_SHOW_ARROW_TO:int = 13
-const SEPARATE_5:int = 14
-const INDEX_ARROW_TYPE_NORMAL:int = 15
+#const INDEX_REMOVE_POINT:int = 5
+const SEPARATE_2:int = 5
+const INDEX_COLOR_WHITE:int = 6
+const INDEX_COLOR_BLACK:int = 7
+const SEPARATE_3:int = 8
+const INDEX_IS_SHOW_EDITABLE_TEXT:int = 9
+const SEPARATE_4:int = 10
+const INDEX_IS_SHOW_ARROW_FROM:int = 11
+const INDEX_IS_SHOW_ARROW_TO:int = 12
+const SEPARATE_5:int = 13
+const INDEX_ARROW_TYPE_NORMAL:int = 14
 
 const arrow_icon = preload("res://addons/godot-idea-board/icon/arrow_normal.svg")
 #-----------------------------------------------------------
@@ -78,7 +78,7 @@ func _ready():
 	add_icon_item(_parent.get_icon("Remove"), _S.tr("Delete"), INDEX_DELETE)
 	add_separator("", SEPARATE_1)
 	add_icon_item(_parent.get_icon("Add"), _S.tr("Add Point"), INDEX_ADD_POINT)
-	add_icon_item(_parent.get_icon("Remove"), _S.tr("Remove Point"), INDEX_REMOVE_POINT)
+#	add_icon_item(_parent.get_icon("Remove"), _S.tr("Remove Point"), INDEX_REMOVE_POINT)
 	add_separator("", SEPARATE_2)
 	add_icon_item(_parent.get_icon("Color"),_S.tr("Color White"), INDEX_COLOR_WHITE)
 	add_icon_item(_parent.get_icon("Color"),_S.tr("Color Black"), INDEX_COLOR_BLACK)
@@ -97,8 +97,8 @@ func _on_index_pressed(index:int):
 			toggle_lock_selected.emit(is_item_checked(INDEX_LOCK))
 		INDEX_ADD_POINT:
 			added_point.emit()
-		INDEX_REMOVE_POINT:
-			removed_point.emit()
+#		INDEX_REMOVE_POINT:
+#			removed_point.emit()
 		INDEX_COPY:
 			copied.emit()
 		INDEX_DELETE:
