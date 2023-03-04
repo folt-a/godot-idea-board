@@ -20,6 +20,8 @@ signal end_node_move
 #-----------------------------------------------------------
 const select_icon = preload("res://addons/godot-idea-board/icon/tool_select.svg")
 
+var line_handle_node = preload("res://addons/godot-idea-board/line_handle_node.tscn")
+
 #-----------------------------------------------------------
 #08. exported variables
 #-----------------------------------------------------------
@@ -29,7 +31,7 @@ const select_icon = preload("res://addons/godot-idea-board/icon/tool_select.svg"
 #-----------------------------------------------------------
 var _parent:GraphEdit
 
-var id
+var id:int
 
 var color_theme ="White"
 
@@ -55,8 +57,16 @@ var arrow_dir_from
 var arrow_dir_to
 var arrow_type:String = ""
 
+var is_main_handle:bool = true
+var handle_node_ids:Array[int] = []
+var handle_nodes:Array[GraphNode] = []
+var main_handle:GraphNode
+var main_handle_id
+
 var _is_show_arrow_from:bool = false
 var _is_show_arrow_to:bool = false
+
+var _line_color:Color
 
 var _curve = Curve2D.new()
 #-----------------------------------------------------------
@@ -78,6 +88,30 @@ var _curve = Curve2D.new()
 #-----------------------------------------------------------
 func init(data = {}):
 	_parent = get_parent()
+
+#	複数ハンドル
+
+	if data.has("is_main_handle"):
+		is_main_handle = data.is_main_handle
+
+		if is_main_handle:
+#			自分を含む表示ハンドル カンマ区切り
+			if data.has("handle_node_ids") and data.handle_node_ids != "":
+				var ids:PackedStringArray = data.handle_node_ids.split(",")
+				var ids_int:Array[int] = []
+				for s in ids:
+					ids_int.append(s.to_int())
+				handle_node_ids = ids_int
+#				まだない可能性があるので次のフレームで初期化する
+				init_handles.call_deferred()
+		elif data.has("main_handle_id"):
+#			これはサブハンドル
+			main_handle_id = data.main_handle_id
+			main_handle = _parent.get_node_from_id(data.main_handle_id)
+			data.is_show_arrow_from = false
+			data.is_show_arrow_to = false
+#			色を変えるTODO
+
 	if data.has("from_node_id"):
 		from_node_id = data.from_node_id
 		_from_node = _parent.get_node_from_id(data.from_node_id)
@@ -90,25 +124,34 @@ func init(data = {}):
 			_to_node.position_offset_changed.connect(_on_position_offset_changed)
 	if data.has("text"):
 		line_edit.text = data.text
-	if data.has("is_hide_editable_text"): #テキスト編集化
-		if data.is_hide_editable_text:
-			context_menu.set_item_checked.bind(context_menu_class.INDEX_IS_HIDE_EDITABLE_TEXT,true).call_deferred()
+	if data.has("is_show_editable_text"): #テキスト編集化
+		if data.is_show_editable_text:
+			context_menu.set_item_checked.bind(context_menu_class.INDEX_IS_SHOW_EDITABLE_TEXT,true).call_deferred()
 			set_deferred("size",Vector2.ZERO)
 		else:
 			set_deferred("size",Vector2(size.x,size.x))
-		_on_toggle_hide_editable_text_context_menu(data.is_hide_editable_text)
+		_on_toggle_show_editable_text_context_menu(data.is_show_editable_text)
+	elif data.has("is_hide_editable_text"): #テキスト編集化
+		if data.is_hide_editable_text:
+			context_menu.set_item_checked.bind(context_menu_class.INDEX_IS_SHOW_EDITABLE_TEXT,true).call_deferred()
+			set_deferred("size",Vector2.ZERO)
+		else:
+			set_deferred("size",Vector2(size.x,size.x))
+		_on_toggle_show_editable_text_context_menu(data.is_hide_editable_text)
 	else:
 		set_deferred("size",Vector2.ZERO)
-		context_menu.set_item_checked.bind(context_menu_class.INDEX_IS_HIDE_EDITABLE_TEXT,true).call_deferred()
-		_on_toggle_hide_editable_text_context_menu(true)
+		context_menu.set_item_checked.bind(context_menu_class.INDEX_IS_SHOW_EDITABLE_TEXT,false).call_deferred()
+		_on_toggle_show_editable_text_context_menu(false)
 
 	if data.has("is_show_arrow_from"):
 		_is_show_arrow_from = data.is_show_arrow_from
+		arrow_from.visible = _is_show_arrow_from
 		if data.is_show_arrow_from:
 			context_menu.set_item_checked.bind(context_menu_class.INDEX_IS_SHOW_ARROW_FROM,true).call_deferred()
 
 	if data.has("is_show_arrow_to"):
 		_is_show_arrow_to = data.is_show_arrow_to
+		arrow_to.visible = _is_show_arrow_to
 		if data.is_show_arrow_to:
 			context_menu.set_item_checked.bind(context_menu_class.INDEX_IS_SHOW_ARROW_TO,true).call_deferred()
 	else:
@@ -150,8 +193,16 @@ func init(data = {}):
 	context_menu.transient = !_parent.is_window
 	context_menu.always_on_top = _parent.is_window
 
+func init_handles():
+	handle_nodes = []
+	for handle_node_id in handle_node_ids:
+		handle_nodes.append(_parent.get_node_from_id(handle_node_id))
+
 func _ready():
 	position_offset_changed.connect(_on_position_offset_changed)
+
+	mouse_entered.connect(_on_mouse_entered)
+	mouse_exited.connect(_on_mouse_exited)
 
 	line_edit.focus_exited.connect(_on_focus_exited_line_edit)
 
@@ -162,8 +213,10 @@ func _ready():
 	context_menu.copied.connect(_on_copied_context_menu)
 	context_menu.deleted.connect(_on_deleted_context_menu)
 	context_menu.toggle_lock_selected.connect(_on_toggle_lock_selected_context_menu)
+	context_menu.added_point.connect(_on_added_point_context_menu)
+	context_menu.removed_point.connect(_on_removed_point_context_menu)
 	context_menu.changed_color.connect(_on_changed_color_context_menu)
-	context_menu.toggle_hide_editable_text.connect(_on_toggle_hide_editable_text_context_menu)
+	context_menu.toggle_hide_editable_text.connect(_on_toggle_show_editable_text_context_menu)
 
 	context_menu.toggle_show_arrow_from.connect(_on_toggle_show_arrow_from_context_menu)
 	context_menu.toggle_show_arrow_to.connect(_on_toggle_show_arrow_to_context_menu)
@@ -205,7 +258,10 @@ func _gui_input(event):
 	and event.button_index == MOUSE_BUTTON_RIGHT\
 	and !event.pressed:
 		accept_event()
-		context_menu.popup()
+		if is_main_handle:
+			context_menu.popup()
+		else:
+			main_handle.context_menu.popup()
 		var pa = _parent.get_parent()
 		if pa is Window: #PopupGraphならWindowのぶんずらす
 			context_menu.position = DisplayServer.mouse_get_position() + pa.position
@@ -219,8 +275,7 @@ func _gui_input(event):
 	and event.double_click:
 		_on_pressed_icon_button()
 
-func draw_line_arrow(node, pos, arrow,is_show) -> Vector2:
-	var self_pos = size / 2
+func get_intersect_point(self_pos, node, pos) -> Vector2:
 	# GraphNodeの矩形と交わる交点を取る
 	# 矩形の4つの辺と
 	var from_pos_ori = node.position_offset - self.position_offset
@@ -233,8 +288,6 @@ func draw_line_arrow(node, pos, arrow,is_show) -> Vector2:
 	var from_left = Geometry2D.segment_intersects_segment(pos,self_pos,from_tl, from_bl)
 	var from_right = Geometry2D.segment_intersects_segment(pos,self_pos,from_tr, from_br)
 	var from_bottom = Geometry2D.segment_intersects_segment(pos,self_pos,from_bl, from_br)
-
-	arrow.visible = is_show
 
 #	一番近い交点を求める 近かったら上書きしていく
 	var from_intersect_point:Vector2 = Vector2.ZERO
@@ -258,30 +311,66 @@ func draw_line_arrow(node, pos, arrow,is_show) -> Vector2:
 	return from_intersect_point
 
 func _on_position_offset_changed():
+	if !is_main_handle and main_handle != null:
+#		サブハンドルならメインハンドルを発火して再描画してもらう
+		main_handle._on_position_offset_changed()
+		return
 	if !_from_node or !_to_node: return
 
 	var from_pos = ((_from_node.position_offset - self.position_offset + _from_node.size / 2) / _parent.zoom ) * _parent.zoom
-#	var from_pos = ((_from_node.position_offset - self.position_offset + _from_node.size / 2) )
 	var self_pos = size / 2
 	var to_pos = ((_to_node.position_offset - self.position_offset + _to_node.size / 2) / _parent.zoom ) * _parent.zoom
-#	var to_pos = ((_to_node.position_offset - self.position_offset + _to_node.size / 2))
 
-	var from_intersect_point = draw_line_arrow(_from_node, from_pos, arrow_from,_is_show_arrow_from)
-	var to_intersect_point = draw_line_arrow(_to_node, to_pos, arrow_to,_is_show_arrow_to)
-
-#	矢印の向きを変更
-	arrow_from.position = from_intersect_point
-	arrow_from.rotation = self_pos.angle_to_point(from_intersect_point)
-#	arrow_from.look_at(self_pos)
-	arrow_to.position = to_intersect_point
-	arrow_to.rotation = self_pos.angle_to_point(to_intersect_point)
-#	arrow_to.look_at(self_pos)
-
+	arrow_from.visible = _is_show_arrow_from
+	arrow_to.visible = _is_show_arrow_to
 
 	line_2d.clear_points()
-	line_2d.add_point(from_intersect_point)
-	line_2d.add_point(self_pos)
-	line_2d.add_point(to_intersect_point)
+
+	if handle_node_ids.is_empty():
+#		中継点ハンドルなし
+		var from_to_dir = from_pos.direction_to(to_pos)
+
+		var from_intersect_point = get_intersect_point(self_pos + to_pos, _from_node, from_pos)
+		var to_intersect_point = get_intersect_point(self_pos + from_pos, _to_node, to_pos)
+
+		line_2d.add_point(from_intersect_point)
+		line_2d.add_point(to_intersect_point)
+	#	矢印の向きを変更
+		arrow_from.position = from_intersect_point
+		arrow_from.rotation = to_intersect_point.angle_to_point(from_intersect_point)
+		arrow_to.position = to_intersect_point
+		arrow_to.rotation = from_intersect_point.angle_to_point(to_intersect_point)
+	else:
+#		中継点ハンドルあり
+#		[from] -> [main] -> (...[sub]...) -> [to]
+		if handle_nodes.is_empty(): return
+		var from_intersect_point = get_intersect_point(self_pos, _from_node, from_pos)
+
+		var rely_points:Array[Vector2] = []
+		for handle_node in handle_nodes:
+			var rely_pos = ((handle_node.position_offset - self.position_offset + handle_node.size / 2) / _parent.zoom ) * _parent.zoom
+			rely_points.append(rely_pos)
+
+		var first_pos = ((handle_nodes[0].position_offset - self.position_offset + handle_nodes[0].size / 2) / _parent.zoom ) * _parent.zoom
+		var last_pos = ((handle_nodes.back().position_offset - self.position_offset + handle_nodes.back().size / 2) / _parent.zoom ) * _parent.zoom
+		var to_intersect_point = get_intersect_point(last_pos, _to_node, to_pos)
+
+	#	矢印の向きを変更
+		arrow_from.position = from_intersect_point
+		arrow_from.rotation = first_pos.angle_to_point(from_intersect_point)
+		arrow_to.position = to_intersect_point
+		arrow_to.rotation = last_pos.angle_to_point(to_intersect_point)
+
+		line_2d.add_point(from_intersect_point)
+		for rely_point in rely_points:
+			line_2d.add_point(rely_point)
+		line_2d.add_point(to_intersect_point)
+
+func _on_mouse_entered():
+	line_2d.width = 20.0
+
+func _on_mouse_exited():
+	line_2d.width = 10.0
 
 func _on_copied_context_menu():
 	var data = get_data()
@@ -305,6 +394,34 @@ func _on_pressed_locked_button():
 	self.selectable = true
 	size = Vector2(_parent.snap_distance, _parent.snap_distance) * 2
 
+func _on_added_point_context_menu():
+#	1つ目はサブハンドルを追加せず自分自身の表示切替のみ。
+	if handle_node_ids.is_empty():
+		handle_node_ids.append(id)
+		handle_nodes.append(self)
+		_on_position_offset_changed()
+		return
+
+	var node = line_handle_node.instantiate()
+	_parent.add_child(node)
+	node.init({
+		"from_node_id": -1,
+		"to_node_id": -1,
+		"is_main_handle": false,
+		"main_handle_id": id
+		})
+	handle_node_ids.append(node.get_instance_id())
+
+	## 2点の真ん中に置く
+	var from = handle_nodes.back()
+	handle_nodes.append(node)
+	var pos_1 = from.position_offset + (from.size / 2)
+	var pos_2 = _to_node.position_offset + (_to_node.size / 2)
+	node.position_offset = (pos_1 + pos_2) / 2
+
+func _on_removed_point_context_menu():
+
+	pass
 
 func _on_changed_color_context_menu(color_str:String):
 	color_theme = color_str
@@ -345,12 +462,13 @@ func _on_changed_color_context_menu(color_str:String):
 	_parent.default_line_color_theme = color_theme
 	_parent.set_dirty()
 
-func _on_toggle_hide_editable_text_context_menu(is_hide):
-	line_edit.visible = !is_hide
-	if is_hide:
-		set_deferred("size",Vector2(_parent.snap_distance, _parent.snap_distance)*1.1)
-	else:
+func _on_toggle_show_editable_text_context_menu(is_show):
+	line_edit.visible = is_show
+	if is_show:
 		set_deferred("size",Vector2.ZERO)
+	else:
+		set_deferred("size",Vector2(_parent.snap_distance, _parent.snap_distance)*1.1)
+
 	call_deferred("_on_position_offset_changed")
 
 func _on_toggle_show_arrow_from_context_menu(is_show):
@@ -393,11 +511,18 @@ func get_data() -> Dictionary:
 		"text" : line_edit.text,
 		"from_node_id" : from_node_id,
 		"to_node_id" : to_node_id,
-		"is_hide_editable_text" : !line_edit.visible,
+		"is_show_editable_text" : line_edit.visible,
 		"is_show_arrow_from" : _is_show_arrow_from,
 		"is_show_arrow_to" : _is_show_arrow_to,
+		"is_main_handle" : is_main_handle,
+		"main_handle_id" : main_handle_id,
+		"handle_node_ids" : ""
 	}
-
+	if handle_node_ids.is_empty():
+		data.handle_node_ids = ""
+	else:
+		var ids_str:Array = handle_node_ids.map(func(i): return str(i))
+		data.handle_node_ids = ",".join(ids_str)
 	return data
 
 func change_text_font(header_font_size,label_font_size):

@@ -34,7 +34,7 @@ var graph_path:String
 #-----------------------------------------------------------
 var _parent:GraphEdit
 var graph_node_type = "Link"
-var id
+var id:int
 
 var drag_start = null
 var mouse_drag_start

@@ -6,7 +6,6 @@ var godot_sekkei_path = preload("res://addons/godot-idea-board/sekkei_main.tscn"
 
 func _enter_tree():
 	get_tree().set_meta("__editor_interface", get_editor_interface())
-	get_tree().set_meta("__undo_redo", get_undo_redo())
 
 func _ready():
 	init()
@@ -22,7 +21,6 @@ func init():
 	get_editor_interface().get_editor_main_screen().add_child(godot_sekkei)
 	godot_sekkei.resource_previewer = get_editor_interface().get_resource_previewer()
 	godot_sekkei.editor_interface = get_editor_interface()
-	godot_sekkei.undo_redo = get_undo_redo()
 	godot_sekkei.init()
 
 func _exit_tree():

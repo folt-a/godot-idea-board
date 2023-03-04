@@ -36,7 +36,6 @@ enum DIALOG_TYPE{
 #-----------------------------------------------------------
 var resource_previewer:EditorResourcePreview
 var editor_interface:EditorInterface
-var undo_redo:EditorUndoRedoManager
 
 var save_json_dir_path:String = ""
 
@@ -129,13 +128,10 @@ func _ready():
 func init():
 	sekkei_graph_1.resource_previewer = resource_previewer
 	sekkei_graph_1.editor_interface = editor_interface
-	sekkei_graph_1.undo_redo = undo_redo
 	sekkei_graph_2.resource_previewer = resource_previewer
 	sekkei_graph_2.editor_interface = editor_interface
-	sekkei_graph_2.undo_redo = undo_redo
 	sekkei_graph_3.resource_previewer = resource_previewer
 	sekkei_graph_3.editor_interface = editor_interface
-	sekkei_graph_3.undo_redo = undo_redo
 
 	window_button.icon = sekkei_graph_1.get_icon("Window")
 	left_button.icon = sekkei_graph_1.get_icon("PlayBackwards")

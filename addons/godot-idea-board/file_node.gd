@@ -41,7 +41,7 @@ enum ITEM_TYPE{
 var path:String = ""
 var script_path:String = ""
 var uid:String = ""
-var id
+var id:int
 var script_icon_path:String = ""
 #-----------------------------------------------------------
 #10. private variables

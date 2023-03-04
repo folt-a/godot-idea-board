@@ -32,7 +32,7 @@ const h2_icon = preload("res://addons/godot-idea-board/icon/h2.svg")
 #-----------------------------------------------------------
 var _parent:GraphEdit
 var graph_node_type = "TextDocument"
-var id
+var id:int
 var icon_name = "Edit"
 var color_theme ="TrDark"
 

@@ -35,7 +35,6 @@ var line_handle_node = preload("res://addons/godot-idea-board/line_handle_node.t
 #-----------------------------------------------------------
 var resource_previewer:EditorResourcePreview
 var editor_interface:EditorInterface
-var undo_redo:EditorUndoRedoManager
 
 var save_json_file_path:String = ""
 
@@ -142,7 +141,6 @@ func _can_drop_data(at_position, data):
 	return true
 
 func _drop_data(at_position, data):
-	undo_redo.create_action("Create file nodes")
 	at_position = snap(at_position / zoom) * zoom
 	for file_path in data.files:
 		var node:GraphNode
@@ -160,27 +158,15 @@ func _drop_data(at_position, data):
 			# 横にずらすようにする
 			at_position += Vector2(node.size.x * zoom, 0)
 
-		undo_redo.add_do_method(node,"show")
-		undo_redo.add_undo_method(node,"hide")
+		node.show()
 		set_dirty()
 
-	undo_redo.commit_action()
-
-func _undo_create_file_nodes(undo_id):
-	for node in get_children():
-		if node.get("undo_id"):
-			if node.undo_id == undo_id:
-				node.queue_free()
-				set_dirty()
-
 func _on_delete_nodes_request(_nodes):
-	undo_redo.create_action("Delete nodes")
 	var deleted_node_ids:= {}
 	for child in get_children():
 		if child is GraphNode:
 			if child.selected and child.visible:
-				undo_redo.add_do_method(child, "hide")
-				undo_redo.add_undo_method(child, "show")
+				delete_node(child)
 				child.selected = false
 				if "id" in child and child.id != 0:
 					deleted_node_ids[child.id] = child.id
@@ -191,11 +177,7 @@ func _on_delete_nodes_request(_nodes):
 			if child.graph_node_type == "LineHandle":
 				if deleted_node_ids.has(child.from_node_id)\
 				or deleted_node_ids.has(child.to_node_id):
-					undo_redo.add_do_method(child, "hide")
-					undo_redo.add_undo_method(child, "show")
-					child.selected = false
-
-	undo_redo.commit_action()
+					delete_node(child)
 	set_dirty()
 
 func _on_copy_nodes_request():
@@ -302,13 +284,6 @@ func _notify_group_move():
 				if selected_node is GraphNode and selected_node.selected:
 					group.on_file_node_moved(selected_node)
 
-
-func _undo_move(node, offset):
-	node.position_offset = offset
-	node.selected = true
-	_notify_group_move()
-
-
 func _do_move(node, offset):
 	node.position_offset = offset
 	_notify_group_move()
@@ -322,12 +297,9 @@ func _on_begin_node_move():
 
 func _on_end_node_move():
 	set_dirty()
-	undo_redo.create_action("Move node")
 	for child in get_children():
 		if child is GraphNode and child.selected:
-			undo_redo.add_do_method(self,"_do_move",child, child.position_offset)
-			undo_redo.add_undo_method(self,"_undo_move",child, child.drag_start)
-	undo_redo.commit_action()
+			_do_move(child, child.position_offset)
 
 func _process(delta):
 	if _is_right_dragging:
@@ -458,10 +430,6 @@ func save():
 	file.store_string(json_str)
 
 	dirty = false
-	if undo_redo:
-		var undo_redo_id := undo_redo.get_object_history_id(self)
-		undo_redo.get_history_undo_redo(undo_redo_id).clear_history()
-	pass
 
 func snap(pos:Vector2):
 	if use_snap:
@@ -474,16 +442,9 @@ func clear():
 		if node is GraphNode:
 			node.queue_free()
 	dirty = false
-	if undo_redo:
-		var undo_redo_id := undo_redo.get_object_history_id(self)
-		undo_redo.get_history_undo_redo(undo_redo_id).clear_history()
 
 func delete_node(node):
-	undo_redo.create_action("Delete nodes")
-	undo_redo.add_do_method(node, "hide")
-	undo_redo.add_undo_method(node, "show")
-	node.selected = false
-	undo_redo.commit_action()
+	node.queue_free()
 	set_dirty()
 
 func get_icon(icon_name:String) -> Texture:
@@ -582,10 +543,10 @@ func penetrate_nodes():
 			"from_node_id": from_node.get_data().id,
 			"to_node_id": to_node.get_data().id,
 			})
-		## 2点の真ん中に置く
+		## 2点の真ん中に置く、ちょっとずらす
 		var pos_1 = from_node.position_offset + from_node.size / 2
 		var pos_2 = to_node.position_offset + to_node.size / 2
-		node.position_offset = snap((pos_1 + pos_2) / 2)
+		node.position_offset = snap(((pos_1 + pos_2) / 2) + Vector2(snap_distance, snap_distance * 2))
 		set_dirty()
 	_right_click_line.clear_points()
 	pass
@@ -615,13 +576,23 @@ func _add_nodes(datas:Array) -> Array:
 
 #	LineHandleは最後に追加する(他のGraphNodeIDからGraphNodeを取得するので)
 	for data in datas:
-		if data.node == "LineHandle":
+		if data.node == "LineHandle" and (!data.has("is_main_handle") or data.is_main_handle):
 			var node:GraphNode = _add_node(line_handle_node, Vector2.ZERO)
 			var header_font_size = editor_interface.get_base_control().theme.get_font_size("font_size","HeaderLarge")
 			var label_font_size = editor_interface.get_base_control().theme.get_font_size("font_size","Label")
 			node.change_text_font(header_font_size,label_font_size)
 			node.init(data)
-			node.position_offset_changed.emit()
+#			node.position_offset_changed.emit()
+			added_nodes.append(node)
+#	サブハンドル
+	for data in datas:
+		if data.node == "LineHandle" and data.has("is_main_handle") and !data.is_main_handle:
+			var node:GraphNode = _add_node(line_handle_node, Vector2.ZERO)
+			var header_font_size = editor_interface.get_base_control().theme.get_font_size("font_size","HeaderLarge")
+			var label_font_size = editor_interface.get_base_control().theme.get_font_size("font_size","Label")
+			node.change_text_font(header_font_size,label_font_size)
+			node.init(data)
+#			node.position_offset_changed.emit()
 			added_nodes.append(node)
 
 #	LineHandle以外は移動終了イベントを発火させて前面に移動させる
@@ -651,10 +622,7 @@ func _add_common_node(node_type, pos, node_name) -> Node:
 		node.init({"node": node_name})
 	accept_event()
 	node.end_node_move.connect(_on_end_node_move)
-	undo_redo.create_action(str("Create ", node_name))
-	undo_redo.add_do_method(node, "show")
-	undo_redo.add_undo_method(node, "hide")
-	undo_redo.commit_action()
+	node.show()
 	return node
 
 func _get_selected_graphnode() -> Array[GraphNode]:
@@ -772,14 +740,10 @@ func _on_aligned(dir:String):
 				node.drag_start = node.position_offset
 				node.position_offset.y = bottom_offset - node.size.y
 
-	undo_redo.create_action("Move node")
 	for child in get_children():
 		if child is GraphNode and child.selected:
-			undo_redo.add_do_method(self,"_do_move",child, child.position_offset)
-			undo_redo.add_undo_method(self,"_undo_move",child, child.drag_start)
-	undo_redo.commit_action()
+			_do_move(child, child.position_offset)
 
-	pass
 
 ## 一定間隔にそろえる　横
 func _on_distribute_h_aligned():
@@ -806,13 +770,9 @@ func _on_distribute_h_aligned():
 			node.drag_start = node.position_offset
 			node.position_offset.x = left_offset + (index * distance)
 		index += 1
-	undo_redo.create_action("Move node")
 	for child in get_children():
 		if child is GraphNode and child.selected:
-			undo_redo.add_do_method(self,"_do_move",child, child.position_offset)
-			undo_redo.add_undo_method(self,"_undo_move",child, child.drag_start)
-	undo_redo.commit_action()
-
+			_do_move(child, child.position_offset)
 
 ## 一定間隔にそろえる　縦
 func _on_distribute_v_aligned():
@@ -839,12 +799,9 @@ func _on_distribute_v_aligned():
 			node.drag_start = node.position_offset
 			node.position_offset.y = top_offset + (index * distance)
 		index += 1
-	undo_redo.create_action("Move node")
 	for child in get_children():
 		if child is GraphNode and child.selected:
-			undo_redo.add_do_method(self,"_do_move",child, child.position_offset)
-			undo_redo.add_undo_method(self,"_undo_move",child, child.drag_start)
-	undo_redo.commit_action()
+			_do_move(child, child.position_offset)
 
 ## 音量調節
 func _on_changed_volume(volume:float):

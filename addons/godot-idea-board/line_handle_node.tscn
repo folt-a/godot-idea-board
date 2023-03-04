@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3]
+[gd_scene load_steps=10 format=3 uid="uid://b7gyevpeuk8q7"]
 
 [ext_resource type="Texture2D" uid="uid://b5qnqty0k1hsh" path="res://addons/godot-idea-board/icon/handle.svg" id="1_hiwoi"]
 [ext_resource type="StyleBox" uid="uid://w82ranjj3lbw" path="res://addons/godot-idea-board/theme/line_handle_frame_stylebox.tres" id="2_pv2kw"]

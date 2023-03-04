@@ -28,7 +28,7 @@ const select_icon = preload("res://addons/godot-idea-board/icon/tool_select.svg"
 #-----------------------------------------------------------
 var _parent:GraphEdit
 
-var id
+var id:int
 
 var snap: = true
 var drag_start = null

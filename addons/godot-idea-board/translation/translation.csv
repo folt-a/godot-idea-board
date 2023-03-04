@@ -40,6 +40,8 @@ Bg Dark,Bg Dark,背景黒 - 字白
 Color White,Color White Line,白線
 Color Black,Color Black Line,黒線
 Hide Editable Text,Hide Editable Text,文字編集欄表示
+Add Point,Add Point,ポイント追加
+Remove Point,Remove Point,ポイント削除
 Arrow To,Arrow To,矢印 終点
 Arrow From,Arrow From,矢印 始点
 Arrow Type Normal,Arrow Type Normal,通常
