@@ -158,17 +158,9 @@ Pastes the selected items to the mouse cursor position.
 
 It can also be found in the right-click menu.
 
-#### Undo / Redo　（Ctrl+Z / Shift+Ctrl+Z）
-
-Saving the file will delete the history.
-
-This is a simplified version, so do not be too overconfident.
-
 #### Save　（Ctrl+S）
 
 Overwrites all canvas states to the layout file.
-
-History will be lost and undo/redo will not be possible.
 
 ---
 
@@ -659,18 +651,8 @@ Godotのファイルシステムのところからアイテムをドラッグし
 
 右クリックメニューにもあります。
 
-#### 元に戻す、進む　（Ctrl+Z,Shift+Ctrl+Z）
-
-アンドゥリドゥ機能です。
-
-保存をすると履歴は削除されます。
-
-簡易的なものなので、あまり過信しないでください。
-
 #### 保存　（Ctrl+S）
 すべてのキャンバスの状態をレイアウトファイルに上書き保存します。
-
-履歴は消えるためアンドゥリドゥはできなくなります。
 
 ---
 
@@ -990,9 +972,3 @@ Ctrl+Sとの違いは複数キャンバスがあってもこちらはこのキ�
 ありがとうございます！
 
 ---
-
-## 今後追加したいもの
-
-* [ ] テキスト（未実装：ファイルにして保存する機能を追加したい）TODO
-* [ ] リソース（ファイルシステム上でそのファイルの場所を開くコマンドが欲しいな・・・）TODO
-* [ ] ディレクトリ（このディレクトリ内のファイルをアイテムとして追加する機能がほしいなあ）TODO
