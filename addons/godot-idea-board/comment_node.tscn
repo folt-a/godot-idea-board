@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://qn1mmq344o61"]
 
-[ext_resource type="Texture2D" uid="uid://b4fk08gp5qkid" path="res://addons/godot-idea-board/icon/handle.svg" id="1_0jksm"]
+[ext_resource type="Texture2D" uid="uid://b5qnqty0k1hsh" path="res://addons/godot-idea-board/icon/handle.svg" id="1_0jksm"]
 [ext_resource type="Script" path="res://addons/godot-idea-board/comment_node.gd" id="1_pfk21"]
 [ext_resource type="StyleBox" uid="uid://bqp6u8a2jbsek" path="res://addons/godot-idea-board/theme/frame_stylebox.tres" id="2_afal7"]
 [ext_resource type="Script" path="res://addons/godot-idea-board/context_menu/comment_menu.gd" id="3_at1ac"]
@@ -49,37 +49,27 @@ script = ExtResource("1_pfk21")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
-offset_right = 320.0
-offset_bottom = 320.0
 size_flags_vertical = 3
 theme_override_constants/margin_bottom = 16
 
 [node name="VB" type="VBoxContainer" parent="MarginContainer"]
 layout_mode = 2
-offset_right = 320.0
-offset_bottom = 304.0
 theme_override_constants/separation = 0
 
 [node name="TitleHBoxContainer" type="HBoxContainer" parent="MarginContainer/VB"]
 layout_mode = 2
-offset_right = 320.0
-offset_bottom = 23.0
 mouse_default_cursor_shape = 13
 
 [node name="CheckBox" type="CheckBox" parent="MarginContainer/VB/TitleHBoxContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-offset_right = 24.0
-offset_bottom = 24.0
 flat = true
 alignment = 1
 
 [node name="MarkdownToggledButton" type="Button" parent="MarginContainer/VB/TitleHBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_right = 8.0
-offset_bottom = 23.0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 icon_alignment = 1
@@ -88,9 +78,6 @@ icon_alignment = 1
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-offset_left = 12.0
-offset_right = 20.0
-offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 icon_alignment = 1
 
@@ -98,9 +85,6 @@ icon_alignment = 1
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-offset_left = 12.0
-offset_right = 20.0
-offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 icon_alignment = 1
 
@@ -108,18 +92,12 @@ icon_alignment = 1
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-offset_left = 12.0
-offset_right = 20.0
-offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 icon_alignment = 1
 
 [node name="HeaderLineEdit" type="LineEdit" parent="MarginContainer/VB/TitleHBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 12.0
-offset_right = 320.0
-offset_bottom = 23.0
 size_flags_horizontal = 3
 mouse_filter = 2
 mouse_default_cursor_shape = 13
@@ -134,49 +112,32 @@ expand_to_text_length = true
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-offset_left = 12.0
-offset_right = 20.0
-offset_bottom = 24.0
 mouse_default_cursor_shape = 2
 icon_alignment = 1
 
 [node name="MenuHBoxContainer" type="HBoxContainer" parent="MarginContainer/VB"]
 visible = false
 layout_mode = 2
-offset_top = 24.0
-offset_right = 96.0
-offset_bottom = 32.0
 mouse_default_cursor_shape = 13
 
 [node name="BoldButton" type="Button" parent="MarginContainer/VB/MenuHBoxContainer"]
 layout_mode = 2
-offset_right = 8.0
-offset_bottom = 8.0
 mouse_default_cursor_shape = 2
 icon_alignment = 1
 
 [node name="H1Button" type="Button" parent="MarginContainer/VB/MenuHBoxContainer"]
 layout_mode = 2
-offset_left = 12.0
-offset_right = 20.0
-offset_bottom = 8.0
 mouse_default_cursor_shape = 2
 icon_alignment = 1
 
 [node name="H2Button" type="Button" parent="MarginContainer/VB/MenuHBoxContainer"]
 layout_mode = 2
-offset_left = 24.0
-offset_right = 32.0
-offset_bottom = 8.0
 mouse_default_cursor_shape = 2
 icon_alignment = 1
 
 [node name="ExportButton" type="Button" parent="MarginContainer/VB/MenuHBoxContainer"]
 visible = false
 layout_mode = 2
-offset_left = 36.0
-offset_right = 44.0
-offset_bottom = 8.0
 mouse_default_cursor_shape = 2
 icon_alignment = 1
 
@@ -184,9 +145,6 @@ icon_alignment = 1
 unique_name_in_owner = true
 custom_minimum_size = Vector2(96, 40)
 layout_mode = 2
-offset_top = 23.0
-offset_right = 320.0
-offset_bottom = 304.0
 size_flags_vertical = 3
 mouse_force_pass_scroll_events = false
 theme_override_styles/normal = ExtResource("8_alaah")
@@ -202,16 +160,12 @@ unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(96, 64)
 layout_mode = 2
-offset_top = 164.0
-offset_right = 320.0
-offset_bottom = 304.0
 size_flags_vertical = 3
 focus_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxLine_pd02s")
 theme_override_styles/normal = SubResource("StyleBoxLine_pd02s")
 bbcode_enabled = true
 text = "adwadwa"
-fit_content_height = true
 scroll_following = true
 autowrap_mode = 1
 threaded = true

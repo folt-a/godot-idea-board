@@ -55,30 +55,20 @@ script = ExtResource("1_ug2mc")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 2
-offset_right = 1152.0
-offset_bottom = 38.0
 
 [node name="PanelContainer" type="PanelContainer" parent="HBoxContainer"]
 layout_mode = 2
-offset_right = 623.0
-offset_bottom = 38.0
 
 [node name="Panel" type="Panel" parent="HBoxContainer/PanelContainer"]
 layout_mode = 2
-offset_right = 623.0
-offset_bottom = 38.0
 
 [node name="LeftContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer"]
 layout_mode = 2
-offset_right = 623.0
-offset_bottom = 38.0
 theme_override_constants/separation = 2
 
 [node name="SaveButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_right = 32.0
-offset_bottom = 38.0
 mouse_default_cursor_shape = 2
 theme_override_constants/h_separation = 0
 shortcut = SubResource("Shortcut_tpbq0")
@@ -87,9 +77,6 @@ text = "保存"
 [node name="GroupButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 34.0
-offset_right = 90.0
-offset_bottom = 38.0
 mouse_default_cursor_shape = 2
 theme_override_constants/h_separation = 0
 shortcut = SubResource("Shortcut_vact5")
@@ -98,9 +85,6 @@ text = "グループ"
 [node name="LabelButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 92.0
-offset_right = 136.0
-offset_bottom = 38.0
 mouse_default_cursor_shape = 2
 theme_override_constants/h_separation = 0
 shortcut = SubResource("Shortcut_s5cmg")
@@ -109,9 +93,6 @@ text = "ラベル"
 [node name="TextDocumentButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 138.0
-offset_right = 194.0
-offset_bottom = 38.0
 mouse_default_cursor_shape = 2
 theme_override_constants/h_separation = 0
 shortcut = SubResource("Shortcut_ms2rg")
@@ -121,9 +102,6 @@ text = "テキスト"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
-offset_left = 196.0
-offset_right = 244.0
-offset_bottom = 38.0
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_s74jh")
 text = "接続"
@@ -132,9 +110,6 @@ text = "接続"
 unique_name_in_owner = true
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
-offset_left = 246.0
-offset_right = 294.0
-offset_bottom = 38.0
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_f84nk")
 text = "ロック"
@@ -143,9 +118,6 @@ text = "ロック"
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-offset_left = 100.0
-offset_right = 108.0
-offset_bottom = 38.0
 mouse_default_cursor_shape = 2
 text = "ロック解除"
 
@@ -153,9 +125,6 @@ text = "ロック解除"
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
-offset_left = 48.0
-offset_right = 56.0
-offset_bottom = 38.0
 theme_override_colors/icon_normal_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_pressed_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_hover_color = Color(1, 1, 1, 1)
@@ -165,46 +134,29 @@ flat = true
 [node name="BgColorLabel" type="Label" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 296.0
-offset_top = 6.0
-offset_right = 337.0
-offset_bottom = 32.0
 text = "背景色:"
 
 [node name="BgColorPickerButton" type="ColorPickerButton" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
-offset_left = 339.0
-offset_right = 387.0
-offset_bottom = 38.0
 mouse_default_cursor_shape = 2
 color = Color(0.14902, 0.160784, 0.176471, 1)
 
 [node name="GridColorIcon" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 389.0
-offset_right = 397.0
-offset_bottom = 38.0
 flat = true
 
 [node name="GridColorLabel" type="Label" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 399.0
-offset_top = 6.0
-offset_right = 404.0
-offset_bottom = 32.0
 text = ":"
 
 [node name="GridColorPickerButton" type="ColorPickerButton" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
-offset_left = 406.0
-offset_right = 454.0
-offset_bottom = 38.0
 mouse_default_cursor_shape = 2
 color = Color(1, 1, 1, 1)
 
@@ -213,42 +165,26 @@ unique_name_in_owner = true
 visible = false
 custom_minimum_size = Vector2(120, 0)
 layout_mode = 2
-offset_left = 76.0
-offset_right = 196.0
-offset_bottom = 31.0
 placeholder_text = "or Bg Image Path"
 
 [node name="GridContainer2" type="VBoxContainer" parent="HBoxContainer/PanelContainer/LeftContainer"]
 layout_mode = 2
-offset_left = 456.0
-offset_right = 589.0
-offset_bottom = 38.0
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/PanelContainer/LeftContainer/GridContainer2"]
 layout_mode = 2
-offset_right = 133.0
-offset_bottom = 26.0
 
 [node name="SoundLabel" type="Label" parent="HBoxContainer/PanelContainer/LeftContainer/GridContainer2/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_right = 29.0
-offset_bottom = 26.0
 text = "音量:"
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/PanelContainer/LeftContainer/GridContainer2/HBoxContainer2"]
 layout_mode = 2
-offset_left = 33.0
-offset_right = 133.0
-offset_bottom = 26.0
 
 [node name="SoundHSlider" type="HSlider" parent="HBoxContainer/PanelContainer/LeftContainer/GridContainer2/HBoxContainer2/CenterContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
-offset_top = 5.0
-offset_right = 100.0
-offset_bottom = 21.0
 mouse_default_cursor_shape = 2
 max_value = 1.0
 step = 0.01
@@ -256,90 +192,56 @@ value = 0.2
 
 [node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/PanelContainer/LeftContainer/GridContainer2"]
 layout_mode = 2
-offset_top = 30.0
-offset_right = 133.0
-offset_bottom = 38.0
 theme_override_constants/separation = 8
 alignment = 1
 
 [node name="SoundPlayButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer/GridContainer2/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 46.0
-offset_right = 54.0
-offset_bottom = 8.0
 mouse_default_cursor_shape = 2
 
 [node name="SoundStopButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer/GridContainer2/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 62.0
-offset_right = 70.0
-offset_bottom = 8.0
 mouse_default_cursor_shape = 2
 
 [node name="SoundLoopButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer/GridContainer2/HBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 78.0
-offset_right = 86.0
-offset_bottom = 8.0
 mouse_default_cursor_shape = 2
 toggle_mode = true
 button_pressed = true
 
 [node name="GridContainer" type="GridContainer" parent="HBoxContainer/PanelContainer/LeftContainer"]
 layout_mode = 2
-offset_left = 591.0
-offset_right = 623.0
-offset_bottom = 38.0
 columns = 3
 
 [node name="LeftAlignButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_right = 8.0
-offset_bottom = 8.0
 mouse_default_cursor_shape = 2
 
 [node name="RightAlignButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 12.0
-offset_right = 20.0
-offset_bottom = 8.0
 mouse_default_cursor_shape = 2
 
 [node name="HAlignButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 24.0
-offset_right = 32.0
-offset_bottom = 8.0
 mouse_default_cursor_shape = 2
 
 [node name="TopAlignButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_top = 12.0
-offset_right = 8.0
-offset_bottom = 20.0
 mouse_default_cursor_shape = 2
 
 [node name="BottomAlignButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 12.0
-offset_top = 12.0
-offset_right = 20.0
-offset_bottom = 20.0
 mouse_default_cursor_shape = 2
 
 [node name="VAlignButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer/GridContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-offset_left = 24.0
-offset_top = 12.0
-offset_right = 32.0
-offset_bottom = 20.0
 mouse_default_cursor_shape = 2
