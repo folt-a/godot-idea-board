@@ -11,6 +11,7 @@ extends GraphNode
 #05. signals
 #-----------------------------------------------------------
 signal end_node_move
+signal load_completed
 #-----------------------------------------------------------
 #06. enums
 #-----------------------------------------------------------
@@ -147,10 +148,12 @@ func init(data:Dictionary):
 
 		if is_exists and resource_exists:
 			uid = ResourceUID.id_to_text(ResourceLoader.get_resource_uid(file_path))
-		elif uid != "" and ResourceLoader.exists(uid):
-			file_path = ResourceUID.get_id_path(ResourceUID.text_to_id(uid))
-			path = file_path
-			is_exists = FileAccess.file_exists(file_path)
+		elif uid != "" :
+			var int_id = ResourceUID.text_to_id(uid)
+			if int_id != -1 and ResourceUID.has_id(int_id):
+				file_path = ResourceUID.get_id_path(ResourceUID.text_to_id(uid))
+				path = file_path
+				is_exists = FileAccess.file_exists(file_path)
 
 		var is_installed_dialogic:bool = FileAccess.file_exists("res://addons/dialogic/plugin.gd")
 
@@ -158,7 +161,13 @@ func init(data:Dictionary):
 	#		シーン
 			_type = ITEM_TYPE.SCENE
 			tscn_label.text = _get_path_name()
-			var instance:Node = load(file_path).instantiate()
+
+
+			ResourceLoader.load_threaded_request(file_path, "", true, 1)
+			set_process(true)
+			await self.load_completed
+			var instance:Node = ResourceLoader.load_threaded_get(path).instantiate()
+
 			var scn_script = instance.get_script()
 
 			var classname = instance.get_class()
@@ -235,10 +244,18 @@ func init(data:Dictionary):
 			tscn_icon_button.icon = load("res://addons/dialogic/Editor/Images/Resources/character.svg")
 			icon_name = "File"
 
+		elif !is_exists:
+			script_h_box_container.visible = false
+			tscn_label.text = _get_path_name()
+#			読み込めなかった
+			_type = ITEM_TYPE.NONE
+			tscn_icon_button.icon = _parent.get_icon("FileBroken")
+			icon_name = "FileBroken"
 		else:
-			var instance = null
-			if is_exists:
-				instance = load(file_path)
+			ResourceLoader.load_threaded_request(file_path, "", true, 1)
+			set_process(true)
+			await self.load_completed
+			var instance = ResourceLoader.load_threaded_get(path)
 			script_h_box_container.visible = false
 			tscn_label.text = _get_path_name()
 			if instance is Texture2D:
@@ -268,17 +285,12 @@ func init(data:Dictionary):
 				var classname = instance.get_class()
 				tscn_icon_button.icon = _parent.get_icon(classname)
 				icon_name = classname
-			elif instance != null:
+			else:
 	#		その他リソース
 				_type = ITEM_TYPE.RESOURCE
 				var classname = instance.get_class()
 				tscn_icon_button.icon = _parent.get_icon(classname)
 				icon_name = classname
-			else:
-	#			読み込めなかった
-				_type = ITEM_TYPE.NONE
-				tscn_icon_button.icon = _parent.get_icon("FileBroken")
-				icon_name = "FileBroken"
 
 #	右クリックメニューの初期化
 	context_menu.transient = !_parent.is_window
@@ -313,6 +325,12 @@ func _ready():
 #-----------------------------------------------------------
 #14. remaining built-in virtual methods
 #-----------------------------------------------------------
+func _process(delta):
+	var status = ResourceLoader.load_threaded_get_status(path)
+	if status == 3: #ResourceLoader.ThreadLoadStatus.THREAD_LOAD_LOADED
+		load_completed.emit()
+		set_process(false)
+
 func _gui_input(event):
 	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT:
 		#drag start
