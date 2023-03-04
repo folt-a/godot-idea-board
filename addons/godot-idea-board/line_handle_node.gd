@@ -19,15 +19,6 @@ signal end_node_move
 #07. constants
 #-----------------------------------------------------------
 const select_icon = preload("res://addons/godot-idea-board/icon/tool_select.svg")
-const down_arrow_icon = preload("res://addons/godot-idea-board/icon/down_arrow.svg")
-const left_arrow_icon = preload("res://addons/godot-idea-board/icon/left_arrow.svg")
-const right_arrow_icon = preload("res://addons/godot-idea-board/icon/right_arrow.svg")
-const up_arrow_icon = preload("res://addons/godot-idea-board/icon/up_arrow.svg")
-
-const top_left_arrow_icon = preload("res://addons/godot-idea-board/icon/top_left_arrow.svg")
-const top_right_arrow_icon = preload("res://addons/godot-idea-board/icon/top_right_arrow.svg")
-const down_left_arrow_icon = preload("res://addons/godot-idea-board/icon/down_left_arrow.svg")
-const down_right_arrow_icon = preload("res://addons/godot-idea-board/icon/down_right_arrow.svg")
 
 #-----------------------------------------------------------
 #08. exported variables
@@ -250,64 +241,19 @@ func draw_line_arrow(node, pos, arrow,is_show) -> Vector2:
 	var from_distance:float = 999999999.0
 	if from_top is Vector2:
 		from_distance = pos.distance_to(from_top)
-		from_intersect_point = from_top + Vector2(0, -_parent.snap_distance)
-
-#		3等分して斜め判定をする
-		if from_tl.distance_to(from_intersect_point) < from_tl.distance_to(from_tr) / 4:
-			arrow.texture = down_right_arrow_icon# ↘
-			arrow.position = from_top - Vector2(0,36)
-		elif from_tl.distance_to(from_intersect_point) > from_tl.distance_to(from_tr) / 4 * 3:
-			arrow.texture = down_left_arrow_icon# ↙
-			arrow.position = from_top - Vector2(0,36)
-		else:
-			arrow.texture = down_arrow_icon
-			arrow.position = from_top - Vector2(0,48)
+		from_intersect_point = from_top + Vector2(0, -(_parent.snap_distance + 12))
 
 	if from_left is Vector2 and pos.distance_to(from_left) < from_distance:
 		from_distance = pos.distance_to(from_left)
-		from_intersect_point = from_left + Vector2(-_parent.snap_distance,0)
-
-#		3等分して斜め判定をする
-		if from_tl.distance_to(from_intersect_point) < from_tl.distance_to(from_bl) / 4:
-			arrow.texture = down_right_arrow_icon# ↘
-			arrow.position = from_left - Vector2(36,0)
-		elif from_tl.distance_to(from_intersect_point) > from_tl.distance_to(from_bl) / 4 * 3:
-			arrow.texture = top_right_arrow_icon# ↗
-			arrow.position = from_left - Vector2(36,0)
-		else:
-			arrow.texture = right_arrow_icon
-			arrow.position = from_left - Vector2(48,0)
+		from_intersect_point = from_left + Vector2(-(_parent.snap_distance + 12),0)
 
 	if from_right is Vector2 and pos.distance_to(from_right) < from_distance:
 		from_distance = pos.distance_to(from_right)
-		from_intersect_point = from_right + Vector2(_parent.snap_distance,0)
-
-#		3等分して斜め判定をする
-		if from_tr.distance_to(from_intersect_point) < from_tr.distance_to(from_br) / 4:
-			arrow.texture = down_left_arrow_icon# ↙
-			arrow.position = from_right + Vector2(36,0)
-		elif from_tr.distance_to(from_intersect_point) > from_tr.distance_to(from_br) / 4 * 3:
-			arrow.texture = top_left_arrow_icon# ↖
-			arrow.position = from_right + Vector2(36,0)
-		else:
-			arrow.texture = left_arrow_icon
-			arrow.position = from_right + Vector2(48,0)
+		from_intersect_point = from_right + Vector2((_parent.snap_distance + 12),0)
 
 	if from_bottom is Vector2 and pos.distance_to(from_bottom) < from_distance:
 		from_distance = pos.distance_to(from_bottom)
-		from_intersect_point = from_bottom + Vector2(0, _parent.snap_distance)
-#		+ Vector2(-arrow.size.x *0.63, -arrow.size.y * 0.4) - Vector2(self.size.x, 0)
-
-#		3等分して斜め判定をする
-		if from_bl.distance_to(from_intersect_point) < from_bl.distance_to(from_br) / 4:
-			arrow.texture = top_right_arrow_icon# ↗
-			arrow.position = from_bottom + Vector2(0,36)
-		elif from_bl.distance_to(from_intersect_point) > from_bl.distance_to(from_br) / 4 *3:
-			arrow.texture = top_left_arrow_icon# ↖
-			arrow.position = from_bottom + Vector2(0,36)
-		else:
-			arrow.texture = up_arrow_icon
-			arrow.position = from_bottom + Vector2(0,48)
+		from_intersect_point = from_bottom + Vector2(0, (_parent.snap_distance + 12))
 
 	return from_intersect_point
 
@@ -322,6 +268,15 @@ func _on_position_offset_changed():
 
 	var from_intersect_point = draw_line_arrow(_from_node, from_pos, arrow_from,_is_show_arrow_from)
 	var to_intersect_point = draw_line_arrow(_to_node, to_pos, arrow_to,_is_show_arrow_to)
+
+#	矢印の向きを変更
+	arrow_from.position = from_intersect_point
+	arrow_from.rotation = self_pos.angle_to_point(from_intersect_point)
+#	arrow_from.look_at(self_pos)
+	arrow_to.position = to_intersect_point
+	arrow_to.rotation = self_pos.angle_to_point(to_intersect_point)
+#	arrow_to.look_at(self_pos)
+
 
 	line_2d.clear_points()
 	line_2d.add_point(from_intersect_point)
