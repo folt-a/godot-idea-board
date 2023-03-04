@@ -22,9 +22,9 @@ Copy this addons/godot-idea-board directory to your godot project's addons direc
 
 **Reload Project.**
 
-![image](https://user-images.githubusercontent.com/32963227/200170578-2419e79f-31a3-4e2e-98bd-9a71591e08cc.png)
+![image](https://user-images.githubusercontent.com/32963227/222911944-7b31ce7d-4d67-4284-b4ef-ca3e73ca0e28.png)
 
-"Design" at Topbar
+"Board" at Topbar
 
 ---
 
@@ -323,6 +323,9 @@ Related: "Create text from this file" for text files
 ![image](https://user-images.githubusercontent.com/32963227/200163153-00879523-9a7e-4fbf-89b7-a022e698d931.png)
 
 ![image](https://user-images.githubusercontent.com/32963227/200163229-2b8334c2-21ff-4ff7-9a54-755636708061.png)
+
+![image](https://user-images.githubusercontent.com/32963227/222912294-0419dd5b-d04e-4d4a-a32a-6162b4658b81.png)
+
 
 Two items can be connected to each other to create a connect item.
 
@@ -828,6 +831,8 @@ json形式でコピーするのでこのアドオン以外では使えなさそ�
 ![image](https://user-images.githubusercontent.com/32963227/200160113-49b3e265-8d2f-4a90-82b2-f7690b889b6d.png)
 
 ![image](https://user-images.githubusercontent.com/32963227/200157010-9ce3c4ee-c88c-4051-8b7c-5de163e53444.png)
+
+![image](https://user-images.githubusercontent.com/32963227/222912294-0419dd5b-d04e-4d4a-a32a-6162b4658b81.png)
 
 2つのアイテム同士をつないでコネクトアイテムを作ることができます。
 
