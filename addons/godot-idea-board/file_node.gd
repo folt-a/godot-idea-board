@@ -128,6 +128,8 @@ func init(data:Dictionary):
 
 	tooltip_text = file_path
 
+	var error = OK
+
 	var dir = DirAccess.open("res://")
 	if dir.dir_exists(file_path):
 #		ディレクトリ
@@ -162,37 +164,42 @@ func init(data:Dictionary):
 			_type = ITEM_TYPE.SCENE
 			tscn_label.text = _get_path_name()
 
-
-			ResourceLoader.load_threaded_request(file_path, "", true, 1)
+			ResourceLoader.load_threaded_request(file_path, "", false, 1)
 			set_process(true)
 			await self.load_completed
-			var instance:Node = ResourceLoader.load_threaded_get(path).instantiate()
+			var packedscene:PackedScene = ResourceLoader.load_threaded_get(path)
+			if packedscene.can_instantiate():
+				var instance:Node = packedscene.instantiate()
 
-			var scn_script = instance.get_script()
+				var scn_script:Script = instance.get_script()
 
-			var classname = instance.get_class()
-			tscn_icon_button.icon = _parent.get_icon(classname)
-			icon_name = classname
-			if scn_script:
-				script_path = scn_script.resource_path
-				script_label.text = _get_script_name()
-				script_icon_button.icon = _parent.get_icon("Script")
-				_resize_script_class_icon.call_deferred()
+				var classname = instance.get_class()
+				tscn_icon_button.icon = _parent.get_icon(classname)
+				icon_name = classname
+				if scn_script:
+					script_path = scn_script.resource_path
+					script_label.text = _get_script_name()
+					script_icon_button.icon = _parent.get_icon("Script")
+					_resize_script_class_icon.call_deferred()
 
-				if script_icon_path == "":
-					var icon_path = get_gori_oshi_icon_path(scn_script.resource_path)
-					if icon_path != "":
-						script_class_icon_button.icon = load(icon_path)
-						script_icon_path = icon_path
+					if script_icon_path == "":
+						var icon_path = get_gori_oshi_icon_path(scn_script.resource_path)
+						if icon_path != "":
+							script_class_icon_button.icon = load(icon_path)
+							script_icon_path = icon_path
+						else:
+							script_class_icon_button.icon = _parent.get_icon(classname)
+							script_icon_path = classname
+					elif script_icon_path.begins_with("res:"):
+						script_class_icon_button.icon = load(script_icon_path)
 					else:
-						script_class_icon_button.icon = _parent.get_icon(classname)
-						script_icon_path = classname
-				elif script_icon_path.begins_with("res:"):
-					script_class_icon_button.icon = load(script_icon_path)
+						script_class_icon_button.icon = _parent.get_icon(script_icon_path)
 				else:
-					script_class_icon_button.icon = _parent.get_icon(script_icon_path)
+					script_h_box_container.visible = false
 			else:
-				script_h_box_container.visible = false
+				error = -1
+				printerr(path + " can not instantiate.")
+
 
 		elif file_path.ends_with(".gd") and is_exists:
 	#		スクリプト
@@ -291,6 +298,15 @@ func init(data:Dictionary):
 				var classname = instance.get_class()
 				tscn_icon_button.icon = _parent.get_icon(classname)
 				icon_name = classname
+
+	if error == -1:
+		script_h_box_container.visible = false
+		tscn_label.text = _get_path_name()
+		# 読み込めなかった
+		_type = ITEM_TYPE.NONE
+		tscn_icon_button.icon = _parent.get_icon("FileBroken")
+		icon_name = "FileBroken"
+		pass
 
 #	右クリックメニューの初期化
 	context_menu.transient = !_parent.is_window
