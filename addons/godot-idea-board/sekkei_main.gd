@@ -204,7 +204,11 @@ func _on_toggled_window_button(button_pressed:bool):
 		sekkei_graph_3.save_json_file_path = sekkei_graph_1.save_json_file_path
 		sekkei_graph_3.reset(datas)
 		var base_size = editor_interface.get_base_control().size / 2
+
+		var win:int = DisplayServer.window_get_current_screen()
+		var pos:Vector2i = DisplayServer.window_get_position()
 		window.show()
+		window.position = pos + Vector2i(32,32)
 		window.size = base_size
 	else:
 		if window.visible:
@@ -375,11 +379,13 @@ func _on_confirmed_confirmation_dialog():
 
 func _on_close_requested_window():
 	if sekkei_graph_3.dirty:
+		window.always_on_top = false
 		_dialog_type = DIALOG_TYPE.SAVE_CONFIRM
 		confirmation_dialog.title = _S.tr("Edited data will not be saved.")
 		confirmation_dialog.dialog_text = _S.tr("Edited data will not be saved.text")
 		_confirmed_exec = _close_window
 		confirmation_dialog.popup_centered()
+		window.always_on_top = true
 	else:
 		_close_window()
 
