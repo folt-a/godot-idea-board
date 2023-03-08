@@ -242,6 +242,8 @@ func init(data:Dictionary):
 			tscn_label.text = _get_path_name()
 			tscn_icon_button.icon = load("res://addons/dialogic/Editor/Images/plugin-icon.svg")
 			icon_name = "File"
+			context_menu.set_item_checked.bind(ITEM_TYPE.DIALOGIC_TIMELINE, true).call_deferred()
+			_on_toggle_play_scene_selected_context_menu.bind(true).call_deferred()
 
 		elif file_path.ends_with(".dch") and is_installed_dialogic and is_exists:
 	#		Dialogic キャラクター
@@ -392,10 +394,12 @@ func _on_pressed_tscn_play_button():
 		ITEM_TYPE.SCENE:
 			_parent.editor_interface.play_custom_scene(path)
 		ITEM_TYPE.DIALOGIC_TIMELINE:
+
 			ProjectSettings.set_setting('dialogic/editor/current_timeline_path', path)
 			ProjectSettings.save()
 			var tree: SceneTree = Engine.get_main_loop()
-			tree.get_root().get_child(0).get_node('DialogicPlugin').editor_interface.play_custom_scene("res://addons/dialogic/Editor/Common/TestTimelineScene.tscn")
+#			tree.get_root().get_child(0).get_node('DialogicPlugin').editor_interface.play_custom_scene("res://addons/dialogic/Editor/Common/TestTimelineScene.tscn")
+			DialogicUtil.get_dialogic_plugin().editor_interface.play_custom_scene("res://addons/dialogic/Editor/TimelineEditor/test_timeline_scene.tscn")
 
 func _on_pressed_sound_play_button():
 	var audio_stream_player:AudioStreamPlayer = _parent._main.audio_stream_player

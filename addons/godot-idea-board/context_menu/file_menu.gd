@@ -101,7 +101,8 @@ func init(item_type:int):
 		ITEM_TYPE.TEXT:
 			add_icon_item(_parent.get_icon("Edit"), _S.tr("Make TxtDoc"), INDEX_EDIT)
 		ITEM_TYPE.DIALOGIC_TIMELINE:
-			add_icon_check_item(_parent.get_icon("PlayScene"), _S.tr("Play Dialogic Timeline"), INDEX_DIALOGIC_TIMELINE_PLAY)
+#			add_icon_check_item(_parent.get_icon("PlayScene"), _S.tr("Play Dialogic Timeline"), INDEX_DIALOGIC_TIMELINE_PLAY)
+			add_separator("",INDEX_DIALOGIC_TIMELINE_PLAY)
 			add_icon_item(_parent.get_icon("Edit"), _S.tr("Make TxtDoc"), INDEX_DIALOGIC_EDIT)
 		_:
 			pass
