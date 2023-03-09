@@ -459,7 +459,9 @@ func delete_node(node):
 	set_dirty()
 
 func get_icon(icon_name:String) -> Texture:
-	return editor_interface.get_base_control().theme.get_icon(icon_name,"EditorIcons")
+	var theme_:Theme = editor_interface.get_base_control().theme
+	if !theme_.has_icon(icon_name,"EditorIcons"): return theme_.get_icon("Object","EditorIcons")
+	return theme_.get_icon(icon_name,"EditorIcons")
 
 func make_edit(node:GraphNode) -> void:
 	var text_node = _add_node(comment_node, node.position_offset * zoom)
