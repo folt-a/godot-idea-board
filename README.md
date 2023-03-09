@@ -20,12 +20,16 @@ Recent Updates
 - 2023/03/05 UndoRedo is removed.
 - 2023/03/05 connection Arrows are now useful.
 - 2023/03/05 Markdown h1~h5 colors are changed now normal colors.
+- 2023/03/08 fix window mode position. top-left at current monitor.
+- 2023/03/08 Dialogic files(dtl, dch). play timeline with .dtl.
 
 最近の更新履歴
 - 2023/03/02 わかりにくいアドオン名を変えました。 project-design-links → idea-board
 - 2023/03/05 不安定だったUndoRedoが削除されました。
 - 2023/03/05 接続の矢印が便利になりました。
 - 2023/03/05 マークダウンのh1~h5の色を通常色にしました
+- 2023/03/08 ウィンドウモードの窓位置を修正しました。メインモニターの左上に出ます。
+- 2023/03/08 「Dialogic」ファイルを配置すると、Dialogicのタイムラインの再生が行えるようになりました。
 
 ---
 
