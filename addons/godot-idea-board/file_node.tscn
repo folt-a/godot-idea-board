@@ -38,7 +38,7 @@ corner_radius_bottom_left = 4
 
 [node name="FileNode" type="GraphNode"]
 offset_right = 15.0
-offset_bottom = 48.0
+offset_bottom = 25.0
 theme_override_icons/resizer = ExtResource("1_dls3y")
 theme_override_styles/frame = SubResource("StyleBoxFlat_6q3xl")
 theme_override_styles/selected_frame = SubResource("StyleBoxFlat_2bnv7")
@@ -105,6 +105,7 @@ icon_alignment = 1
 
 [node name="ScriptHBoxContainer" type="HBoxContainer" parent="VBoxContainer"]
 unique_name_in_owner = true
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 

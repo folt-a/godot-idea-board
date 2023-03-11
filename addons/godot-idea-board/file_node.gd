@@ -181,6 +181,7 @@ func init(data:Dictionary):
 					script_label.text = _get_script_name()
 					script_icon_button.icon = _parent.get_icon("Script")
 					_resize_script_class_icon.call_deferred()
+					script_h_box_container.visible = true
 
 					if script_icon_path == "":
 						var icon_path = get_gori_oshi_icon_path(scn_script.resource_path)
