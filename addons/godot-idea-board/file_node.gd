@@ -398,8 +398,8 @@ func _on_pressed_tscn_play_button():
 			ProjectSettings.set_setting('dialogic/editor/current_timeline_path', path)
 			ProjectSettings.save()
 			var tree: SceneTree = Engine.get_main_loop()
-#			tree.get_root().get_child(0).get_node('DialogicPlugin').editor_interface.play_custom_scene("res://addons/dialogic/Editor/Common/TestTimelineScene.tscn")
-#			DialogicUtil.get_dialogic_plugin().editor_interface.play_custom_scene("res://addons/dialogic/Editor/TimelineEditor/test_timeline_scene.tscn")
+			if tree.get_root().get_child(0).has_node('DialogicPlugin'):
+				tree.get_root().get_child(0).get_node('DialogicPlugin').editor_interface.play_custom_scene("res://addons/dialogic/Editor/TimelineEditor/test_timeline_scene.tscn")
 
 func _on_pressed_sound_play_button():
 	var audio_stream_player:AudioStreamPlayer = _parent._main.audio_stream_player
