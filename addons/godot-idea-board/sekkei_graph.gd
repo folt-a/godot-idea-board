@@ -128,6 +128,11 @@ func _ready():
 	paste_nodes_request.connect(_on_paste_nodes_request)
 	node_selected.connect(_on_node_selected)
 	node_deselected.connect(_on_node_deselected)
+	
+#	# TODO SCROLL ANIMATION
+#	var bg_scrool_animation = get_node_or_null("MarginContainer/TextureRect/AnimationPlayer")
+#	if bg_scrool_animation != null:
+#		bg_scrool_animation.play("scroll")
 
 #	エディタのWindowにファイルドロップのシグナルをつける おくらいり
 #	get_viewport().files_dropped.connect(_on_files_dropped_editor_window)
@@ -220,10 +225,15 @@ func _on_paste_nodes_request():
 #	ズームをいい感じにして位置を指定
 	var mouse_pos = ((get_local_mouse_position()) + scroll_offset) / zoom
 	mouse_pos = snap(mouse_pos / zoom) * zoom
+	var filtered_datas := []
 	for data in datas:
 		data.position_offset_x = data.position_offset_x + mouse_pos.x
 		data.position_offset_y = data.position_offset_y + mouse_pos.y
-	var added_nodes = _add_nodes(datas)
+		if "node" in data and data.node == "LineHandle":
+			pass
+		else:
+			filtered_datas.append(data)
+	var added_nodes = _add_nodes(filtered_datas)
 
 #	選択中のものは非選択にする
 	for selected_node in _get_selected_graphnode():
