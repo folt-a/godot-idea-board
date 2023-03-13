@@ -35,6 +35,7 @@ var graph_node_type = "TextDocument"
 var id:int
 var icon_name = "Edit"
 var color_theme ="TrDark"
+var sub_color
 
 var path:String = ""
 
@@ -56,6 +57,7 @@ var dragging: = false
 @onready var check_box:CheckBox = %CheckBox
 @onready var icon_button:Button = %IconButton
 @onready var markdown_toggled_button:Button = %MarkdownToggledButton
+@onready var sub_color_button:Button = %SubColor
 @onready var file_button:Button = %FileButton
 @onready var save_button:Button = %SaveButton
 @onready var locked_button:Button = %LockedButton
@@ -105,6 +107,11 @@ func init(data:Dictionary = {}):
 	else:
 		color_theme = _parent.default_text_color_theme
 	_on_changed_color_context_menu(color_theme)
+
+	if data.has("sub_color"):
+		sub_color = Color.from_string(data.sub_color,Color.WHITE)
+		_on_changed_sub_color_context_menu.bind(sub_color).call_deferred()
+
 	if "is_md" in data and data.is_md:
 		markdown_toggled_button.button_pressed = true
 		_on_toggled_markdown_toggled_button.bind(true).call_deferred()
@@ -134,6 +141,7 @@ func init(data:Dictionary = {}):
 		else:
 			markdown_toggled_button.visible = false
 
+	sub_color_button.icon = _parent.get_icon("Panels1")
 
 	markdown_toggled_button.icon = _parent.get_icon("Edit")
 	markdown_toggled_button.add_theme_color_override("icon_normal_color", Color.from_string("e589a4",Color.WHITE))
@@ -192,7 +200,8 @@ func _ready():
 	context_menu.toggle_lock_selected.connect(_on_toggle_lock_selected_context_menu)
 	context_menu.save_pressed.connect(_on_save_pressed_context_menu)
 	context_menu.changed_color.connect(_on_changed_color_context_menu)
-	pass
+	context_menu.changed_sub_color.connect(_on_changed_sub_color_context_menu)
+	context_menu.deleted_sub_color.connect(_on_deleted_sub_color_context_menu)
 
 #-----------------------------------------------------------
 #14. remaining built-in virtual methods
@@ -370,6 +379,15 @@ func _on_changed_color_context_menu(color_str:String):
 	_parent.default_text_color_theme = color_theme
 	_parent.set_dirty()
 
+func _on_changed_sub_color_context_menu(color:Color):
+#	sub_color_button.add_theme_color_override("icon_normal_color", color)
+	sub_color_button.icon = _parent.get_color_rect_image(color)
+	sub_color_button.visible = true
+	sub_color = color
+
+func _on_deleted_sub_color_context_menu():
+	sub_color_button.visible = false
+	sub_color = null
 
 func _on_toggle_lock_selected_context_menu(is_enabled:bool):
 	if is_enabled:
@@ -418,6 +436,8 @@ func get_data() -> Dictionary:
 			"check" : check_box.button_pressed,
 			"path" : path,
 		}
+		if sub_color != null:
+			data.sub_color = sub_color.to_html(true)
 		return data
 	else:
 		var data = {
@@ -436,6 +456,8 @@ func get_data() -> Dictionary:
 			"check" : check_box.button_pressed,
 			"path" : path,
 		}
+		if sub_color != null:
+			data.sub_color = sub_color.to_html(true)
 		return data
 
 func lock():

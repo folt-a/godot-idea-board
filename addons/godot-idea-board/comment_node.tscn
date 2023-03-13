@@ -74,6 +74,16 @@ mouse_default_cursor_shape = 2
 toggle_mode = true
 icon_alignment = 1
 
+[node name="SubColor" type="Button" parent="MarginContainer/VB/TitleHBoxContainer"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+mouse_default_cursor_shape = 2
+toggle_mode = true
+button_mask = 0
+flat = true
+icon_alignment = 1
+
 [node name="FileButton" type="Button" parent="MarginContainer/VB/TitleHBoxContainer"]
 unique_name_in_owner = true
 visible = false
@@ -171,5 +181,26 @@ autowrap_mode = 1
 threaded = true
 selection_enabled = true
 
+[node name="ColorPickerControl" type="Control" parent="MarginContainer/VB"]
+unique_name_in_owner = true
+visible = false
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VB/ColorPickerControl"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="ColorFixButton" type="Button" parent="MarginContainer/VB/ColorPickerControl/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "確定"
+
+[node name="ColorPicker" type="ColorPicker" parent="MarginContainer/VB/ColorPickerControl/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
 [node name="ContextMenu" type="PopupMenu" parent="."]
 script = ExtResource("3_at1ac")
+
+[node name="ColorMenu" type="PopupMenu" parent="ContextMenu"]

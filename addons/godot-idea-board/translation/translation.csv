@@ -8,6 +8,16 @@ canvas_menu_lock_button,Lock,ロック
 canvas_menu_connect_button,Connect,接続
 canvas_menu_unlock_button,Unlock,ロック解除
 canvas_menu_sound_label,SndVol:,音量:
+Color,Color,色
+Black,Black,黒
+White,White,白
+Red,Red,赤
+Orange,Orange,橙
+Yellow,Yellow,黄
+Green,Green,緑
+Blue,Blue,青
+Purple,Purple,紫
+Custom,Custom,カスタム
 connect_size_err,Select 2 Nodes only.,2つだけ選択してください。
 Edited data will not be saved.,Edited data will not be saved.,編集中のデータは保存されません。
 Edited data will not be saved.text,Edited data will not be saved. \nAre you sure you want to switch the displayed data?,編集中のデータは保存されません。\n画面を切り替えてよろしいですか？

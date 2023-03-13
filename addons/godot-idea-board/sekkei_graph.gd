@@ -128,7 +128,7 @@ func _ready():
 	paste_nodes_request.connect(_on_paste_nodes_request)
 	node_selected.connect(_on_node_selected)
 	node_deselected.connect(_on_node_deselected)
-	
+
 #	# TODO SCROLL ANIMATION
 #	var bg_scrool_animation = get_node_or_null("MarginContainer/TextureRect/AnimationPlayer")
 #	if bg_scrool_animation != null:
@@ -472,6 +472,13 @@ func get_icon(icon_name:String) -> Texture:
 	var theme_:Theme = editor_interface.get_base_control().theme
 	if !theme_.has_icon(icon_name,"EditorIcons"): return theme_.get_icon("Object","EditorIcons")
 	return theme_.get_icon(icon_name,"EditorIcons")
+
+func get_color_rect_image(color:Color = Color.WHITE):
+	var theme_:Theme = editor_interface.get_base_control().theme
+	var tex:Texture2D = theme_.get_icon("Object","EditorIcons")
+	var image:Image = tex.get_image()
+	image.fill(color)
+	return ImageTexture.create_from_image(image)
 
 func make_edit(node:GraphNode) -> void:
 	var text_node = _add_node(comment_node, node.position_offset * zoom)
