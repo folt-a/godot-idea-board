@@ -213,6 +213,8 @@ func init(data:Dictionary):
 			var script_class = load(file_path)
 			var classname = script_class.get_instance_base_type()
 			_resize_script_class_icon.call_deferred()
+			script_h_box_container.visible = true
+
 			if script_icon_path == "":
 				var icon_path = get_gori_oshi_icon_path(script_path)
 
@@ -338,7 +340,7 @@ func _ready():
 	context_menu.make_edit.connect(_on_make_edit_context_menu)
 	context_menu.add_files_in_dir.connect(_on_add_files_in_dir_context_menu)
 	context_menu.add_files_recursive_in_dir.connect(_on_add_files_recursive_in_dir_context_menu)
-	
+
 	self.pivot_offset = size / 2
 
 
