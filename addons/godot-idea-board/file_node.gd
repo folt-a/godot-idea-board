@@ -341,9 +341,6 @@ func _ready():
 	context_menu.add_files_in_dir.connect(_on_add_files_in_dir_context_menu)
 	context_menu.add_files_recursive_in_dir.connect(_on_add_files_recursive_in_dir_context_menu)
 
-	self.pivot_offset = size / 2
-
-
 
 #-----------------------------------------------------------
 #14. remaining built-in virtual methods
