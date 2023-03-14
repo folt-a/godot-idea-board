@@ -294,17 +294,17 @@ func _on_file_moved(old_file_path, new_file_path):
 			set_dirty()
 
 
-func _notify_group_move():
-	#notify all groups of node moving
-	for group in get_children():
-		if group is GraphNode and group.graph_node_type == "Group":
-			for selected_node in get_children():
-				if selected_node is GraphNode and selected_node.selected:
-					group.on_file_node_moved(selected_node)
+#func _notify_group_move():
+#	#notify all groups of node moving
+#	for group in get_children():
+#		if group is GraphNode and group.graph_node_type == "Group":
+#			for selected_node in get_children():
+#				if selected_node is GraphNode and selected_node.selected:
+#					group.on_file_node_moved(selected_node)
 
 func _do_move(node, offset):
 	node.position_offset = offset
-	_notify_group_move()
+#	_notify_group_move()
 
 
 func _on_begin_node_move():

@@ -42,6 +42,7 @@ var graph_node_type = "Group"
 #-----------------------------------------------------------
 #11. onready variables
 #-----------------------------------------------------------
+@onready var margin_container = $MarginContainer
 
 @onready var icon_texture_rect:TextureRect = %IconTextureRect
 @onready var select_button:Button = %SelectButton
@@ -142,6 +143,10 @@ func _gui_input(event):
 			selected = true
 			end_node_move.emit()
 			dragging = false
+			var this_rect:Rect2i = Rect2i(position_offset + mouse_drag_start,get_local_mouse_position() - mouse_drag_start).abs()
+			for node in _get_group_nodes(this_rect):
+				node.selected = true
+			queue_redraw()
 	#drag selected node
 	elif dragging and event is InputEventMouseMotion:
 #		position_offset += get_local_mouse_position() - mouse_drag_start
@@ -151,7 +156,8 @@ func _gui_input(event):
 	# コンテキストメニューを表示する
 	if event is InputEventMouseButton\
 	and event.button_index == MOUSE_BUTTON_RIGHT\
-	and !event.pressed:
+	and !event.pressed\
+	and selectable:
 		accept_event()
 		context_menu.popup()
 		var pa = _parent.get_parent()
@@ -170,9 +176,8 @@ func _on_resize_request(new_minsize):
 
 func _on_pressed_select_button():
 	selected = true
-	for node in get_parent().get_children():
-		if node is GraphNode and is_node_child(node):
-			node.selected = true
+	for node in _get_group_nodes():
+		node.selected = true
 	select_button.release_focus()
 	_parent.grab_focus.call_deferred()
 
@@ -201,30 +206,42 @@ func _on_toggle_lock_selected_context_menu(is_enabled:bool):
 	if is_enabled:
 		locked_button.visible = true
 		self.selectable = false
+#		self.mouse_filter = Control.MOUSE_FILTER_IGNORE
+#		margin_container.mouse_filter = Control.MOUSE_FILTER_IGNORE
+		self.mouse_default_cursor_shape = Control.CURSOR_ARROW
 	else:
 		_on_pressed_locked_button()
 
 ## 範囲内のロックをする
 func _on_group_locked_context_menu():
-	for node in get_parent().get_children():
-		if node is GraphNode and is_node_child(node):
-			node.context_menu.set_item_checked.bind(0,true).call_deferred()
-			node._on_toggle_lock_selected_context_menu.bind(true).call_deferred()
+
+	for node in _get_group_nodes():
+		node.context_menu.set_item_checked.bind(0,true).call_deferred()
+		node._on_toggle_lock_selected_context_menu.bind(true).call_deferred()
 	self.context_menu.set_item_checked.bind(0,true).call_deferred()
 	self._on_toggle_lock_selected_context_menu.bind(true).call_deferred()
 
 ## 範囲内のロック解除をする
 func _on_group_unlocked_context_menu():
-	for node in get_parent().get_children():
-		if node is GraphNode and is_node_child(node):
-			node._on_pressed_locked_button()
+	for node in _get_group_nodes():
+		node._on_pressed_locked_button()
 	self._on_pressed_locked_button()
 
 func _on_pressed_locked_button():
 	context_menu.set_item_checked(0, false)#ロックのチェックを外す
 	locked_button.visible = false
 	self.selectable = true
+#	self.mouse_filter = Control.MOUSE_FILTER_STOP
+#	margin_container.mouse_filter = Control.MOUSE_FILTER_PASS
+	self.mouse_default_cursor_shape = Control.CURSOR_MOVE
 
+func _draw():
+	if dragging:
+		draw_rect(Rect2i(mouse_drag_start,get_local_mouse_position() - mouse_drag_start),Color(0, 1, 1, 0.5),true)
+
+func _process(delta):
+	if dragging:
+		queue_redraw()
 
 #-----------------------------------------------------------
 #15. public methods
@@ -250,9 +267,8 @@ func get_data() -> Dictionary:
 	}
 	return data
 
-func is_node_child(node):
+func is_node_child(node,this_rect):
 	# 全点が矩形内にはいっているか確認する
-	var this_rect:Rect2i = Rect2i(position_offset,size)
 	var node_points = [
 		node.position_offset,
 		Vector2(node.position_offset.x + node.size.x,node.position_offset.y),
@@ -283,18 +299,20 @@ func _resize(size):
 	self.size = get_parent().snap(size)
 	get_parent().set_dirty()
 
-func _get_group_nodes():
+func _get_group_nodes(this_rect:Rect2i = Rect2i()):
+	if this_rect == Rect2i():
+		this_rect = Rect2i(position_offset,size)
 	var nodes = []
 	for child in _parent.get_children():
 		if child is GraphNode:
-			if is_node_child(child):
+			if is_node_child(child,this_rect):
 				nodes.append(child)
 	return nodes
 
-func on_file_node_moved(node):
-	if is_node_child(node):
-		if not _children.has(node):
-			_children.append(node)
-	else:
-		if _children.has(node):
-			_children.erase(node)
+#func on_file_node_moved(node):
+#	if is_node_child(node):
+#		if not _children.has(node):
+#			_children.append(node)
+#	else:
+#		if _children.has(node):
+#			_children.erase(node)
