@@ -142,7 +142,6 @@ func init(data:Dictionary):
 		script_h_box_container.visible = false
 	else:
 		var textfiles = _parent.editor_interface.get_editor_settings().get("docks/filesystem/textfile_extensions")
-
 #		ファイルがあるかチェックする、なかったらuidをチェックしてあればファイルを更新
 #		※スクリプトはUIDがない
 		var is_exists = FileAccess.file_exists(file_path)
@@ -233,6 +232,7 @@ func init(data:Dictionary):
 	#		テキストファイル
 				_type = ITEM_TYPE.TEXT
 				tscn_h_box_container.visible = false
+				script_h_box_container.visible = true
 				script_path = file_path
 				script_label.text = _get_script_name()
 				script_icon_button.icon = _parent.get_icon("TextFile")
