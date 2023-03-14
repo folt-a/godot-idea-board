@@ -122,31 +122,32 @@ func _ready():
 #-----------------------------------------------------------
 
 func _gui_input(event):
-	if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and !event.double_click:
-		#drag start
-		if event.pressed:
-#			selected = true
-			drag_start = position_offset
-			mouse_drag_start = get_local_mouse_position()
-			dragging = true
-		#reorder nodes so selected group is on top of other groups
+	if !selectable:
+		if event is InputEventMouseButton and event.button_index == MOUSE_BUTTON_LEFT and !event.double_click:
+			#drag start
+			if event.pressed:
+	#			selected = true
+				drag_start = position_offset
+				mouse_drag_start = get_local_mouse_position()
+				dragging = true
+			#reorder nodes so selected group is on top of other groups
 
-			# グループを後ろに、その他を前に持っていく
-			for node in get_parent().get_children():
-				if node is GraphNode and node.graph_node_type == "Group" and node != self:
-					node.move_to_front.call_deferred()
-			move_to_front()
-			for node in get_parent().get_children():
-				if node is GraphNode and node.graph_node_type != "Group" and node != self:
-					node.move_to_front.call_deferred()
-		else:
-			selected = true
-			end_node_move.emit()
-			dragging = false
-			var this_rect:Rect2i = Rect2i(position_offset + mouse_drag_start,get_local_mouse_position() - mouse_drag_start).abs()
-			for node in _get_group_nodes(this_rect):
-				node.selected = true
-			queue_redraw()
+				# グループを後ろに、その他を前に持っていく
+				for node in get_parent().get_children():
+					if node is GraphNode and node.graph_node_type == "Group" and node != self:
+						node.move_to_front.call_deferred()
+				move_to_front()
+				for node in get_parent().get_children():
+					if node is GraphNode and node.graph_node_type != "Group" and node != self:
+						node.move_to_front.call_deferred()
+			else:
+				selected = true
+				end_node_move.emit()
+				dragging = false
+				var this_rect:Rect2i = Rect2i(position_offset + mouse_drag_start,get_local_mouse_position() - mouse_drag_start).abs()
+				for node in _get_group_nodes(this_rect):
+					node.selected = true
+				queue_redraw()
 	#drag selected node
 	elif dragging and event is InputEventMouseMotion:
 #		position_offset += get_local_mouse_position() - mouse_drag_start
@@ -168,7 +169,8 @@ func _gui_input(event):
 		_parent.penetrate_nodes()
 	if event is InputEventMouseButton\
 	and event.button_index == MOUSE_BUTTON_LEFT\
-	and event.double_click:
+	and event.double_click\
+	and selectable:
 		_on_double_pressed_header_line_edit()
 
 func _on_resize_request(new_minsize):
