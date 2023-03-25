@@ -43,6 +43,8 @@ var is_window:bool
 var dirty = false
 var _data_init_completed:bool  =false
 
+var is_first:bool = false
+
 ## テキストの色テーマ初期設定
 var default_text_color_theme = "TrLight"
 var default_line_color_theme = "White"
@@ -128,6 +130,13 @@ func _ready():
 	paste_nodes_request.connect(_on_paste_nodes_request)
 	node_selected.connect(_on_node_selected)
 	node_deselected.connect(_on_node_deselected)
+
+	is_first = true
+	await get_tree().create_timer(1).timeout
+	is_first = false
+	dirty = false
+
+
 
 #	# TODO SCROLL ANIMATION
 #	var bg_scrool_animation = get_node_or_null("MarginContainer/TextureRect/AnimationPlayer")
@@ -419,6 +428,10 @@ func reset(json_data:Dictionary):
 
 	await get_tree().create_timer(0.1).timeout # call_deferredより後にdirty有効化したい
 	_data_init_completed = true
+	is_first = true
+	await get_tree().create_timer(1).timeout
+	is_first = false
+	dirty = false
 
 func save():
 	#delete hidden nodes (deleted)
@@ -511,7 +524,7 @@ func link_jump(graph_path:String, target_id:int):
 	pass
 
 func set_dirty():
-	if _data_init_completed:
+	if _data_init_completed and !is_first:
 		dirty = true
 
 func get_node_from_id(id):
