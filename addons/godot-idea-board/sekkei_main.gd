@@ -149,10 +149,14 @@ func init():
 #	メインのディレクトリパスを指定する
 
 #	初期起動時はないので追加する
-	if !ProjectSettings.has_setting("godot_project_design_links/directory_path"):
-		ProjectSettings.set_setting("godot_project_design_links/directory_path", "res://addons/godot-idea-board/savedata/")
+	if ProjectSettings.has_setting("godot_project_design_links/directory_path"):
+		ProjectSettings.set_setting("godot_idea_board/directory_path", ProjectSettings.get_setting("godot_project_design_links/directory_path"))
+		ProjectSettings.clear("godot_project_design_links/directory_path")
+		ProjectSettings.clear("godot_project_design_links")
+	if !ProjectSettings.has_setting("godot_idea_board/directory_path"):
+		ProjectSettings.set_setting("godot_idea_board/directory_path", "res://addons/godot-idea-board/savedata/")
 		var property_info = {
-			"name": "godot_project_design_links/directory_path",
+			"name": "godot_idea_board/directory_path",
 			"type": TYPE_STRING,
 			"hint": PROPERTY_HINT_DIR,
 			"hint_string": ""
@@ -160,7 +164,7 @@ func init():
 		ProjectSettings.add_property_info(property_info)
 		ProjectSettings.save()
 
-	save_json_dir_path = ProjectSettings.get_setting("godot_project_design_links/directory_path")
+	save_json_dir_path = ProjectSettings.get_setting("godot_idea_board/directory_path")
 	main_path_line_edit.text = save_json_dir_path
 
 	var dir = DirAccess.open("res://")
@@ -246,7 +250,7 @@ func _on_toggled_split_button(button_pressed:bool):
 		window_button.disabled = false
 
 func _on_pressed_reload_button():
-	save_json_dir_path = ProjectSettings.get_setting("godot_project_design_links/directory_path")
+	save_json_dir_path = ProjectSettings.get_setting("godot_idea_board/directory_path")
 	update_saved_item_list()
 
 func _on_pressed_add_button():
@@ -308,9 +312,9 @@ func _on_focus_exited_main_path_line_edit():
 	if !dir.dir_exists(new_text):
 		printerr(_S.tr("main_dir_not_exists") % new_text)
 		return
-	ProjectSettings.set_setting("godot_project_design_links/directory_path", new_text)
+	ProjectSettings.set_setting("godot_idea_board/directory_path", new_text)
 	ProjectSettings.save()
-	print(_S.tr("main_changed_dir_path") % ProjectSettings.get_setting("godot_project_design_links/directory_path"))
+	print(_S.tr("main_changed_dir_path") % ProjectSettings.get_setting("godot_idea_board/directory_path"))
 	save_json_dir_path = new_text
 	main_path_line_edit.mouse_filter = Control.MOUSE_FILTER_IGNORE
 
