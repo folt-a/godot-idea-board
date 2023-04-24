@@ -243,14 +243,14 @@ func _gui_input(event):
 			dragging = true
 		#reorder nodes so selected group is on top of other groups
 
-			# グループを後ろに、その他を前に持っていく
-			for node in get_parent().get_children():
-				if node is GraphNode and node.graph_node_type == "Group" and node != self:
-					node.move_to_front.call_deferred()
-			move_to_front()
-			for node in get_parent().get_children():
-				if node is GraphNode and node.graph_node_type != "Group" and node != self:
-					node.move_to_front.call_deferred()
+			# # グループを後ろに、その他を前に持っていく
+			# for node in get_parent().get_children():
+			# 	if node is GraphNode and node.graph_node_type == "Group" and node != self:
+			# 		node.move_to_front.call_deferred()
+			# move_to_front()
+			# for node in get_parent().get_children():
+			# 	if node is GraphNode and node.graph_node_type != "Group" and node != self:
+			# 		node.move_to_front.call_deferred()
 		else:
 			selected = true
 			end_node_move.emit()
