@@ -64,96 +64,78 @@ layout_mode = 2
 
 [node name="WindowButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "別ウィンドウで開く/閉じる"
+tooltip_text = "Open Floating Window"
 toggle_mode = true
 icon_alignment = 1
-expand_icon = true
 
 [node name="SplitButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "左右ビューに切り替える"
+tooltip_text = "Toggle H Split View"
 toggle_mode = true
 icon_alignment = 1
-expand_icon = true
 
 [node name="LeftButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "左のビューを選択する（左右ビューONの場合のみ）"
+tooltip_text = "Select Left(H Split)"
 disabled = true
 toggle_mode = true
 button_pressed = true
 button_group = ExtResource("2_wtk48")
 icon_alignment = 1
-expand_icon = true
 
 [node name="RightButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "右のビューを選択する（左右ビューONの場合のみ）"
+tooltip_text = "Select Right(H Split)"
 disabled = true
 toggle_mode = true
 button_group = ExtResource("2_wtk48")
 icon_alignment = 1
-expand_icon = true
 
 [node name="ReloadButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer2"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "リロード"
+tooltip_text = "Reload items"
 icon_alignment = 1
-expand_icon = true
 
 [node name="HBoxContainer" type="HBoxContainer" parent="SidebarVBoxContainer"]
 layout_mode = 2
 
 [node name="AddButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "新しいレイアウトを追加する"
+tooltip_text = "Add new layout"
 icon_alignment = 1
-expand_icon = true
 
 [node name="DuplicateButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "選択したレイアウトを複製する"
+tooltip_text = "Duplicate selected layout"
 icon_alignment = 1
-expand_icon = true
 
 [node name="RenameButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "選択したレイアウトの名前を変更する"
+tooltip_text = "rename selected layout"
 icon_alignment = 1
-expand_icon = true
 
 [node name="RemoveButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "選択したレイアウトの名前を削除する"
+tooltip_text = "remove selected layout"
 icon_alignment = 1
-expand_icon = true
 
 [node name="SavedItemList" type="ItemList" parent="SidebarVBoxContainer"]
 unique_name_in_owner = true
@@ -166,18 +148,16 @@ layout_mode = 2
 
 [node name="MainPathEditButton" type="Button" parent="SidebarVBoxContainer/HBoxContainer3"]
 unique_name_in_owner = true
-custom_minimum_size = Vector2(36, 36)
 layout_mode = 2
-tooltip_text = "レイアウトファイルのディレクトリを変更する"
+tooltip_text = "change layout directory path"
 toggle_mode = true
 icon_alignment = 1
-expand_icon = true
 
 [node name="MainPathLineEdit" type="LineEdit" parent="SidebarVBoxContainer/HBoxContainer3"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-tooltip_text = "レイアウトファイルのディレクトリを変更する"
+tooltip_text = "change layout directory path"
 mouse_filter = 2
 editable = false
 virtual_keyboard_enabled = false
