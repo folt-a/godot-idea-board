@@ -72,7 +72,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_constants/h_separation = 0
 shortcut = SubResource("Shortcut_tpbq0")
-text = "保存"
+text = "Save"
 
 [node name="GroupButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
@@ -80,7 +80,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_constants/h_separation = 0
 shortcut = SubResource("Shortcut_vact5")
-text = "グループ"
+text = "Group"
 
 [node name="LabelButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
@@ -88,7 +88,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_constants/h_separation = 0
 shortcut = SubResource("Shortcut_s5cmg")
-text = "ラベル"
+text = "Label"
 
 [node name="TextDocumentButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
@@ -96,7 +96,7 @@ layout_mode = 2
 mouse_default_cursor_shape = 2
 theme_override_constants/h_separation = 0
 shortcut = SubResource("Shortcut_ms2rg")
-text = "テキスト"
+text = "TxtDoc"
 
 [node name="ConnectButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
@@ -104,7 +104,7 @@ custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_s74jh")
-text = "接続"
+text = "Connect"
 
 [node name="LockButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
@@ -112,14 +112,14 @@ custom_minimum_size = Vector2(48, 0)
 layout_mode = 2
 mouse_default_cursor_shape = 2
 shortcut = SubResource("Shortcut_f84nk")
-text = "ロック"
+text = "Lock"
 
 [node name="UnlockButton" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
 visible = false
 layout_mode = 2
 mouse_default_cursor_shape = 2
-text = "ロック解除"
+text = "Unlock"
 
 [node name="BgColorIcon" type="Button" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
@@ -134,7 +134,7 @@ flat = true
 [node name="BgColorLabel" type="Label" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "背景色:"
+text = "Bg:"
 
 [node name="BgColorPickerButton" type="ColorPickerButton" parent="HBoxContainer/PanelContainer/LeftContainer"]
 unique_name_in_owner = true
@@ -176,7 +176,7 @@ layout_mode = 2
 [node name="SoundLabel" type="Label" parent="HBoxContainer/PanelContainer/LeftContainer/GridContainer2/HBoxContainer2"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "音量:"
+text = "SndVol:"
 
 [node name="CenterContainer" type="CenterContainer" parent="HBoxContainer/PanelContainer/LeftContainer/GridContainer2/HBoxContainer2"]
 layout_mode = 2
