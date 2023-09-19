@@ -1,13 +1,17 @@
-[gd_scene load_steps=13 format=3 uid="uid://qn1mmq344o61"]
+[gd_scene load_steps=15 format=3 uid="uid://qn1mmq344o61"]
 
 [ext_resource type="Texture2D" uid="uid://b5qnqty0k1hsh" path="res://addons/godot-idea-board/icon/handle.svg" id="1_0jksm"]
 [ext_resource type="Script" path="res://addons/godot-idea-board/comment_node.gd" id="1_pfk21"]
-[ext_resource type="StyleBox" uid="uid://bqp6u8a2jbsek" path="res://addons/godot-idea-board/theme/frame_stylebox.tres" id="2_afal7"]
+[ext_resource type="StyleBox" uid="uid://bqp6u8a2jbsek" path="res://addons/godot-idea-board/theme/frame_stylebox.tres" id="2_gkf8t"]
 [ext_resource type="Script" path="res://addons/godot-idea-board/context_menu/comment_menu.gd" id="3_at1ac"]
-[ext_resource type="StyleBox" uid="uid://bacwowhkqlri7" path="res://addons/godot-idea-board/theme/selected_frame_stylebox.tres" id="3_pvsnt"]
+[ext_resource type="StyleBox" uid="uid://bacwowhkqlri7" path="res://addons/godot-idea-board/theme/selected_frame_stylebox.tres" id="3_v88km"]
 [ext_resource type="StyleBox" uid="uid://dp23tuoxcdmsm" path="res://addons/godot-idea-board/theme/header_lineedit_stylebox.tres" id="6_r7dye"]
 [ext_resource type="StyleBox" uid="uid://dd45kulojlvij" path="res://addons/godot-idea-board/theme/focused_header_lineedit_stylebox.tres" id="7_rawt7"]
 [ext_resource type="StyleBox" uid="uid://do10b3bjhp1et" path="res://addons/godot-idea-board/theme/transparent_style_box_line.tres" id="8_alaah"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0sw32"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_6lkwi"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_o2qiq"]
 
@@ -24,16 +28,13 @@ color = Color(1, 1, 1, 1)
 thickness = 2
 
 [node name="CommentNode" type="GraphNode"]
-offset_right = 320.0
-offset_bottom = 320.0
-theme_override_colors/title_color = Color(0.811765, 0.815686, 0.819608, 0.0980392)
+offset_right = 132.0
+offset_bottom = 102.0
 theme_override_icons/resizer = ExtResource("1_0jksm")
-theme_override_styles/frame = ExtResource("2_afal7")
-theme_override_styles/selected_frame = ExtResource("3_pvsnt")
-theme_override_styles/comment = SubResource("StyleBoxEmpty_o2qiq")
-theme_override_styles/comment_focus = SubResource("StyleBoxEmpty_o2qiq")
-theme_override_styles/breakpoint = SubResource("StyleBoxEmpty_o2qiq")
-theme_override_styles/position = SubResource("StyleBoxEmpty_o2qiq")
+theme_override_styles/panel = ExtResource("2_gkf8t")
+theme_override_styles/panel_selected = ExtResource("3_v88km")
+theme_override_styles/titlebar = SubResource("StyleBoxEmpty_0sw32")
+theme_override_styles/titlebar_selected = SubResource("StyleBoxEmpty_6lkwi")
 theme_override_styles/slot = SubResource("StyleBoxEmpty_o2qiq")
 resizable = true
 slot/0/left_enabled = false

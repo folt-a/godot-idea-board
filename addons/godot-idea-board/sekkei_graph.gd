@@ -85,7 +85,7 @@ var _selected_nodes:Array = []
 
 func init(main):
 	_main = main
-	var hbox:HBoxContainer = get_zoom_hbox()
+	var hbox:HBoxContainer = get_menu_hbox()
 	hbox.size_flags_horizontal = HBoxContainer.SIZE_EXPAND_FILL
 
 	var canvas_menu = preload("res://addons/godot-idea-board/canvas_menu.tscn").instantiate()
@@ -118,14 +118,14 @@ func init(main):
 
 	context_menu.copied.connect(_on_copy_nodes_request)
 	context_menu.pasted.connect(_on_paste_nodes_request)
-	context_menu.deleted.connect(_on_delete_nodes_request)
+	context_menu.deleted.connect(_on_close_nodes_request)
 
 	is_window = get_parent() is Window
 
 func _ready():
 
 	resized.connect(_on_resized)
-	delete_nodes_request.connect(_on_delete_nodes_request)
+	close_nodes_request.connect(_on_close_nodes_request)
 	copy_nodes_request.connect(_on_copy_nodes_request)
 	paste_nodes_request.connect(_on_paste_nodes_request)
 	node_selected.connect(_on_node_selected)
@@ -169,7 +169,7 @@ func _drop_data(at_position, data):
 		# 縦にずらす
 			var y = node.size.y * zoom
 			at_position += Vector2(0, y)
-			at_position += Vector2(0, (int(at_position.y / zoom) % snap_distance) * zoom)
+			at_position += Vector2(0, (int(at_position.y / zoom) % snapping_distance) * zoom)
 		else:
 			# 横にずらすようにする
 			at_position += Vector2(node.size.x * zoom, 0)
@@ -177,7 +177,7 @@ func _drop_data(at_position, data):
 		node.show()
 		set_dirty()
 
-func _on_delete_nodes_request(_nodes):
+func _on_close_nodes_request(_nodes):
 	var deleted_node_ids:= {}
 	for child in get_children():
 		if child is GraphNode:
@@ -355,15 +355,15 @@ func _gui_input(event):
 				add_text_document = false
 				mouse_default_cursor_shape = Control.CURSOR_ARROW
 				var node = _add_common_node(comment_node, get_local_mouse_position(), "TextDocument")
-				var header_font_size = editor_interface.get_base_control().theme.get_font_size("font_size","HeaderLarge")
-				var label_font_size = editor_interface.get_base_control().theme.get_font_size("font_size","Label")
+				var header_font_size = editor_interface.get_editor_theme().get_font_size("font_size","HeaderLarge")
+				var label_font_size = editor_interface.get_editor_theme().get_font_size("font_size","Label")
 				node.change_text_font(header_font_size,label_font_size)
 			elif add_label:
 				add_label = false
 				mouse_default_cursor_shape = Control.CURSOR_ARROW
 				var node = _add_common_node(comment_node, get_local_mouse_position(), "Label")
-				var header_font_size = editor_interface.get_base_control().theme.get_font_size("font_size","HeaderLarge") + 2
-				var label_font_size = editor_interface.get_base_control().theme.get_font_size("font_size","Label")
+				var header_font_size = editor_interface.get_editor_theme().get_font_size("font_size","HeaderLarge") + 2
+				var label_font_size = editor_interface.get_editor_theme().get_font_size("font_size","Label")
 				node.change_text_font(header_font_size,label_font_size)
 		# コンテキストメニューを表示する
 		if event.button_index == MOUSE_BUTTON_RIGHT\
@@ -391,9 +391,9 @@ func reset(json_data:Dictionary):
 	if "data" in json_data:
 		_add_nodes(json_data.data)
 	if "snap_distance" in json_data:
-		snap_distance = json_data.snap_distance
+		snapping_distance = json_data.snap_distance
 	if "use_snap" in json_data:
-		use_snap = json_data.use_snap
+		snapping_enabled = json_data.use_snap
 	if "minimap_enabled" in json_data:
 		minimap_enabled = json_data.minimap_enabled
 	if "zoom" in json_data:
@@ -445,8 +445,8 @@ func save():
 	var canvas_menu_data:Dictionary = _canvas_menu.get_data()
 	var graph_edit_data:Dictionary = {
 		"data" = datas,
-		"snap_distance" = snap_distance,
-		"use_snap" = use_snap,
+		"snap_distance" = snapping_distance,
+		"use_snap" = snapping_enabled,
 		"minimap_enabled" = minimap_enabled,
 		"zoom" = zoom,
 		"scroll_offset_x" = scroll_offset.x,
@@ -463,9 +463,9 @@ func save():
 	dirty = false
 
 func snap(pos:Vector2):
-	if use_snap:
-		pos = pos / snap_distance
-		pos = pos.floor() * snap_distance
+	if snapping_enabled:
+		pos = pos / snapping_distance
+		pos = pos.floor() * snapping_distance
 	return pos
 
 func clear():
@@ -482,12 +482,12 @@ func delete_node(node):
 	set_dirty()
 
 func get_icon(icon_name:String) -> Texture:
-	var theme_:Theme = editor_interface.get_base_control().theme
+	var theme_:Theme = editor_interface.get_editor_theme()
 	if !theme_.has_icon(icon_name,"EditorIcons"): return theme_.get_icon("Object","EditorIcons")
 	return theme_.get_icon(icon_name,"EditorIcons")
 
 func get_color_rect_image(color:Color = Color.WHITE):
-	var theme_:Theme = editor_interface.get_base_control().theme
+	var theme_:Theme = editor_interface.get_editor_theme()
 	var tex:Texture2D = theme_.get_icon("Object","EditorIcons")
 	var image:Image = tex.get_image()
 	image.fill(color)
@@ -515,7 +515,7 @@ func link_jump(graph_path:String, target_id:int):
 				var current_zoom = zoom
 				zoom = 1
 				scroll_offset = node.position_offset - (size / 3)
-				Vector2(snap_distance * 4,snap_distance * 4)
+				Vector2(snapping_distance * 4,snapping_distance * 4)
 				zoom = current_zoom
 	else:
 		save()
@@ -590,7 +590,7 @@ func penetrate_nodes():
 		## 2点の真ん中に置く、ちょっとずらす
 		var pos_1 = from_node.position_offset + from_node.size / 2
 		var pos_2 = to_node.position_offset + to_node.size / 2
-		node.position_offset = snap(((pos_1 + pos_2) / 2) + Vector2(snap_distance, snap_distance * 2))
+		node.position_offset = snap(((pos_1 + pos_2) / 2) + Vector2(snapping_distance, snapping_distance * 2))
 		set_dirty()
 	_right_click_line.clear_points()
 	pass
@@ -606,8 +606,8 @@ func _add_nodes(datas:Array) -> Array:
 			node = _add_node(file_node, Vector2.ZERO)
 		elif data.node == "TextDocument" or data.node == "Label":
 			node = _add_node(comment_node, Vector2.ZERO)
-			var header_font_size = editor_interface.get_base_control().theme.get_font_size("font_size","HeaderLarge")
-			var label_font_size = editor_interface.get_base_control().theme.get_font_size("font_size","Label")
+			var header_font_size = editor_interface.get_editor_theme().get_font_size("font_size","HeaderLarge")
+			var label_font_size = editor_interface.get_editor_theme().get_font_size("font_size","Label")
 			node.change_text_font(header_font_size,label_font_size)
 		elif data.node == "Group":
 			node = _add_node(group_node, Vector2.ZERO)
@@ -622,8 +622,8 @@ func _add_nodes(datas:Array) -> Array:
 	for data in datas:
 		if data.node == "LineHandle" and (!data.has("is_main_handle") or data.is_main_handle):
 			var node:GraphNode = _add_node(line_handle_node, Vector2.ZERO)
-			var header_font_size = editor_interface.get_base_control().theme.get_font_size("font_size","HeaderLarge")
-			var label_font_size = editor_interface.get_base_control().theme.get_font_size("font_size","Label")
+			var header_font_size = editor_interface.get_editor_theme().get_font_size("font_size","HeaderLarge")
+			var label_font_size = editor_interface.get_editor_theme().get_font_size("font_size","Label")
 			node.change_text_font(header_font_size,label_font_size)
 			node.init(data)
 #			node.position_offset_changed.emit()
@@ -632,8 +632,8 @@ func _add_nodes(datas:Array) -> Array:
 	for data in datas:
 		if data.node == "LineHandle" and data.has("is_main_handle") and !data.is_main_handle:
 			var node:GraphNode = _add_node(line_handle_node, Vector2.ZERO)
-			var header_font_size = editor_interface.get_base_control().theme.get_font_size("font_size","HeaderLarge")
-			var label_font_size = editor_interface.get_base_control().theme.get_font_size("font_size","Label")
+			var header_font_size = editor_interface.get_editor_theme().get_font_size("font_size","HeaderLarge")
+			var label_font_size = editor_interface.get_editor_theme().get_font_size("font_size","Label")
 			node.change_text_font(header_font_size,label_font_size)
 			node.init(data)
 #			node.position_offset_changed.emit()

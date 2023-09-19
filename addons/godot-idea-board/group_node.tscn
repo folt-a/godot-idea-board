@@ -1,12 +1,16 @@
-[gd_scene load_steps=9 format=3 uid="uid://rdd8r8vrk3cb"]
+[gd_scene load_steps=11 format=3 uid="uid://rdd8r8vrk3cb"]
 
 [ext_resource type="Texture2D" uid="uid://b5qnqty0k1hsh" path="res://addons/godot-idea-board/icon/handle.svg" id="1_hiwoi"]
 [ext_resource type="Script" path="res://addons/godot-idea-board/group_node.gd" id="1_m4t2i"]
+[ext_resource type="StyleBox" uid="uid://b06cmyqqc77jv" path="res://addons/godot-idea-board/theme/group_frame_stylebox.tres" id="2_bq8a8"]
 [ext_resource type="Script" path="res://addons/godot-idea-board/context_menu/group_menu.gd" id="2_bqeb5"]
-[ext_resource type="StyleBox" uid="uid://b06cmyqqc77jv" path="res://addons/godot-idea-board/theme/group_frame_stylebox.tres" id="2_bvygk"]
-[ext_resource type="StyleBox" uid="uid://cif6pdlua51vx" path="res://addons/godot-idea-board/theme/group_selected_frame_stylebox.tres" id="3_sttee"]
+[ext_resource type="StyleBox" uid="uid://cif6pdlua51vx" path="res://addons/godot-idea-board/theme/group_selected_frame_stylebox.tres" id="3_g6olt"]
 [ext_resource type="StyleBox" uid="uid://chihapvyjmh2o" path="res://addons/godot-idea-board/theme/transparent_title_line_edit.tres" id="5_gmg6p"]
 [ext_resource type="StyleBox" uid="uid://c0ptw6jphi0td" path="res://addons/godot-idea-board/theme/transparent_title_selected_line_edit.tres" id="6_qoikp"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_oww0u"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_nyojw"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_fcp3l"]
 
@@ -15,12 +19,10 @@ offset_right = 178.0
 offset_bottom = 103.0
 mouse_default_cursor_shape = 13
 theme_override_icons/resizer = ExtResource("1_hiwoi")
-theme_override_styles/frame = ExtResource("2_bvygk")
-theme_override_styles/selected_frame = ExtResource("3_sttee")
-theme_override_styles/comment = SubResource("StyleBoxEmpty_fcp3l")
-theme_override_styles/comment_focus = SubResource("StyleBoxEmpty_fcp3l")
-theme_override_styles/breakpoint = SubResource("StyleBoxEmpty_fcp3l")
-theme_override_styles/position = SubResource("StyleBoxEmpty_fcp3l")
+theme_override_styles/panel = ExtResource("2_bq8a8")
+theme_override_styles/panel_selected = ExtResource("3_g6olt")
+theme_override_styles/titlebar = SubResource("StyleBoxEmpty_oww0u")
+theme_override_styles/titlebar_selected = SubResource("StyleBoxEmpty_nyojw")
 theme_override_styles/slot = SubResource("StyleBoxEmpty_fcp3l")
 resizable = true
 slot/0/left_enabled = false

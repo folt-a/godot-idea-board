@@ -94,8 +94,8 @@ var _graphedit
 #-----------------------------------------------------------
 func init(graphedit):
 	_graphedit = graphedit
-	var header_large_font_size = _graphedit.editor_interface.get_base_control().theme.get_font_size("font_size","HeaderLarge")
-	var header_small_font_size = _graphedit.editor_interface.get_base_control().theme.get_font_size("font_size","HeaderSmall")
+	var header_large_font_size = _graphedit.editor_interface.get_editor_theme().get_font_size("font_size","HeaderLarge")
+	var header_small_font_size = _graphedit.editor_interface.get_editor_theme().get_font_size("font_size","HeaderSmall")
 
 	save_button.icon = _graphedit.get_icon("Save")
 #	save_button.add_theme_font_override("font", _graphedit.main_font)

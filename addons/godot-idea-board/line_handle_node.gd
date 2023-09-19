@@ -188,8 +188,8 @@ func init(data = {}):
 	locked_button.add_theme_color_override("icon_normal_color", Color.from_string("fada79",Color.WHITE))
 	locked_button.add_theme_color_override("icon_hover_color", Color.from_string("fada79",Color.WHITE))
 
-#	arrow_from.size = Vector2(_parent.snap_distance, _parent.snap_distance) * 3
-#	arrow_to.size = Vector2(_parent.snap_distance, _parent.snap_distance) * 3
+#	arrow_from.size = Vector2(_parent.snapping_distance, _parent.snapping_distance) * 3
+#	arrow_to.size = Vector2(_parent.snapping_distance, _parent.snapping_distance) * 3
 
 
 #	line_edit.add_theme_font_size_override("font_size", int(size.y/1.5))
@@ -207,6 +207,11 @@ func init_handles():
 		handle_nodes.append(_parent.get_node_from_id(handle_node_id))
 
 func _ready():
+	for item in get_titlebar_hbox().get_children():
+		item.visible = false
+		item.size = Vector2.ZERO
+	get_titlebar_hbox().visible = false
+	get_titlebar_hbox().size = Vector2.ZERO
 	position_offset_changed.connect(_on_position_offset_changed)
 
 	mouse_entered.connect(_on_mouse_entered)
@@ -306,19 +311,19 @@ func get_intersect_point(self_pos, node, pos) -> Vector2:
 	var from_distance:float = 999999999.0
 	if from_top is Vector2:
 		from_distance = pos.distance_to(from_top)
-		from_intersect_point = from_top + Vector2(0, -(_parent.snap_distance + 12))
+		from_intersect_point = from_top + Vector2(0, -(_parent.snapping_distance + 12))
 
 	if from_left is Vector2 and pos.distance_to(from_left) < from_distance:
 		from_distance = pos.distance_to(from_left)
-		from_intersect_point = from_left + Vector2(-(_parent.snap_distance + 12),0)
+		from_intersect_point = from_left + Vector2(-(_parent.snapping_distance + 12),0)
 
 	if from_right is Vector2 and pos.distance_to(from_right) < from_distance:
 		from_distance = pos.distance_to(from_right)
-		from_intersect_point = from_right + Vector2((_parent.snap_distance + 12),0)
+		from_intersect_point = from_right + Vector2((_parent.snapping_distance + 12),0)
 
 	if from_bottom is Vector2 and pos.distance_to(from_bottom) < from_distance:
 		from_distance = pos.distance_to(from_bottom)
-		from_intersect_point = from_bottom + Vector2(0, (_parent.snap_distance + 12))
+		from_intersect_point = from_bottom + Vector2(0, (_parent.snapping_distance + 12))
 
 	return from_intersect_point
 
@@ -410,7 +415,7 @@ func _on_pressed_locked_button():
 	context_menu.set_item_checked(0, false)#ロックのチェックを外す
 	locked_button.visible = false
 	self.selectable = true
-	size = Vector2(_parent.snap_distance, _parent.snap_distance) * 2
+	size = Vector2(_parent.snapping_distance, _parent.snapping_distance) * 2
 
 func _on_added_point_context_menu():
 #	1つ目はサブハンドルを追加せず自分自身の表示切替のみ。
@@ -504,7 +509,7 @@ func _on_toggle_show_editable_text_context_menu(is_show):
 	if is_show:
 		set_deferred("size",Vector2.ZERO)
 	else:
-		set_deferred("size",Vector2(_parent.snap_distance, _parent.snap_distance)*1.1)
+		set_deferred("size",Vector2(_parent.snapping_distance, _parent.snapping_distance)*1.1)
 
 	call_deferred("_on_position_offset_changed")
 

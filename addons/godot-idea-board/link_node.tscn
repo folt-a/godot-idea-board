@@ -1,40 +1,16 @@
-[gd_scene load_steps=14 format=3 uid="uid://8akhawpdokcm"]
+[gd_scene load_steps=12 format=3 uid="uid://8akhawpdokcm"]
 
 [ext_resource type="Texture2D" uid="uid://b5qnqty0k1hsh" path="res://addons/godot-idea-board/icon/handle.svg" id="1_dls3y"]
+[ext_resource type="StyleBox" uid="uid://cwyalj2mnt5j7" path="res://addons/godot-idea-board/theme/node_panel_style_box_flat.tres" id="2_qj4oe"]
 [ext_resource type="Script" path="res://addons/godot-idea-board/link_node.gd" id="2_x00rg"]
+[ext_resource type="StyleBox" uid="uid://ccfutuxb0dxwh" path="res://addons/godot-idea-board/theme/selected_node_panel_style_box_flat.tres" id="3_1evns"]
 [ext_resource type="Script" path="res://addons/godot-idea-board/context_menu/link_menu.gd" id="3_amj4g"]
 [ext_resource type="StyleBox" uid="uid://dp23tuoxcdmsm" path="res://addons/godot-idea-board/theme/header_lineedit_stylebox.tres" id="3_m8tqn"]
 [ext_resource type="StyleBox" uid="uid://dd45kulojlvij" path="res://addons/godot-idea-board/theme/focused_header_lineedit_stylebox.tres" id="4_cqrvk"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6q3xl"]
-bg_color = Color(0.14902, 0.160784, 0.176471, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ah36b"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2bnv7"]
-bg_color = Color(0.301961, 0.32549, 0.360784, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-corner_radius_top_left = 4
-corner_radius_top_right = 4
-corner_radius_bottom_right = 4
-corner_radius_bottom_left = 4
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_03sfx"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xa4dc"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_t8oxx"]
-
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xm36b"]
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_vl2ur"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_scucf"]
 
@@ -49,12 +25,10 @@ bg_color = Color(0.647059, 0.647059, 0.647059, 1)
 offset_right = 73.0
 offset_bottom = 25.0
 theme_override_icons/resizer = ExtResource("1_dls3y")
-theme_override_styles/frame = SubResource("StyleBoxFlat_6q3xl")
-theme_override_styles/selected_frame = SubResource("StyleBoxFlat_2bnv7")
-theme_override_styles/comment = SubResource("StyleBoxEmpty_03sfx")
-theme_override_styles/comment_focus = SubResource("StyleBoxEmpty_xa4dc")
-theme_override_styles/breakpoint = SubResource("StyleBoxEmpty_t8oxx")
-theme_override_styles/position = SubResource("StyleBoxEmpty_xm36b")
+theme_override_styles/panel = ExtResource("2_qj4oe")
+theme_override_styles/panel_selected = ExtResource("3_1evns")
+theme_override_styles/titlebar = SubResource("StyleBoxEmpty_ah36b")
+theme_override_styles/titlebar_selected = SubResource("StyleBoxEmpty_vl2ur")
 theme_override_styles/slot = SubResource("StyleBoxEmpty_scucf")
 slot/0/left_enabled = false
 slot/0/left_type = 0
