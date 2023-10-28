@@ -163,8 +163,8 @@ theme_override_styles/focus = ExtResource("8_alaah")
 theme_override_styles/read_only = SubResource("StyleBoxEmpty_vaj17")
 virtual_keyboard_enabled = false
 wrap_mode = 1
-draw_tabs = true
 scroll_smooth = true
+draw_tabs = true
 
 [node name="ParsedRichTextLabel" type="RichTextLabel" parent="MarginContainer/VB"]
 unique_name_in_owner = true

@@ -118,14 +118,14 @@ func init(main):
 
 	context_menu.copied.connect(_on_copy_nodes_request)
 	context_menu.pasted.connect(_on_paste_nodes_request)
-	context_menu.deleted.connect(_on_close_nodes_request)
+	context_menu.deleted.connect(_on_delete_nodes_request)
 
 	is_window = get_parent() is Window
 
 func _ready():
 
 	resized.connect(_on_resized)
-	close_nodes_request.connect(_on_close_nodes_request)
+	delete_nodes_request.connect(_on_delete_nodes_request)
 	copy_nodes_request.connect(_on_copy_nodes_request)
 	paste_nodes_request.connect(_on_paste_nodes_request)
 	node_selected.connect(_on_node_selected)
@@ -177,7 +177,7 @@ func _drop_data(at_position, data):
 		node.show()
 		set_dirty()
 
-func _on_close_nodes_request(_nodes):
+func _on_delete_nodes_request(_nodes):
 	var deleted_node_ids:= {}
 	for child in get_children():
 		if child is GraphNode:
