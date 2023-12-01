@@ -24,7 +24,7 @@ Edited data will not be saved.text,Edited data will not be saved. \nAre you sure
 Add json file.,Add json file.,レイアウトファイルを追加する
 Duplicate json file.,Duplicate json file.,レイアウトファイルをコピーする
 Rename json file.,Rename json file.,レイアウトファイルの名前を変更する
-Delete json file.,Delete json file.,レイアウトファイルを削除する\n[%s]
+Delete json file.,Delete json file.,レイアウトファイルを削除する
 [{0}.json] is invalid name.,[%s.json] is invalid name.,[%s] はファイル名にできないので名前を変えてください
 [{0}] is already exists.,[%s] is already exists.,[%s] はすでに存在します
 Lock,Lock,ロック
@@ -32,7 +32,7 @@ Copy,Copy,コピー
 Paste,Paste,ペースト
 Copy only this,Copy only this,これだけコピー
 Task,Task,タスクにする
-Delete,Delte,削除
+Delete,Delete,削除
 Edit,Edit,編集
 Make TxtDoc,Create TxtDoc,このファイルからテキストをつくる
 Make Files,Create Files in this Dir,ディレクトリ内のファイルからつくる
