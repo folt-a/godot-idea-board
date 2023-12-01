@@ -14,9 +14,9 @@ You can arrange and manage items such as (scenes, resources, files, directories)
 
 ---
 
-**There are major changes to GraphEdit in Godot 4.2. Please use `v4.2` branch, if you want to use this addon Godot 4.2.**
+**There are major changes to GraphEdit in Godot 4.2. Please use Godot version `4.2` or later.**
 
-**Godot4.2 でGraphEditに大きな変更があります。 Godot4.2で使用する場合は v4.2 branch を使用してください。**
+**Godot4.2 でGraphEditに大きな変更があります。 Godot4.2以上のバージョンを使用してください。**
 
 ---
 
