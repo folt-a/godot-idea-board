@@ -107,6 +107,11 @@ func init(data:Dictionary):
 	locked_button.add_theme_color_override("icon_hover_color", Color.from_string("fada79",Color.WHITE))
 
 func _ready():
+	for item in get_titlebar_hbox().get_children():
+		item.visible = false
+		item.size = Vector2.ZERO
+	get_titlebar_hbox().visible = false
+	get_titlebar_hbox().size = Vector2.ZERO
 	icon_button.pressed.connect(_on_pressed_icon_button)
 	target_icon_button.pressed.connect(_on_pressed_icon_button)
 	arrow_target_icon_button.pressed.connect(_on_pressed_icon_button)

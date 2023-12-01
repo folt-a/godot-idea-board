@@ -320,6 +320,11 @@ func init(data:Dictionary):
 
 
 func _ready():
+	for item in get_titlebar_hbox().get_children():
+		item.visible = false
+		item.size = Vector2.ZERO
+	get_titlebar_hbox().visible = false
+	get_titlebar_hbox().size = Vector2.ZERO
 	tscn_icon_button.pressed.connect(_on_pressed_tscn_icon_button)
 	tscn_play_button.pressed.connect(_on_pressed_tscn_play_button)
 	sound_play_button.pressed.connect(_on_pressed_sound_play_button)

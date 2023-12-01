@@ -182,6 +182,11 @@ func init(data:Dictionary = {}):
 
 
 func _ready():
+	for item in get_titlebar_hbox().get_children():
+		item.visible = false
+		item.size = Vector2.ZERO
+	get_titlebar_hbox().visible = false
+	get_titlebar_hbox().size = Vector2.ZERO
 	icon_button.pressed.connect(_on_pressed_icon_button)
 	header_line_edit.focus_exited.connect(_on_focus_exited_header_line_edit)
 	resize_request.connect(_on_resize_request)
