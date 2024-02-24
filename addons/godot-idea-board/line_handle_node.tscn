@@ -1,13 +1,13 @@
 [gd_scene load_steps=12 format=3 uid="uid://b7gyevpeuk8q7"]
 
-[ext_resource type="Texture2D" uid="uid://b5qnqty0k1hsh" path="res://addons/godot-idea-board/icon/handle.svg" id="1_hiwoi"]
+[ext_resource type="Texture2D" path="res://addons/godot-idea-board/icon/handle.svg" id="1_hiwoi"]
 [ext_resource type="StyleBox" uid="uid://w82ranjj3lbw" path="res://addons/godot-idea-board/theme/line_handle_frame_stylebox.tres" id="2_x0gsd"]
 [ext_resource type="StyleBox" uid="uid://8me00ja0tbra" path="res://addons/godot-idea-board/theme/line_handle_frame_white_stylebox.tres" id="3_3yj5h"]
 [ext_resource type="Script" path="res://addons/godot-idea-board/line_handle_node.gd" id="4_kje78"]
 [ext_resource type="StyleBox" uid="uid://1a2ks43qywgj" path="res://addons/godot-idea-board/theme/text_light_title_line_edit.tres" id="5_n7r5b"]
 [ext_resource type="Script" path="res://addons/godot-idea-board/context_menu/line_handle_menu.gd" id="5_qleyb"]
 [ext_resource type="StyleBox" uid="uid://dd3e5yean6mrf" path="res://addons/godot-idea-board/theme/text_light_title_selected_line_edit.tres" id="6_vh0tj"]
-[ext_resource type="Texture2D" uid="uid://b2jnsrl7naekt" path="res://addons/godot-idea-board/icon/normal_arrow.svg" id="10_rq6cd"]
+[ext_resource type="Texture2D" path="res://addons/godot-idea-board/icon/normal_arrow.svg" id="10_rq6cd"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_7st5x"]
 

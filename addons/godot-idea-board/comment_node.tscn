@@ -1,6 +1,6 @@
 [gd_scene load_steps=15 format=3 uid="uid://qn1mmq344o61"]
 
-[ext_resource type="Texture2D" uid="uid://b5qnqty0k1hsh" path="res://addons/godot-idea-board/icon/handle.svg" id="1_0jksm"]
+[ext_resource type="Texture2D" path="res://addons/godot-idea-board/icon/handle.svg" id="1_0jksm"]
 [ext_resource type="Script" path="res://addons/godot-idea-board/comment_node.gd" id="1_pfk21"]
 [ext_resource type="StyleBox" uid="uid://bqp6u8a2jbsek" path="res://addons/godot-idea-board/theme/frame_stylebox.tres" id="2_gkf8t"]
 [ext_resource type="Script" path="res://addons/godot-idea-board/context_menu/comment_menu.gd" id="3_at1ac"]
