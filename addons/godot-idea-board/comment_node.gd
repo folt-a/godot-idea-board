@@ -46,7 +46,7 @@ var dragging: = false
 #-----------------------------------------------------------
 #10. private variables
 #-----------------------------------------------------------
-
+const Markdownlabel = preload("res://addons/godot-idea-board/md/markdownlabel.gd")
 #-----------------------------------------------------------
 #11. onready variables
 #-----------------------------------------------------------
@@ -278,8 +278,8 @@ func _on_toggled_markdown_toggled_button(button_pressed:bool):
 	if button_pressed:
 		text_edit.visible = false
 		parsed_rich_text_label.visible = true
-		var parsed_bb_code_text = _parent.markdown_parser.parse(text_edit.text, size.x)
-		parsed_rich_text_label.text = parsed_bb_code_text
+		#var parsed_bb_code_text = _parent.markdown_parser.parse(text_edit.text, size.x)
+		parsed_rich_text_label.markdown_text = text_edit.text
 		markdown_toggled_button.icon = md_icon
 	else:
 		text_edit.visible = true

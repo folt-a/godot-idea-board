@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://qn1mmq344o61"]
+[gd_scene load_steps=16 format=3 uid="uid://qn1mmq344o61"]
 
 [ext_resource type="Texture2D" path="res://addons/godot-idea-board/icon/handle.svg" id="1_0jksm"]
 [ext_resource type="Script" path="res://addons/godot-idea-board/comment_node.gd" id="1_pfk21"]
@@ -8,6 +8,7 @@
 [ext_resource type="StyleBox" uid="uid://dp23tuoxcdmsm" path="res://addons/godot-idea-board/theme/header_lineedit_stylebox.tres" id="6_r7dye"]
 [ext_resource type="StyleBox" uid="uid://dd45kulojlvij" path="res://addons/godot-idea-board/theme/focused_header_lineedit_stylebox.tres" id="7_rawt7"]
 [ext_resource type="StyleBox" uid="uid://do10b3bjhp1et" path="res://addons/godot-idea-board/theme/transparent_style_box_line.tres" id="8_alaah"]
+[ext_resource type="Script" path="res://addons/godot-idea-board/md/markdownlabel.gd" id="8_hg7xp"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_0sw32"]
 
@@ -176,11 +177,11 @@ focus_mode = 2
 theme_override_styles/focus = SubResource("StyleBoxLine_pd02s")
 theme_override_styles/normal = SubResource("StyleBoxLine_pd02s")
 bbcode_enabled = true
-text = "adwadwa"
 scroll_following = true
 autowrap_mode = 1
 threaded = true
 selection_enabled = true
+script = ExtResource("8_hg7xp")
 
 [node name="ColorPickerControl" type="Control" parent="MarginContainer/VB"]
 unique_name_in_owner = true

@@ -1,10 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://ctvg3e2tkspqb"]
+[gd_scene load_steps=9 format=3 uid="uid://ctvg3e2tkspqb"]
 
 [ext_resource type="Script" path="res://addons/godot-idea-board/sekkei_main.gd" id="1_2n0ft"]
 [ext_resource type="Theme" uid="uid://dp1xxx710usj3" path="res://addons/godot-idea-board/main_theme.tres" id="1_eha6v"]
 [ext_resource type="Script" path="res://addons/godot-idea-board/sekkei_graph.gd" id="1_lrq46"]
 [ext_resource type="ButtonGroup" uid="uid://b8qct4jrxfu76" path="res://addons/godot-idea-board/left_right_button_group.tres" id="2_wtk48"]
-[ext_resource type="Script" path="res://addons/godot-idea-board/markdown_parser.gd" id="3_xn6dl"]
 [ext_resource type="Script" path="res://addons/godot-idea-board/context_menu/graph_menu.gd" id="5_extsy"]
 
 [sub_resource type="Animation" id="Animation_w05kn"]
@@ -181,11 +180,8 @@ snapping_distance = 24
 zoom_min = 0.1
 zoom_max = 3.0
 show_zoom_label = true
-arrange_nodes_button_hidden = true
+show_arrange_button = false
 script = ExtResource("1_lrq46")
-
-[node name="MarkdownParser" type="Node" parent="HSplitContainer/SekkeiGraph1"]
-script = ExtResource("3_xn6dl")
 
 [node name="ContextMenu" type="PopupMenu" parent="HSplitContainer/SekkeiGraph1"]
 script = ExtResource("5_extsy")
@@ -205,11 +201,8 @@ size_flags_horizontal = 3
 snapping_distance = 24
 zoom_min = 0.1
 zoom_max = 3.0
-arrange_nodes_button_hidden = true
+show_arrange_button = false
 script = ExtResource("1_lrq46")
-
-[node name="MarkdownParser" type="Node" parent="HSplitContainer/SekkeiGraph2"]
-script = ExtResource("3_xn6dl")
 
 [node name="ContextMenu" type="PopupMenu" parent="HSplitContainer/SekkeiGraph2"]
 script = ExtResource("5_extsy")
@@ -271,19 +264,15 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 3
 theme_override_colors/activity = Color(1, 0, 0, 1)
-scroll_offset = Vector2(-100, -100)
 snapping_distance = 24
 zoom_min = 0.1
 zoom_max = 3.0
 show_zoom_label = true
-arrange_nodes_button_hidden = true
+show_arrange_button = false
 script = ExtResource("1_lrq46")
 
 [node name="ContextMenu" type="PopupMenu" parent="Window/SekkeiGraph3"]
 script = ExtResource("5_extsy")
-
-[node name="MarkdownParser" type="Node" parent="Window/SekkeiGraph3"]
-script = ExtResource("3_xn6dl")
 
 [node name="DragPath" type="Line2D" parent="Window/SekkeiGraph3"]
 position = Vector2(706, 0)

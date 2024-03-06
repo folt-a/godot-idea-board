@@ -67,7 +67,6 @@ var _selected_nodes:Array = []
 #-----------------------------------------------------------
 #11. onready variables
 #-----------------------------------------------------------
-@onready var markdown_parser = $MarkdownParser
 @onready var context_menu = $ContextMenu
 
 @onready var _right_click_line:Line2D = $DragPath
