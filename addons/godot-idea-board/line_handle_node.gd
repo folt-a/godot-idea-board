@@ -20,7 +20,7 @@ signal end_node_move
 #-----------------------------------------------------------
 const select_icon = preload("res://addons/godot-idea-board/icon/tool_select.svg")
 
-var line_handle_node = preload("res://addons/godot-idea-board/line_handle_node.tscn")
+var line_handle_node = load("res://addons/godot-idea-board/line_handle_node.tscn")
 
 #-----------------------------------------------------------
 #08. exported variables
