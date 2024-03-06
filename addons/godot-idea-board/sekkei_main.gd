@@ -292,7 +292,7 @@ func _on_pressed_remove_button():
 	save()
 	_dialog_type = DIALOG_TYPE.REMOVE_CONFIRM
 	confirmation_dialog.title = _S.tr("Delete json file.")
-	confirmation_dialog.dialog_text = _S.tr("Delete json file.") % saved_item_list.get_item_metadata(_selected_index)
+	confirmation_dialog.dialog_text = _S.tr("Delete json file.")
 	confirmation_dialog.popup_centered()
 
 
