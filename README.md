@@ -2,7 +2,7 @@
 
 Design all Godot editor items. Godot4 addon.
 
-[日本語READMEはこちら japanese readme is here](https://github.com/folt-a/godot-idea-board#%E6%97%A5%E6%9C%AC%E8%AA%9E)
+[日本語READMEはこちら japanese readme is here](#jpreadme)
 
 There is no need to go back and forth between the design document tool and the Godot editor.
 
@@ -505,7 +505,7 @@ Thank you!
 
 
 ---
-
+# jpreadme
 ## 日本語
  
 もう設計書ツールとGodotエディタとの間で往復をする必要はありません。
