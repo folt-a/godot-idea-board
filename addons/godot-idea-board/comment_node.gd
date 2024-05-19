@@ -98,6 +98,7 @@ func init(data:Dictionary = {}):
 		parsed_rich_text_label.custom_minimum_size = Vector2.ZERO
 		custom_minimum_size = Vector2.ZERO
 		size = Vector2(size.x,0)
+		context_menu.is_textdoc = false
 	if data.has("is_visible_check"):
 		check_box.visible = data.is_visible_check
 	if data.has("check"):
@@ -207,6 +208,8 @@ func _ready():
 	context_menu.changed_color.connect(_on_changed_color_context_menu)
 	context_menu.changed_sub_color.connect(_on_changed_sub_color_context_menu)
 	context_menu.deleted_sub_color.connect(_on_deleted_sub_color_context_menu)
+	context_menu.break_to_label.connect(_on_break_to_label_context_menu)
+	
 
 #-----------------------------------------------------------
 #14. remaining built-in virtual methods
@@ -393,6 +396,9 @@ func _on_changed_sub_color_context_menu(color:Color):
 func _on_deleted_sub_color_context_menu():
 	sub_color_button.visible = false
 	sub_color = null
+
+func _on_break_to_label_context_menu(is_task:bool):
+	_parent.break_to_label(self, is_task)
 
 func _on_toggle_lock_selected_context_menu(is_enabled:bool):
 	if is_enabled:

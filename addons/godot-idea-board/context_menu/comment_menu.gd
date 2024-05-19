@@ -19,6 +19,7 @@ signal save_pressed
 signal changed_color(s)
 signal changed_sub_color(color:Color)
 signal deleted_sub_color()
+signal break_to_label(is_task:bool)
 
 #-----------------------------------------------------------
 #06. enums
@@ -40,6 +41,8 @@ const INDEX_BG_TR_LI:int = 9
 const INDEX_BG_TR_DA:int = 10
 const INDEX_BG_LI:int = 11
 const INDEX_BG_DA:int = 12
+const INDEX_BREAK_TO_LABEL:int = 13
+const INDEX_BREAK_TO_TASK_LABEL:int = 14
 
 const SUB_INDEX_REMOVE:int = 0
 const SUB_INDEX_BLACK:int = 1
@@ -59,7 +62,7 @@ const SUB_INDEX_CUSTOM:int = 9
 #-----------------------------------------------------------
 #09. public variables
 #-----------------------------------------------------------
-
+var is_textdoc:bool = true
 #-----------------------------------------------------------
 #10. private variables
 #-----------------------------------------------------------
@@ -115,6 +118,10 @@ func _ready():
 	add_icon_item(_parent.get_icon("Color"),_S.tr("Bg Transparent Dark"), INDEX_BG_TR_DA)
 	add_icon_item(_parent.get_icon("Color"),_S.tr("Bg Light"), INDEX_BG_LI)
 	add_icon_item(_parent.get_icon("Color"),_S.tr("Bg Dark"), INDEX_BG_DA)
+	if is_textdoc:
+		add_icon_item(_parent.get_icon("ArrowRight"),_S.tr("to Label"), INDEX_BREAK_TO_LABEL)
+		add_icon_item(_parent.get_icon("CheckBox"),_S.tr("to Label"), INDEX_BREAK_TO_TASK_LABEL)
+	
 
 func _on_index_pressed(index:int):
 	match index:
@@ -152,6 +159,10 @@ func _on_index_pressed(index:int):
 			changed_color.emit("Light")
 		INDEX_BG_DA:# Bg Dark
 			changed_color.emit("Dark")
+		INDEX_BREAK_TO_LABEL:
+			break_to_label.emit(false)
+		INDEX_BREAK_TO_TASK_LABEL:
+			break_to_label.emit(true)
 
 func _on_index_pressed_sub_color(index:int):
 	var color:Color

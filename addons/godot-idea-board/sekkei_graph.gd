@@ -594,6 +594,30 @@ func penetrate_nodes():
 	_right_click_line.clear_points()
 	pass
 
+
+func break_to_label(node:GraphNode,is_task:bool):
+	var orgdata:Dictionary = node.get_data()
+	var splitted:PackedStringArray = orgdata.text_edit_text.split("\n")
+	var at_position:Vector2= node.position_offset
+	
+	for line in splitted:
+		if line.is_empty():continue
+		var text_node = _add_node(comment_node, at_position)
+		var data:Dictionary = {}
+		data.node = "Label"
+		data.is_md = false
+		data.header_text = line
+		data.is_visible_check = is_task
+		data.check = false
+		data.size_x = 0
+		data.size_y = 32
+		text_node.init(data)
+		text_node.position_offset = Vector2(at_position.x + node.size.x, at_position.y)
+	
+		# 縦にずらす
+		at_position += Vector2(0, 48)
+		#at_position += Vector2(0, (int(at_position.y / zoom) % snapping_distance) * zoom)
+
 #-----------------------------------------------------------
 #16. private methods
 #-----------------------------------------------------------

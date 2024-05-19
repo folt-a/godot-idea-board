@@ -68,3 +68,4 @@ tooltip_main_duplicate_button,Duplicate selected layout,選択したレイアウ
 tooltip_main_rename_button,rename selected layout,選択したレイアウトの名前を変更する
 tooltip_main_remove_button,remove selected layout,選択したレイアウトの名前を削除する
 tooltip_main_main_path_line_edit,change layout directory path,レイアウトファイルのディレクトリを変更する
+to Label,to Label split break,行毎のLabelに変換
