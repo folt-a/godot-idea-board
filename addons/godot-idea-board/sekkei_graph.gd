@@ -369,10 +369,11 @@ func _gui_input(event):
 		and !event.pressed:
 			context_menu.popup()
 			var pa = get_parent()
+			
 			if pa is Window: #PopupGraphならWindowのぶんずらす
-				context_menu.position = DisplayServer.mouse_get_position() + pa.position
+				context_menu.position = DisplayServer.mouse_get_position() + pa.position - self.get_window().position
 			else:
-				context_menu.position = DisplayServer.mouse_get_position()
+				context_menu.position = DisplayServer.mouse_get_position() - self.get_window().position
 			_is_right_dragging = false
 			_right_click_line.clear_points()
 
@@ -904,5 +905,3 @@ func _on_toggled_sound_loop_button(button_press:bool):
 #func _on_pressed_comment_button():
 #	mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
 #	add_text_document_large = true
-
-
