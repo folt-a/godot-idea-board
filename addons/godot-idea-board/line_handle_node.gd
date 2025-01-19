@@ -273,17 +273,15 @@ func _gui_input(event):
 		accept_event()
 		var pa = _parent.get_parent()
 		if is_main_handle:
+			context_menu.position = get_global_mouse_position()
+			if not get_window().gui_embed_subwindows:
+				context_menu.position += get_window().position
 			context_menu.popup()
-			if pa is Window: #PopupGraphならWindowのぶんずらす
-				context_menu.position = DisplayServer.mouse_get_position() + pa.position
-			else:
-				context_menu.position = DisplayServer.mouse_get_position()
 		else:
+			main_handle.context_menu.position = get_global_mouse_position()
+			if not get_window().gui_embed_subwindows:
+				main_handle.context_menu.position += get_window().position
 			main_handle.context_menu.popup()
-			if pa is Window: #PopupGraphならWindowのぶんずらす
-				main_handle.context_menu.position = DisplayServer.mouse_get_position() + pa.position
-			else:
-				main_handle.context_menu.position = DisplayServer.mouse_get_position()
 		_parent.penetrate_nodes()
 
 #	ダブルクリック

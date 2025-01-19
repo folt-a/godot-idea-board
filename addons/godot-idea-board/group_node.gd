@@ -165,12 +165,10 @@ func _gui_input(event):
 	and !event.pressed\
 	and selectable:
 		accept_event()
+		context_menu.position = get_global_mouse_position()
+		if not get_window().gui_embed_subwindows:
+			context_menu.position += get_window().position
 		context_menu.popup()
-		var pa = _parent.get_parent()
-		if pa is Window: #PopupGraphならWindowのぶんずらす
-			context_menu.position = DisplayServer.mouse_get_position() + pa.position
-		else:
-			context_menu.position = DisplayServer.mouse_get_position()
 		_parent.penetrate_nodes()
 	if event is InputEventMouseButton\
 	and event.button_index == MOUSE_BUTTON_LEFT\

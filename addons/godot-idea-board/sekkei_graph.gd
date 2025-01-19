@@ -367,13 +367,10 @@ func _gui_input(event):
 		# コンテキストメニューを表示する
 		if event.button_index == MOUSE_BUTTON_RIGHT\
 		and !event.pressed:
+			context_menu.position = get_global_mouse_position()
+			if not get_window().gui_embed_subwindows:
+				context_menu.position += get_window().position
 			context_menu.popup()
-			var pa = get_parent()
-			
-			if pa is Window: #PopupGraphならWindowのぶんずらす
-				context_menu.position = DisplayServer.mouse_get_position() + pa.position - self.get_window().position
-			else:
-				context_menu.position = DisplayServer.mouse_get_position() - self.get_window().position
 			_is_right_dragging = false
 			_right_click_line.clear_points()
 
