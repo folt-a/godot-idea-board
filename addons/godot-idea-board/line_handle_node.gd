@@ -122,14 +122,10 @@ func init(data = {}):
 
 	if data.has("from_node_id"):
 		from_node_id = data.from_node_id
-		_from_node = _parent.get_node_from_id(data.from_node_id)
-		if _from_node:
-			_from_node.position_offset_changed.connect(_on_position_offset_changed)
+		set_from_node.call_deferred()
 	if data.has("to_node_id"):
 		to_node_id = data.to_node_id
-		_to_node = _parent.get_node_from_id(data.to_node_id)
-		if _to_node:
-			_to_node.position_offset_changed.connect(_on_position_offset_changed)
+		set_to_node.call_deferred()
 	if data.has("text"):
 		line_edit.text = data.text
 	if data.has("is_show_editable_text"): #テキスト編集化
@@ -200,6 +196,17 @@ func init(data = {}):
 	await get_tree().create_timer(0.1).timeout
 	_on_changed_color_context_menu.bind(color_theme).call_deferred()
 	_on_position_offset_changed()
+
+func set_from_node():
+	_from_node = _parent.get_node_from_id(from_node_id)
+	if _from_node:
+		_from_node.position_offset_changed.connect(_on_position_offset_changed)
+
+
+func set_to_node():
+	_to_node = _parent.get_node_from_id(to_node_id)
+	if _to_node:
+		_to_node.position_offset_changed.connect(_on_position_offset_changed)
 
 func init_handles():
 	handle_nodes = []
